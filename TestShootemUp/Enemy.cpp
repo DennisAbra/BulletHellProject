@@ -1,3 +1,5 @@
+#pragma warning(push)
+#pragma warning(disable : 26812)
 #include "Enemy.h"
 
 std::vector<std::vector<Vector2>> Enemy::paths;
@@ -113,3 +115,4 @@ void Enemy::Render()
 		}
 	}
 }
+#pragma warning(pop)

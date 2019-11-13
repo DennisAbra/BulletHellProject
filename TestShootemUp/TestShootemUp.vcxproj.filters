@@ -43,6 +43,12 @@
     <Filter Include="Source Files\GameFiles">
       <UniqueIdentifier>{e7746793-8a54-4ac2-ad01-e0aff5cca308}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameFiles\Entities">
+      <UniqueIdentifier>{0ac8ae14-1589-4c63-818a-6e3ebfc7d3e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameFiles\Entities">
+      <UniqueIdentifier>{171832fd-c72c-4163-9b4a-ee500a578521}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEntity.cpp">
@@ -75,14 +81,17 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files\GameFiles</Filter>
-    </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
     <ClCompile Include="BezierPath.cpp">
       <Filter>Source Files\GameFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\GameFiles\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\GameFiles\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,14 +125,17 @@
     <ClInclude Include="Timer.h">
       <Filter>Header Files\Engine\System</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files\GameFiles</Filter>
-    </ClInclude>
     <ClInclude Include="Collision.h">
       <Filter>Header Files\Engine\System</Filter>
     </ClInclude>
     <ClInclude Include="BezierPath.h">
       <Filter>Header Files\GameFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\GameFiles\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\GameFiles\Entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

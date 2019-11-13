@@ -1,3 +1,5 @@
+#pragma warning(push)
+#pragma warning(disable : 26812)
 #include "Graphics.h"
 
 Graphics* Graphics::instance = nullptr;
@@ -150,3 +152,4 @@ void Graphics::Render()
 	SDL_RenderPresent(renderer);
 }
 
+#pragma warning(pop)
