@@ -1,6 +1,7 @@
 #include "AnimatedTexture.h"
 
-AnimatedTexture::AnimatedTexture(std::string filename, int x, int y, int w, int h, int _frameCount, float _animationSpeed, ANIM_DIR animDirection)
+AnimatedTexture::AnimatedTexture(std::string filename, int x, int y, int w, int h, 
+	int _frameCount, float _animationSpeed, ANIM_DIR animDirection)
 	: Texture(filename, x, y, w, h)
 {
 	timer = Timer::Instance();
