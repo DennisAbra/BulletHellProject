@@ -8,7 +8,8 @@ public:
 	enum WRAP_MODE { once = 0, loop = 1 };
 	enum ANIM_DIR { horizontal = 0, vertical = 1};
 
-	AnimatedTexture(std::string filename, int x, int y, int w, int h, int _frameCount, float _animationSpeed, ANIM_DIR animDirection);
+	AnimatedTexture(std::string filename, int x, int y, int w, int h,
+		int _frameCount, float _animationSpeed, ANIM_DIR animDirection);
 	~AnimatedTexture();
 
 	void WrapMode(WRAP_MODE mode);
