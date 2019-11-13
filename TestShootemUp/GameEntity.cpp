@@ -109,8 +109,8 @@ void GameEntity::Parent(GameEntity* _parent)
 		}
 
 		Vector2 parentScale = _parent->Scale(world);
-		Vector2 bullShit = Pos(world) - _parent->Pos(world);
-		pos = RotateVector(bullShit,  -_parent->Rotation(world));
+		Vector2 tempCalc = Pos(world) - _parent->Pos(world);
+		pos = RotateVector(tempCalc,  -_parent->Rotation(world));
 		pos.x /= parentScale.x;
 		pos.y /= parentScale.y;
 
