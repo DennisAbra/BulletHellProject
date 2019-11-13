@@ -70,7 +70,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>../External/include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)External\include\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LibraryPath>$(SolutionDir)External\SDL2\libs\;$(SolutionDir)External\SDL2image\libs\;$(SolutionDir)External\SDL2ttf\libs\;$(SolutionDir)External\SDL2mixer\libs\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)External\SDL2\include\;$(SolutionDir)External\SDL2image\include\;$(SolutionDir)External\SDL2ttf\include\;$(SolutionDir)External\SDL2mixer\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -78,11 +82,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../External/SDL2mixer/include;../External/SDL2ttf/include;../External/SDL2image/include;../External/SDL2/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)External/SDL2mixer/include;$(SolutionDir)External/SDL2ttf/include;$(SolutionDir)External/SDL2image/include;$(SolutionDir)External/SDL2/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>../External/SDL2mixer/lib/x86;../External/SDL2ttf/lib/x86;../External/SDL2image/x86;../External/SDL2/lib/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)External/SDL2mixer/libs/;$(SolutionDir)External/SDL2ttf/libs/;$(SolutionDir)External/SDL2image/libs;$(SolutionDir)External/SDL2/libs/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -92,9 +96,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)External\SDL2\include\;$(SolutionDir)External\SDL2image\include\;$(SolutionDir)External\SDL2mixer\include\;$(SolutionDir)External\SDL2ttf\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
