@@ -37,6 +37,12 @@
     <Filter Include="Source Files\Engine\System">
       <UniqueIdentifier>{2f7c6ed9-ad8e-4fab-ab15-7fe8313f8008}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameFiles">
+      <UniqueIdentifier>{44809746-65e7-43e2-a6c2-51a87578e8bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameFiles">
+      <UniqueIdentifier>{e7746793-8a54-4ac2-ad01-e0aff5cca308}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEntity.cpp">
@@ -69,6 +75,9 @@
     <ClCompile Include="Timer.cpp">
       <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEntity.h">
@@ -100,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>Header Files\Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
