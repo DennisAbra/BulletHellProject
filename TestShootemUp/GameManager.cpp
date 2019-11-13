@@ -38,10 +38,14 @@ GameManager::GameManager() // Handle as Awake in Unity
 
 	texture = new Texture("Hello World", "font.ttf", 72, {255, 0, 0});
 	texture->Pos(Vector2(Graphics::screenWidth * 0.5f, Graphics::screenHeight * 0.4));
-	texture2 = new Texture("Hello World", "font.ttf", 72, {0, 0, 0});
+	texture2 = new Texture("Hello World", "font.ttf", 72, {255, 255, 0});
 	texture2->Pos(Vector2(Graphics::screenWidth * 0.5f, Graphics::screenHeight * 0.7));
+	audioManager->PlayMusic("music.mp3");
 
 	texture2->Parent(texture);
+	Enemy::CreatePaths();
+	enemy = new Enemy(0);
+
 
 
 }
@@ -68,6 +72,9 @@ GameManager::~GameManager()
 
 	delete texture2;
 	texture2 = nullptr;
+
+	delete enemy;
+	enemy = nullptr;
 }
 
 void GameManager::EarlyUpdate()
@@ -81,12 +88,13 @@ void GameManager::Update() // Do Entity updates and input here
 	{
 		texture2->Parent(texture);
 	}
-
+	enemy->Pos(inputManager->MousePos());
 	if (inputManager->MouseButtonPressed(InputManager::middle))
 	{
 		texture2->Parent(nullptr);
 	}
 
+	enemy->Update();
 
 	texture->Rotate(10 * timer->DeltaTime());
 }
@@ -97,7 +105,7 @@ void GameManager::Render()
 	//Do all draw calls here and before graphics->Render()
 	texture->Render();
 	texture2->Render();
-
+	enemy->Render();
 
 	graphics->Render();
 }

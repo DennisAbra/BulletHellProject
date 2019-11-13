@@ -2,6 +2,7 @@
 #include "AnimatedTexture.h"
 #include "InputManager.h"
 #include "AudioManager.h"
+#include "Enemy.h"
 
 
 class GameManager
@@ -22,6 +23,7 @@ private:
 	SDL_Event event;
 	Texture* texture;
 	Texture* texture2;
+	Enemy* enemy;
 
 	GameManager();
 	~GameManager();

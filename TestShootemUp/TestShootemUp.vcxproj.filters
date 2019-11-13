@@ -69,14 +69,20 @@
     <ClCompile Include="Graphics.cpp">
       <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files\Engine\System</Filter>
-    </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
+    <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\GameFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="BezierPath.cpp">
+      <Filter>Source Files\GameFiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -111,7 +117,13 @@
       <Filter>Header Files\Engine\System</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Header Files\Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="BezierPath.h">
+      <Filter>Header Files\GameFiles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

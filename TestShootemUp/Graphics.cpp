@@ -67,7 +67,7 @@ bool Graphics::Init()
 		return false;
 	}
 	
-	SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 
 	int flags = IMG_INIT_PNG;
 	if (!(IMG_Init(flags) & flags))
@@ -136,6 +136,13 @@ void Graphics::ClearBackBuffer()
 void Graphics::DrawTexture(SDL_Texture* tex, SDL_Rect* clip, SDL_Rect* rend, float angle, SDL_RendererFlip flip)
 {
 	SDL_RenderCopyEx(renderer, tex, clip, rend, angle, NULL, flip);
+}
+
+void Graphics::DrawLine(float startX, float startY, float endX, float endY)
+{
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+	SDL_RenderDrawLine(renderer, startX, startY, endX, endY);
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
 
 void Graphics::Render()
