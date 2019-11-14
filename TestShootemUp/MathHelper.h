@@ -3,6 +3,7 @@
 
 #define PI 3.14159265
 #define degToRad PI / 180.0f
+#define radToDeg 180.0f / PI
 
 struct Vector2
 {

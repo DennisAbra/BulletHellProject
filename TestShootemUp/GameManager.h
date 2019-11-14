@@ -24,6 +24,7 @@ private:
 	Texture* texture;
 	Texture* texture2;
 	Enemy* enemy;
+	Enemy* enemy2;
 
 	GameManager();
 	~GameManager();
