@@ -87,14 +87,10 @@ struct BezierCurve
 	Vector2 p3;
 
 	Vector2 CalculateCurvePoint(float t)
-	{
-		float tSquared = pow(t, 2);
-		float tCubicSquared = pow(t, 3);
+	{	
 		float u = 1.0f - t;
-		float uSquared = pow(u, 2);
-		float uCubicSquared = pow(u, 3);
-
-		Vector2 point = (uCubicSquared * p0) + (3 * uSquared * t * p1) + (3 * u * tSquared * p2) + (tCubicSquared * p3);
+		
+		Vector2 point = (pow(u,3) * p0) + (3 * pow(u,2) * t * p1) + (3 * u * pow(t,2) * p2) + (pow(t,3) * p3);
 		point.x = round(point.x);
 		point.y = round(point.y);
 		return point;
