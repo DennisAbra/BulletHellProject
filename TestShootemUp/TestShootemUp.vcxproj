@@ -145,7 +145,11 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="InputManager.cpp" />
+<<<<<<< Updated upstream
     <ClCompile Include="Player.cpp" />
+=======
+    <ClCompile Include="ObjectPooling.cpp" />
+>>>>>>> Stashed changes
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -163,7 +167,11 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MathHelper.h" />
+<<<<<<< Updated upstream
     <ClInclude Include="Player.h" />
+=======
+    <ClInclude Include="ObjectPooling.h" />
+>>>>>>> Stashed changes
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
