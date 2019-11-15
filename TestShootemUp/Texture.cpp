@@ -47,6 +47,16 @@ Texture::Texture(std::string text, std::string fontPath, int size, SDL_Color col
 	renderRect.h = height;
 }
 
+int Texture::GetWidth()
+{
+	return width;
+}
+
+int Texture::GetHeight()
+{
+	return height;
+}
+
 Texture::~Texture()
 {
 	texture = nullptr;

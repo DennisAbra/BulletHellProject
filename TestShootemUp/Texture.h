@@ -19,6 +19,8 @@ public:
 	Texture(std::string filename);
 	Texture(std::string filename, int x, int y, int w, int h);
 	Texture(std::string text, std::string fontPath, int size, SDL_Color color);
+	int GetWidth();
+	int GetHeight();
 	~Texture();
 
 	virtual void Render();
