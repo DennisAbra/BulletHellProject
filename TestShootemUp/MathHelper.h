@@ -20,7 +20,7 @@ struct Vector2
 
 	float Magnitude()
 	{
-		return sqrtf(x*x +y*y);
+		return sqrtf(x * x + y * y);
 	}
 
 	Vector2 Normalized()
@@ -29,39 +29,39 @@ struct Vector2
 		return Vector2(x / mag, y / mag);
 	}
 
-	Vector2& operator+= (const Vector2& rhs)
+	Vector2& operator+= (const Vector2& vector)
 	{
-		x += rhs.x;
-		y += rhs.y;
+		x += vector.x;
+		y += vector.y;
 		return *this;
 	}
 
-	Vector2& operator-= (const Vector2& rhs)
+	Vector2& operator-= (const Vector2& vector)
 	{
-		x -= rhs.x;
-		y -= rhs.y;
+		x -= vector.x;
+		y -= vector.y;
 		return *this;
 	}
 };
 
-inline Vector2 operator +(const Vector2& lefthandSide, const Vector2& righthandSide)
+inline Vector2 operator +(const Vector2& x, const Vector2& y)
 {
-	return Vector2(lefthandSide.x + righthandSide.x, lefthandSide.y + righthandSide.y);
+	return Vector2(x.x + y.x, x.y + y.y);
 }
 
-inline Vector2 operator -(const Vector2& lefthandSide, const Vector2& righthandSide)
+inline Vector2 operator -(const Vector2& x, const Vector2& y)
 {
-	return Vector2(lefthandSide.x - righthandSide.x, lefthandSide.y - righthandSide.y);
+	return Vector2(x.x - y.x, x.y - y.y);
 }
 
-inline Vector2 operator *(const Vector2& lefthandSide, const float& righthandSide)
+inline Vector2 operator *(const Vector2& x, const float& y)
 {
-	return Vector2(lefthandSide.x * righthandSide, lefthandSide.y * righthandSide);
+	return Vector2(x.x * y, x.y * y);
 }
 
-inline Vector2 operator *(const float& lefthandSide, const Vector2& righthandSide)
+inline Vector2 operator *(const float& x, const Vector2& y)
 {
-	return Vector2(lefthandSide * righthandSide.x, lefthandSide * righthandSide.y);
+	return Vector2(x * y.x, x * y.y);
 }
 
 inline Vector2 RotateVector(const Vector2& vec, float angle)
@@ -77,6 +77,8 @@ const Vector2 Vec2_Down = { 0.0f, -1.0f };
 const Vector2 Vec2_Right = { 1.0f, 0.0f };
 const Vector2 Vec2_Left = { -1.0f, 0.0f };
 
+
+
 struct BezierCurve
 {
 	Vector2 p0;
@@ -86,13 +88,13 @@ struct BezierCurve
 
 	Vector2 CalculateCurvePoint(float t)
 	{
-		float tt = t * t;
-		float ttt = tt * t;
+		float tSquared = pow(t, 2);
+		float tCubicSquared = pow(t, 3);
 		float u = 1.0f - t;
-		float uu = u * u;
-		float uuu = uu * u;
+		float uSquared = pow(u, 2);
+		float uCubicSquared = pow(u, 3);
 
-		Vector2 point = (uuu * p0) + (3 * uu * t * p1) + (3 * u * tt * p2) + (ttt * p3);
+		Vector2 point = (uCubicSquared * p0) + (3 * uSquared * t * p1) + (3 * u * tSquared * p2) + (tCubicSquared * p3);
 		point.x = round(point.x);
 		point.y = round(point.y);
 		return point;
