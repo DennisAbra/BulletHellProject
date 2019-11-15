@@ -98,8 +98,7 @@ void GameManager::Render()
 {
 	graphics->ClearBackBuffer();
 	//Do all draw calls here and before graphics->Render()
-	texture->Render();
-	texture2->Render();
+
 	enemy->Render();
 
 
