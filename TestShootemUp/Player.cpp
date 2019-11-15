@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include <iostream>
 Player::Player(int posX, int posY, InputManager* input, const char* filePath) : input(input)
 {
 	position.x = posX;
@@ -18,7 +18,7 @@ void Player::Update()
 	SwitchMovement();
 	MovePlayer();
 	texture->Pos(position);
-	
+
 }
 
 void Player::Render()
@@ -65,7 +65,7 @@ bool Player::CheckMouseScreenBounds()
 
 void Player::MovePlayer()
 {
-	
+
 	if (movementState == MovementStates::KEYBOARD)
 	{
 		Vector2 movement;
@@ -73,13 +73,14 @@ void Player::MovePlayer()
 		{
 			if (position.y <= 0 + texture->GetHeight() * .5f)
 			{
-				position.y =  0 + texture->GetHeight() * .5f;
+				position.y = 0 + texture->GetHeight() * .5f;
 			}
 			movement.y -= 10;
 		}
+
 		if (input->KeyDown(SDL_SCANCODE_S))
 		{
-			if (position.y >= Graphics::screenHeight - texture->GetHeight()* .5f)
+			if (position.y >= Graphics::screenHeight - texture->GetHeight() * .5f)
 			{
 				position.y = Graphics::screenHeight - texture->GetHeight() * .5f;
 			}
@@ -103,8 +104,8 @@ void Player::MovePlayer()
 		}
 		if (ShouldNormalizeVector())
 		{
-			//TODO SHOULD FIX THIS
-			position += movement * speed * timer->DeltaTime();
+			position += (movement * .75f) * speed  * timer->DeltaTime();
+		std::cout << movement.x << ',' <<  movement.y  << std::endl;
 		}
 		else
 		{
@@ -120,18 +121,17 @@ void Player::MovePlayer()
 		}
 		position = input->MousePos();
 	}
-	
 }
 
 void Player::SwitchMovement()
 {
 	if (movementState == MovementStates::KEYBOARD && input->MouseButtonReleased(InputManager::Mouse_Button::middle))
 	{
-			movementState = MovementStates::MOUSE;		
+		movementState = MovementStates::MOUSE;
 	}
 	else if (movementState == MovementStates::MOUSE && input->MouseButtonReleased(InputManager::Mouse_Button::middle))
-	{		
-			movementState = MovementStates::KEYBOARD;		
+	{
+		movementState = MovementStates::KEYBOARD;
 	}
 }
 
