@@ -36,12 +36,12 @@ GameManager::GameManager() // Handle as Awake in Unity
 
 	timer = Timer::Instance();
 
-	texture = new Texture("Hello World", "font.ttf", 72, {255, 0, 0});
+	/*texture = new Texture("Hello World", "font.ttf", 72, {255, 0, 0});
 	texture->Pos(Vector2(Graphics::screenWidth * 0.5f, Graphics::screenHeight * 0.4));
 	texture2 = new Texture("Hello World", "font.ttf", 72, {255, 255, 0});
-	texture2->Pos(Vector2(Graphics::screenWidth * 0.5f, Graphics::screenHeight * 0.7));
+	texture2->Pos(Vector2(Graphics::screenWidth * 0.5f, Graphics::screenHeight * 0.7));*/
 
-	texture2->Parent(texture);
+	//texture2->Parent(texture);
 	Enemy::CreatePaths();
 	enemy = new Enemy(0);
 
@@ -67,11 +67,16 @@ GameManager::~GameManager()
 	Timer::Release();
 	timer = nullptr;
 
+	if (texture)
+	{
 	delete texture;
 	texture = nullptr;
-
+	}
+	if (texture2)
+	{
 	delete texture2;
 	texture2 = nullptr;
+	}
 
 	delete enemy;
 	enemy = nullptr;
@@ -86,20 +91,7 @@ void GameManager::EarlyUpdate()
 
 void GameManager::Update() // Do Entity updates and input here
 {
-	if (inputManager->KeyPressed(SDL_SCANCODE_W))
-	{
-		texture2->Parent(texture);
-	}
-
-	if (inputManager->MouseButtonPressed(InputManager::middle))
-	{
-		texture2->Parent(nullptr);
-	}
-
 	enemy->Update();
-
-
-	texture->Rotate(10 * timer->DeltaTime());
 }
 
 void GameManager::Render()
