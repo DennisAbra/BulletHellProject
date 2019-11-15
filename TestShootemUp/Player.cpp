@@ -16,14 +16,27 @@ void Player::Render()
 
 void Player::MovePlayer()
 {
-	if (currentState == KEYBOARD)
+	Player::SwitchMovement();
+	if (movementState == KEYBOARD)
 	{
-		if (input.)
+		if (input->KeyPressed(SDL_SCANCODE_W))
 		{
-
+			position.y -= 10;
+		}
+		else if (input->KeyPressed(SDL_SCANCODE_S))
+		{
+			position.y += 10;
+		}
+		else if (input->KeyPressed(SDL_SCANCODE_A))
+		{
+			position.x -= 10;
+		}
+		else if (input->KeyPressed(SDL_SCANCODE_D))
+		{
+			position.x += 10;
 		}
 	}
-	else if (currentState == MOUSE)
+	else if (movementState == MOUSE)
 	{
 		position = input->MousePos();
 	}
@@ -32,18 +45,18 @@ void Player::MovePlayer()
 
 void Player::SwitchMovement()
 {
-	if (currentState == KEYBOARD)
+	if (movementState == KEYBOARD)
 	{
 		if (input->middle)
 		{
-			currentState = MOUSE;
+			movementState = MOUSE;
 		}
 	}
-	else if (currentState == MOUSE)
+	else if (movementState == MOUSE)
 	{
 		if (input->middle)
 		{
-			currentState = KEYBOARD;
+			movementState = KEYBOARD;
 		}
 	}
 }

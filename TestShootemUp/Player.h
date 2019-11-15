@@ -11,6 +11,7 @@ public:
 	void Render();
 
 	enum MovementStates {KEYBOARD = 0, MOUSE};
+	
 private:
 	InputManager* input;
 
@@ -22,7 +23,8 @@ private:
 	bool active;
 	bool mouseMovement;
 
-	MovementStates currentState;
+	MovementStates movementState;
+	
 	void MovePlayer();
 	void SwitchMovement();
 };
