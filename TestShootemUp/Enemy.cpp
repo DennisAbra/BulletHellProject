@@ -31,9 +31,30 @@ Enemy::Enemy(int path)
 
 	texture = new Texture("swordfish.png");
 	texture->Parent(this);
+
 	texture->Pos(Vec2_Zero);
 
 	speed = 100.0f;
+
+}
+
+Enemy::Enemy(int path, std::string textureName)
+{
+	timer = Timer::Instance();
+
+	currentPath = path;
+
+	currentState = flyIn;
+
+	currentWaypoint = 0;
+	Pos(paths[currentPath][currentWaypoint]);
+
+	texture = new Texture(textureName);
+	texture->Parent(this);
+
+	texture->Pos(Vec2_Zero);
+
+	speed = 50.0f;
 }
 
 Enemy::~Enemy()

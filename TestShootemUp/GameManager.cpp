@@ -34,16 +34,19 @@ GameManager::GameManager() // Handle as Awake in Unity
 
 	audioManager = AudioManager::Instance();
 
+	entityManager = EntityManager::Instance();
+
 	timer = Timer::Instance();
 
-	/*texture = new Texture("Hello World", "font.ttf", 72, {255, 0, 0});
-	texture->Pos(Vector2(Graphics::screenWidth * 0.5f, Graphics::screenHeight * 0.4));
-	texture2 = new Texture("Hello World", "font.ttf", 72, {255, 255, 0});
-	texture2->Pos(Vector2(Graphics::screenWidth * 0.5f, Graphics::screenHeight * 0.7));*/
-
-	//texture2->Parent(texture);
 	Enemy::CreatePaths();
 	enemy = new Enemy(0);
+	enemy2 = new Enemy(0, "SpriteSheet.png");
+
+	player = new Player(400, 300, inputManager, "crawfish.png");
+	entityManager->AddPlayer(player);
+
+	entityManager->AddEnemies(enemy);
+	entityManager->AddEnemies(enemy2);
 
 
 
@@ -52,6 +55,13 @@ GameManager::GameManager() // Handle as Awake in Unity
 
 GameManager::~GameManager()
 {
+	player = nullptr;
+	enemy = nullptr;
+	enemy2 = nullptr;
+
+	entityManager->Instance()->Release();
+	entityManager = nullptr;
+
 	AudioManager::Release();
 	audioManager = nullptr;
 
@@ -67,21 +77,6 @@ GameManager::~GameManager()
 	Timer::Release();
 	timer = nullptr;
 
-	if (texture)
-	{
-	delete texture;
-	texture = nullptr;
-	}
-	if (texture2)
-	{
-	delete texture2;
-	texture2 = nullptr;
-	}
-
-	delete enemy;
-	enemy = nullptr;
-
-
 }
 
 void GameManager::EarlyUpdate()
@@ -91,7 +86,7 @@ void GameManager::EarlyUpdate()
 
 void GameManager::Update() // Do Entity updates and input here
 {
-	enemy->Update();
+	entityManager->Update();
 }
 
 void GameManager::Render()
@@ -99,8 +94,7 @@ void GameManager::Render()
 	graphics->ClearBackBuffer();
 	//Do all draw calls here and before graphics->Render()
 
-	enemy->Render();
-
+	entityManager->Render();
 
 	graphics->Render();
 }

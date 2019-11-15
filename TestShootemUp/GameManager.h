@@ -2,7 +2,7 @@
 #include "AnimatedTexture.h"
 #include "InputManager.h"
 #include "AudioManager.h"
-#include "Enemy.h"
+#include "EntityManager.h"
 
 
 class GameManager
@@ -16,15 +16,18 @@ private:
 	AssetManager* assetManager;
 	InputManager* inputManager;
 	AudioManager* audioManager;
+	EntityManager* entityManager;
+	
 
 	const int frameRate = 60;
 	Timer* timer;
 
 	SDL_Event event;
-	Texture* texture;
-	Texture* texture2;
+
 	Enemy* enemy;
 	Enemy* enemy2;
+
+	Player* player;
 
 	GameManager();
 	~GameManager();

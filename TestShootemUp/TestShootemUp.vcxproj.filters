@@ -93,6 +93,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\GameFiles\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEntity.h">
@@ -136,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files\GameFiles\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

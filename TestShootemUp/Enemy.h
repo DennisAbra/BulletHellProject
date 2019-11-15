@@ -25,6 +25,7 @@ private:
 public:
 	static void CreatePaths();
 	Enemy(int path);
+	Enemy(int path, std::string textureName);
 	virtual ~Enemy();
 
 	virtual void HandleFlyInState();
