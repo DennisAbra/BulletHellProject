@@ -8,8 +8,8 @@
 class Graphics
 {
 public:
-	static const int screenWidth = 800; // 800
-	static const int screenHeight = 600; // 600
+	static const int screenWidth = 1024; // 800
+	static const int screenHeight = 768; // 600
 
 	static Graphics* Instance();
 	static void Release();

@@ -28,7 +28,7 @@ private:
 	bool mouseMovement;
 
 	MovementStates movementState;
-	
+	bool CheckMouseScreenBounds();
 	void MovePlayer();
 	void SwitchMovement();
 };
