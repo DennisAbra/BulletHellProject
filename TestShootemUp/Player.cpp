@@ -1,42 +1,59 @@
 #include "Player.h"
 
-Player::Player(int posX, int posY, InputManager* input) : input(input)
+Player::Player(int posX, int posY, InputManager* input, const char* filePath) : input(input)
 {
 	position.x = posX;
 	position.y = posY;
+
+	texture = new Texture(filePath);
+	texture->Pos(position);
+
+	movementState = MovementStates::KEYBOARD;
+
+	timer = timer->Instance();
 }
 
 void Player::Update()
 {
+	SwitchMovement();
+	MovePlayer();
+	texture->Pos(position);
+	
 }
 
 void Player::Render()
 {
+	if (Active())
+	{
+		texture->Render();
+	}
 }
 
 void Player::MovePlayer()
 {
-	Player::SwitchMovement();
-	if (movementState == KEYBOARD)
+	
+	if (movementState == MovementStates::KEYBOARD)
 	{
-		if (input->KeyPressed(SDL_SCANCODE_W))
+		Vector2 movement;
+		if (input->KeyDown(SDL_SCANCODE_W))
 		{
-			position.y -= 10;
+			movement.y -= 10;
 		}
-		else if (input->KeyPressed(SDL_SCANCODE_S))
+		if (input->KeyDown(SDL_SCANCODE_S))
 		{
-			position.y += 10;
+			movement.y += 10;
 		}
-		else if (input->KeyPressed(SDL_SCANCODE_A))
+		if (input->KeyDown(SDL_SCANCODE_A))
 		{
-			position.x -= 10;
+			movement.x -= 10;
 		}
-		else if (input->KeyPressed(SDL_SCANCODE_D))
+		if (input->KeyDown(SDL_SCANCODE_D))
 		{
-			position.x += 10;
+			movement.x += 10;
 		}
+		position += movement * speed * timer->DeltaTime();
 	}
-	else if (movementState == MOUSE)
+	else if (movementState == MovementStates::MOUSE)
 	{
 		position = input->MousePos();
 	}
@@ -45,19 +62,13 @@ void Player::MovePlayer()
 
 void Player::SwitchMovement()
 {
-	if (movementState == KEYBOARD)
+	if (movementState == MovementStates::KEYBOARD && input->MouseButtonReleased(InputManager::Mouse_Button::middle))
 	{
-		if (input->middle)
-		{
-			movementState = MOUSE;
-		}
+			movementState = MovementStates::MOUSE;		
 	}
-	else if (movementState == MOUSE)
-	{
-		if (input->middle)
-		{
-			movementState = KEYBOARD;
-		}
+	else if (movementState == MovementStates::MOUSE && input->MouseButtonReleased(InputManager::Mouse_Button::middle))
+	{		
+			movementState = MovementStates::KEYBOARD;		
 	}
 }
 
