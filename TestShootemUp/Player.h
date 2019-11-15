@@ -26,6 +26,7 @@ private:
 	float speed = 50.f;
 	bool active;
 	bool mouseMovement;
+	bool ShouldNormalizeVector();
 
 	MovementStates movementState;
 	bool CheckMouseScreenBounds();

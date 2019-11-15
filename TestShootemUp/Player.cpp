@@ -29,6 +29,18 @@ void Player::Render()
 	}
 }
 
+bool Player::ShouldNormalizeVector()
+{
+	if (input->KeyDown(SDL_SCANCODE_W) && input->KeyDown(SDL_SCANCODE_D)
+		|| input->KeyDown(SDL_SCANCODE_W) && input->KeyDown(SDL_SCANCODE_A)
+		|| input->KeyDown(SDL_SCANCODE_S) && input->KeyDown(SDL_SCANCODE_A)
+		|| input->KeyDown(SDL_SCANCODE_S) && input->KeyDown(SDL_SCANCODE_D))
+	{
+		return true;
+	}
+	return false;
+}
+
 bool Player::CheckMouseScreenBounds()
 {
 	if (position.x <= 0 + texture->GetWidth() * .5f && input->MousePos().x <= 0 + texture->GetWidth() * .5f)
@@ -89,7 +101,16 @@ void Player::MovePlayer()
 			}
 			movement.x += 10;
 		}
-		position += movement * speed * timer->DeltaTime();
+		if (ShouldNormalizeVector())
+		{
+			//TODO SHOULD FIX THIS
+			position += movement * speed * timer->DeltaTime();
+		}
+		else
+		{
+			position += movement * speed * timer->DeltaTime();
+		}
+
 	}
 	else if (movementState == MovementStates::MOUSE)
 	{
