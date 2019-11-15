@@ -48,11 +48,6 @@
     </Filter>
     <Filter Include="Header Files\GameFiles\Entities">
       <UniqueIdentifier>{171832fd-c72c-4163-9b4a-ee500a578521}</UniqueIdentifier>
-    <Filter Include="Header Files\GameFiles\GameSystems">
-      <UniqueIdentifier>{cd510bcb-fbbb-48b4-bb3b-e2069548a05e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameFiles\GameSystems">
-      <UniqueIdentifier>{8ac8ff13-3f07-430f-a09b-2717de385170}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -89,23 +84,20 @@
     <ClCompile Include="Collision.cpp">
       <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
-    <ClCompile Include="BezierPath.cpp">
-      <Filter>Source Files\GameFiles</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\GameFiles\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\GameFiles\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="EntityManager.cpp">
-      <Filter>Source Files\Engine\System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source.cpp">
+    <ClCompile Include="ObjectPooling.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectPooling.cpp">
-      <Filter>Source Files\GameFiles\GameSystems</Filter>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>Source Files\Engine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BezierPath.cpp">
+      <Filter>Source Files\Engine\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,19 +134,20 @@
     <ClInclude Include="Collision.h">
       <Filter>Header Files\Engine\System</Filter>
     </ClInclude>
-    <ClInclude Include="BezierPath.h">
-      <Filter>Header Files\GameFiles</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Header Files\GameFiles\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files\GameFiles\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="EntityManager.h">
-      <Filter>Header Files</Filter>
     <ClInclude Include="ObjectPooling.h">
-      <Filter>Header Files\GameFiles\GameSystems</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Header Files\Engine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BezierPath.h">
+      <Filter>Header Files\Engine\Entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
