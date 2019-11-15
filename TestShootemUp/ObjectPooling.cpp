@@ -38,7 +38,7 @@ void ObjectPooling::spawn(double x, double y, int lifeTime)
 	{
 		if (!entities[i].Active()) 
 		{
-			//Spawn
+			
 			entities[i].Active = false; //Inactive when spawned
 		}
 	}
