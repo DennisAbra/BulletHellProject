@@ -50,13 +50,27 @@ GameManager::GameManager() // Handle as Awake in Unity
 	entityManager->AddEnemies(enemy);
 	entityManager->AddEnemies(enemy2);
 
+	enemyPool->InitializeEnemyPool();
 
+	for (int i = 0; i < enemyPool->POOL_SIZE; i++)
+	{
+		enemyPool->SetEnemyActive();
+
+		if (enemyPool->enemies[i] != NULL)
+		{
+
+			printf("Enemy spawing works!\n");
+		}
+	}
 
 
 }
 
 GameManager::~GameManager()
 {
+	enemyPool->Release();
+	enemyPool = nullptr;
+
 	player = nullptr;
 
 	entityManager->Instance()->Release();
@@ -105,20 +119,9 @@ void GameManager::LateUpdate() // Do collision or Physics checks here
 	timer->Reset();
 }
 
-void GameManager::Run()
+void GameManager::Run() // Don't test stuff here. Use the Update functions
 {
-	enemyPool->InitializeEnemyPool();
 
-	for (int i = 0; i < enemyPool->POOL_SIZE; i++)
-	{
-		enemyPool->SetEnemyActive();
-
-		if (enemyPool->enemies[i] != NULL) 
-		{
-
-			printf("Enemy spawing works!\n");
-		}
-	}
 
 	while (!quit)
 	{
@@ -128,7 +131,6 @@ void GameManager::Run()
 		{
 			if (event.type == SDL_QUIT)
 			{
-				enemyPool->CleanUpEnemies();
 				quit = true;
 			}
 		}

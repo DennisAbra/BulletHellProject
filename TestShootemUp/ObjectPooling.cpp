@@ -12,6 +12,14 @@ ObjectPooling* ObjectPooling::Instance()
 	return instance;
 }
 
+void ObjectPooling::Release()
+{
+	delete instance;
+	instance = nullptr;
+
+	CleanUpEnemies();
+}
+
 ObjectPooling::ObjectPooling() //cTor
 {
 }
@@ -29,7 +37,7 @@ void ObjectPooling::InitializeEnemyPool()
 	}
 }
 
-void ObjectPooling::SetEnemyActive()
+void ObjectPooling::SetEnemyActive() // Sets all enemies active. Think about the nameing of this method. Possibly change it to only make a specific enemy active
 {
 	for (int i = 0; i < POOL_SIZE; i++)
 	{
@@ -45,10 +53,14 @@ void ObjectPooling::CleanUpEnemies()
 		enemies[i]->active = false;
 		enemies[i] = nullptr;
 		enemies[i] = NULL;
+		//delete enemies[i];
 	}
+
+	// if using std::vector<Enemy*>
+	//enemies.clear();
 }
 
-void ObjectPooling::SetEnemyInactive(int enemy)
+void ObjectPooling::SetEnemyInactive(int enemy)// Sets all enemies active. Think about the nameing of this method. Possibly change it to only make a specific enemy inactive
 {
 	enemies[enemy]->active = false;
 }

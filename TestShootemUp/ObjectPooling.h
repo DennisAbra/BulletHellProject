@@ -16,6 +16,8 @@ public:
 
 	static ObjectPooling* Instance();
 
+	void Release();
+
 	void spawn(double x, double y, int lifeTime);
 
 	void InitializeEnemyPool();
@@ -29,6 +31,7 @@ public:
 	static const int POOL_SIZE = 5;
 
 	Enemy* enemies[POOL_SIZE];
+	//std::vector<Enemy*> enemies; Might want to use this instead
 
 
 	
