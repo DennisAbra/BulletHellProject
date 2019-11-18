@@ -42,32 +42,33 @@ GameManager::GameManager() // Handle as Awake in Unity
 
 	Enemy::CreatePaths();
 	enemy = new Enemy(0);
-	enemy2 = new Enemy(0, "SpriteSheet.png");
+	//enemy2 = new Enemy(0);
 
-	player = new Player(400, 300, inputManager, "crawfish.png");
+	player = new Player(400, 300, inputManager, "Bubble4.png");
 	entityManager->AddPlayer(player);
 
 	entityManager->AddEnemies(enemy);
-	entityManager->AddEnemies(enemy2);
+	//entityManager->AddEnemies(enemy2);
 
-	enemyPool->InitializeEnemyPool();
 
-	for (int i = 0; i < enemyPool->POOL_SIZE; i++)
-	{
-		enemyPool->SetEnemyActive();
+	//for (int i = 0; i < enemyPool->POOL_SIZE; i++)
+	//{
+	//	enemyPool->SetEnemyActive();
 
-		if (enemyPool->enemies[i] != NULL)
-		{
+	//	if (enemyPool->enemies[i] != NULL)
+	//	{
 
-			printf("Enemy spawing works!\n");
-		}
-	}
-
+	//		printf("Enemy spawing works!\n");
+	//	}
+	//}	
 
 }
 
 GameManager::~GameManager()
 {
+	delete texture;
+	texture = nullptr;
+
 	enemyPool->Release();
 	enemyPool = nullptr;
 
@@ -109,6 +110,7 @@ void GameManager::Render()
 	//Do all draw calls here and before graphics->Render()
 
 	entityManager->Render();
+	texture->Render();
 
 	graphics->Render();
 }

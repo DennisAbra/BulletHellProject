@@ -99,6 +99,9 @@
     <ClCompile Include="BezierPath.cpp">
       <Filter>Source Files\Engine\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEntity.h">
@@ -148,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="BezierPath.h">
       <Filter>Header Files\Engine\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

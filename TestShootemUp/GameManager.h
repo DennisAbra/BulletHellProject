@@ -31,6 +31,8 @@ private:
 
 	Player* player;
 
+	Texture* texture;
+
 	GameManager();
 	~GameManager();
 

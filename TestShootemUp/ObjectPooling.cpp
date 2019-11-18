@@ -17,7 +17,7 @@ void ObjectPooling::Release()
 	delete instance;
 	instance = nullptr;
 
-	CleanUpEnemies();
+	//CleanUpEnemies();
 }
 
 ObjectPooling::ObjectPooling() //cTor
