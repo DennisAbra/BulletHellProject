@@ -1,34 +1,36 @@
 #pragma once
 #include "GameEntity.h"
 #include "EntityManager.h"
-#include <string>
-#include "Timer.h"
-#include <vector>
 
 class ObjectPooling
 {
-private:
-
-	static ObjectPooling* Instance; //Singleton
-
+	//TODO: Implement Enemy Reset
 public:
+
+	static ObjectPooling* instance; //Singleton
 
 	int spawnTimer;
 
 	ObjectPooling();
 	~ObjectPooling();
 
+	static ObjectPooling* Instance();
 
 	void spawn(double x, double y, int lifeTime);
 
-	void CleanUpEnemies(); //Not implemented in cpp
-	void CleanUpBullets(); //Not implemented in cpp
+	void InitializeEnemyPool();
 
-	GameEntity SpawnAfterTime(float spawnTime, std::string object);
+	void SetEnemyActive();
 
-	void animate();
+	void CleanUpEnemies();
 
-private:
+	void SetEnemyInactive(int enemy);
 
-	static const int POOL_SIZE = 2;
+	static const int POOL_SIZE = 5;
+
+	Enemy* enemies[POOL_SIZE];
+
+
+	
+
 };

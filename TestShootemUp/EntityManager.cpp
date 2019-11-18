@@ -28,7 +28,7 @@ void EntityManager::Release()
 	instance = nullptr;
 }
 
-void EntityManager::AddEnemies(Enemy* enemy)
+void EntityManager::AddEnemies(Enemy* enemy) //TODO: Decide with group if we remove these or implement object pooling in this script/GameEntity instead instead?
 {
 	enemies.push_back(enemy);
 }

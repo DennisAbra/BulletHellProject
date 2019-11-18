@@ -3,6 +3,7 @@
 #include "InputManager.h"
 #include "AudioManager.h"
 #include "EntityManager.h"
+#include "ObjectPooling.h"
 
 
 class GameManager
@@ -12,6 +13,7 @@ private:
 	static GameManager* instance;
 	bool quit;
 
+	ObjectPooling* enemyPool;
 	Graphics* graphics;
 	AssetManager* assetManager;
 	InputManager* inputManager;

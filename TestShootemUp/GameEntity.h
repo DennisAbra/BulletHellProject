@@ -31,12 +31,13 @@ public:
 	void Translate(Vector2 vec);
 	void Rotate(float amount);
 
+	bool active = false;
+
 private:
 
 	Vector2 pos;
 	float rotation;
 	Vector2 scale;
 
-	bool active;
 	GameEntity* parent;
 };

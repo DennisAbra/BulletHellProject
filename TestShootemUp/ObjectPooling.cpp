@@ -1,50 +1,58 @@
-//#include "ObjectPooling.h"
-//
-//
-//ObjectPooling* ObjectPooling::Instance = nullptr;
-//Timer* timer;
-//
-//ObjectPooling::ObjectPooling() //cTor
-//{
-//
-//}
-//
-//ObjectPooling::~ObjectPooling() 
-//{
-//	//entities[POOL_SIZE] = NULL;
-//}
-//
-//GameEntity ObjectPooling::SpawnAfterTime(float spawnTime, std::string object) 
-//{
-//	spawnTime += timer->DeltaTime();
-//
-//	for (int i = 0; i < POOL_SIZE; i++)
-//	{
-//		//Search for GameEntity with the name of std::string object
-//		//Spawn found object in the if statement
-//		//If not found, throw an error
-//	}
-//
-//	if (spawnTimer <= spawnTime) 
-//	{
-//		//Set the found object to active and reset spawnTimer to 0.
-//		//return
-//	}
-//}
-//
-//void ObjectPooling::spawn(double x, double y, int lifeTime)
-//{
-//	//for (int i = 0; i < POOL_SIZE; i++)
-//	//{
-//	//	if (!entities[i].Active()) 
-//	//	{
-//	//		
-//	//		entities[i].Active = false; //Inactive when spawned
-//	//	}
-//	//}
-//}
-//
-//void ObjectPooling::animate()
-//{
-//
-//}
+#include "ObjectPooling.h"
+
+ObjectPooling* ObjectPooling::instance = nullptr;
+
+ObjectPooling* ObjectPooling::Instance()
+{
+	if (instance == nullptr)
+	{
+		instance = new ObjectPooling();
+	}
+
+	return instance;
+}
+
+ObjectPooling::ObjectPooling() //cTor
+{
+}
+
+ObjectPooling::~ObjectPooling()
+{
+}
+
+/* Create Enemies store them in enemies[] and set them to inactive*/
+void ObjectPooling::InitializeEnemyPool()
+{
+	for (int i = 0; i < POOL_SIZE; i++)
+	{
+		enemies[i] = new Enemy(0);
+	}
+}
+
+void ObjectPooling::SetEnemyActive()
+{
+	for (int i = 0; i < POOL_SIZE; i++)
+	{
+		enemies[i]->active = true;
+	}
+}
+
+/* Deletes all enemies created */
+void ObjectPooling::CleanUpEnemies()
+{
+	for (int i = 0; i < POOL_SIZE; i++)
+	{
+		enemies[i]->active = false;
+		enemies[i] = nullptr;
+		enemies[i] = NULL;
+	}
+}
+
+void ObjectPooling::SetEnemyInactive(int enemy)
+{
+	enemies[enemy]->active = false;
+}
+
+
+
+
