@@ -1,6 +1,7 @@
 #pragma once
 #include "GameEntity.h"
-#include "EntityManager.h"
+
+class Enemy;
 
 class ObjectPooling
 {
@@ -28,10 +29,12 @@ public:
 
 	void SetEnemyInactive(int enemy);
 
-	static const int POOL_SIZE = 5;
+	//std::vector<Enemy*> GetListOfEnemies();
+
+	static const int POOL_SIZE = 15;
 
 	Enemy* enemies[POOL_SIZE];
-	//std::vector<Enemy*> enemies; Might want to use this instead
+	//std::vector<Enemy*> enemies; //Might want to use this instead
 
 
 	

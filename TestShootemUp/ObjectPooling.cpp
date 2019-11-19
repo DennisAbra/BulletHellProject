@@ -1,4 +1,5 @@
 #include "ObjectPooling.h"
+#include "Enemy.h"
 
 ObjectPooling* ObjectPooling::instance = nullptr;
 
@@ -31,10 +32,18 @@ ObjectPooling::~ObjectPooling()
 /* Create Enemies store them in enemies[] and set them to inactive*/
 void ObjectPooling::InitializeEnemyPool()
 {
-	for (int i = 0; i < POOL_SIZE; i++)
+	for (int i = 0; i < POOL_SIZE / 3; i++)
 	{
 		enemies[i] = new Enemy(0);
-		
+	}
+	for (int i = 5; i < 10; i++)
+	{
+		enemies[i] = new Enemy(1);
+	}
+
+	for (int i = 10; i < POOL_SIZE; i++)
+	{
+		enemies[i] = new Enemy(2);
 	}
 }
 
@@ -53,10 +62,9 @@ void ObjectPooling::CleanUpEnemies()
 	{
 		enemies[i]->active = false;
 		enemies[i] = nullptr;
-		enemies[i] = NULL;
-		//delete enemies[i];
+		delete enemies[i];
 	}
-
+	
 	// if using std::vector<Enemy*>
 	//enemies.clear();
 }
@@ -65,6 +73,11 @@ void ObjectPooling::SetEnemyInactive(int enemy)// Sets all enemies active. Think
 {
 	enemies[enemy]->active = false;
 }
+
+//std::vector<Enemy*> ObjectPooling::GetListOfEnemies()
+//{
+//	return enemies;
+//}
 
 
 
