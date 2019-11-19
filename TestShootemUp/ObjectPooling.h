@@ -18,7 +18,7 @@ public:
 
 	void Release();
 
-	void spawn(double x, double y, int lifeTime);
+	void Spawn(double x, double y, int lifeTime);
 
 	void InitializeEnemyPool();
 

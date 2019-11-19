@@ -42,6 +42,7 @@ void EntityManager::Update()
 {
 	for (auto enemy : enemies)
 	{
+		//TODO - create a kongo line of enemies
 		enemy->Update();
 	}
 	

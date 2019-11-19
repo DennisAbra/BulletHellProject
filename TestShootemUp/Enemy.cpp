@@ -9,11 +9,10 @@ void Enemy::CreatePaths()
 	int currentPath = 0;
 	BezierPath* path = new BezierPath();
 
-	path->AddCurve({ Vector2(Graphics::screenWidth * 0, Graphics::screenHeight * 0), Vector2(Graphics::screenWidth * 0.5f, Graphics::screenHeight * 0.05f),
-		Vector2(Graphics::screenWidth * 0.3f,  Graphics::screenHeight * 0.25f),Vector2(Graphics::screenWidth * 0.6f, Graphics::screenHeight * 0.7f) }, 180);
+	path->AddCurve(path->TopLeftSCurve(), 45);
 
-	path->AddCurve({ Vector2(Graphics::screenWidth * 0.7f, Graphics::screenHeight * 0.2f), Vector2(Graphics::screenWidth * 0.05f, Graphics::screenHeight * 0.5f),
-		Vector2(Graphics::screenWidth * 0.8f, Graphics::screenHeight * 0.3f),Vector2(Graphics::screenWidth * 1.1f, Graphics::screenHeight * 0.5f) }, 180);
+	//path->AddCurve({ Vector2(Graphics::screenWidth * 0.7f, Graphics::screenHeight * 0.2f), Vector2(Graphics::screenWidth * 0.05f, Graphics::screenHeight * 0.5f),
+		//Vector2(Graphics::screenWidth * 0.8f, Graphics::screenHeight * 0.3f),Vector2(Graphics::screenWidth * 1.1f, Graphics::screenHeight * 0.5f) }, 180);
 
 	paths.push_back(std::vector<Vector2>());
 	path->Sample(&paths[currentPath]);

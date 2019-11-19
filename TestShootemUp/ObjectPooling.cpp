@@ -34,6 +34,7 @@ void ObjectPooling::InitializeEnemyPool()
 	for (int i = 0; i < POOL_SIZE; i++)
 	{
 		enemies[i] = new Enemy(0);
+		
 	}
 }
 

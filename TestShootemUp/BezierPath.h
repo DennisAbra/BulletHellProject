@@ -15,5 +15,13 @@ public:
 
 	void AddCurve(BezierCurve curve, int sample);
 
+	//Easy to use curves
+	BezierCurve TopUCurve();
+	BezierCurve LeftUCurve();
+	BezierCurve RightUCurve();
+
+	BezierCurve TopLeftSCurve();
+	BezierCurve TopRightSCurve();
+	
 	void Sample(std::vector<Vector2>* sampledPath);
 };

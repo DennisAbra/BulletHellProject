@@ -1,5 +1,5 @@
 #include "BezierPath.h"
-
+#include "Graphics.h"
 BezierPath::BezierPath()
 {
 
@@ -15,6 +15,36 @@ void BezierPath::AddCurve(BezierCurve curve, int sample)
 	curves.push_back(curve);
 	samples.push_back(sample);
 }
+
+BezierCurve BezierPath::TopUCurve()
+{
+	return { Vector2(Graphics::screenWidth * 0, Graphics::screenHeight * 0), Vector2(Graphics::screenWidth * 0.5f, Graphics::screenHeight * 0.55f),
+		Vector2(Graphics::screenWidth * 0.5f,  Graphics::screenHeight * 0.55f),Vector2(Graphics::screenWidth * 1.f, Graphics::screenHeight * 0.f) };
+}
+
+BezierCurve BezierPath::LeftUCurve()
+{
+	return { Vector2(Graphics::screenWidth * 0, Graphics::screenHeight * 0.2), Vector2(Graphics::screenWidth * 0.5f, Graphics::screenHeight * 0.55f),
+		Vector2(Graphics::screenWidth * 0.5f,  Graphics::screenHeight * 0.55f),Vector2(Graphics::screenWidth * 1.f, Graphics::screenHeight * 0.f) };
+}
+
+BezierCurve BezierPath::RightUCurve()
+{
+	return BezierCurve();
+}
+
+BezierCurve BezierPath::TopLeftSCurve()
+{
+	return { Vector2(Graphics::screenWidth * 0, Graphics::screenHeight * 0.2f), Vector2(Graphics::screenWidth * 0.8f, Graphics::screenHeight * 0.2f),
+		Vector2(Graphics::screenWidth * 0.2f,  Graphics::screenHeight * 0.8f),Vector2(Graphics::screenWidth * 1.f, Graphics::screenHeight * 0.8f) };
+}
+
+BezierCurve BezierPath::TopRightSCurve()
+{
+	return { Vector2(Graphics::screenWidth * 1.f, Graphics::screenHeight * 0.2f), Vector2(Graphics::screenWidth * 0.2f, Graphics::screenHeight * 0.2f),
+		Vector2(Graphics::screenWidth * 0.8f,  Graphics::screenHeight * 0.8f),Vector2(Graphics::screenWidth * 0.f, Graphics::screenHeight * 0.8f) };
+}
+
 
 void BezierPath::Sample(std::vector<Vector2>* sampledPath)
 {
