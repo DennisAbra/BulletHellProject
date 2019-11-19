@@ -36,7 +36,7 @@ void Player::Update()
 	MovePlayer();
 	texture->Pos(position);
 
-	firePoint = { texture->Pos().x, texture->Pos().y + 5 };
+	firePoint = { texture->Pos().x, texture->Pos().y - 20 };
 
 	HandleFiring();
 

@@ -9,6 +9,7 @@ Bullet::Bullet()
 	texture = new Texture("Bubble4.png");
 	texture->Parent(this);
 	texture->Pos(Vec2_Zero);
+	texture->Scale(Vector2(0.5f, 0.5f));
 
 	Reload();
 }
