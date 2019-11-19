@@ -106,47 +106,43 @@ void Enemy::HandleFlyInState()
 }
 
 void Enemy::HandleInactiveState()
-{
-	float t = 5;
+{	
 	Active(false);
 
-	accuTimer += timer->DeltaTime();
-
-	if (!ObjectPooling::Instance()->enemies[5]->active)
+	if (!ObjectPooling::Instance()->enemies[4]->active)
 	{
 		for (int i = 0; i < 5; i++)
 		{
 			ObjectPooling::Instance()->enemies[i]->Active(true);
-			Pos(startPos);
-			this->currentWaypoint = 0;
-			this->currentState = flyIn;
-		}
-		//ObjectPooling::Instance()->enemies[5]->Active(true);
-		//this->currentState = flyIn;
+			ObjectPooling::Instance()->enemies[i]->Pos(ObjectPooling::Instance()->enemies[i]->startPos);
+			ObjectPooling::Instance()->enemies[i]->currentWaypoint = 0;
+			ObjectPooling::Instance()->enemies[i]->currentState = flyIn;
+			
+		}	
 	}
 
+	if (!ObjectPooling::Instance()->enemies[9]->active)
+	{
+		for (int i = 5; i < 10; i++)
+		{
+			ObjectPooling::Instance()->enemies[i]->Active(true);
+			ObjectPooling::Instance()->enemies[i]->Pos(ObjectPooling::Instance()->enemies[i]->startPos);
+			ObjectPooling::Instance()->enemies[i]->currentWaypoint = 0;
+			ObjectPooling::Instance()->enemies[i]->currentState = flyIn;
+		}
+	}
 
+	if (!ObjectPooling::Instance()->enemies[14]->active)
+	{
+		for (int i = 10; i < 15; i++)
+		{
+			ObjectPooling::Instance()->enemies[i]->Active(true);
+			ObjectPooling::Instance()->enemies[i]->Pos(ObjectPooling::Instance()->enemies[i]->startPos);
+			ObjectPooling::Instance()->enemies[i]->currentWaypoint = 0;
+			ObjectPooling::Instance()->enemies[i]->currentState = flyIn;
 
-
-	//if (!!ObjectPooling::Instance()->enemies[10]->active)
-	//{
-	//	for (int y = 5; y < 10; y++)
-	//	{
-	//		ObjectPooling::Instance()->enemies[y]->Active(true);
-	//		ObjectPooling::Instance()->enemies[y]->currentWaypoint = 0;
-	//		currentState = flyIn;
-	//	}
-	//}
-
-	//if (!!ObjectPooling::Instance()->enemies[15]->active)
-	//{
-	//	for (int y = 10; y < 15; y++)
-	//	{
-	//		ObjectPooling::Instance()->enemies[y]->Active(true);
-	//		ObjectPooling::Instance()->enemies[y]->currentWaypoint = 0;
-	//		currentState = flyIn;
-	//	}
-	//}
+		}
+	}
 
 
 
