@@ -2,23 +2,41 @@
 #pragma warning(disable : 26812)
 #include "Enemy.h"
 
+
 std::vector<std::vector<Vector2>> Enemy::paths;
 
 void Enemy::CreatePaths()
 {
-	int currentPath = 0;
-	BezierPath* path = new BezierPath();
+	//int currentPath = 0;
 
-	path->AddCurve(path->TopLeftSCurve(), 45);
+	for (int currentPath = 0; currentPath < 3; currentPath++)
+	{
+		BezierPath* path = new BezierPath();
 
-	//path->AddCurve({ Vector2(Graphics::screenWidth * 0.7f, Graphics::screenHeight * 0.2f), Vector2(Graphics::screenWidth * 0.05f, Graphics::screenHeight * 0.5f),
-		//Vector2(Graphics::screenWidth * 0.8f, Graphics::screenHeight * 0.3f),Vector2(Graphics::screenWidth * 1.1f, Graphics::screenHeight * 0.5f) }, 180);
+		switch (currentPath)
+		{
+		case 0:
+			path->AddCurve(path->TopLeftSCurve(), 45);
+			break;
+		case 1:
+			path->AddCurve(path->TopRightSCurve(), 45);
+			break;
+		case 2:
+			path->AddCurve(path->TopUCurve(), 45);
+			break;
+		}
 
-	paths.push_back(std::vector<Vector2>());
-	path->Sample(&paths[currentPath]);
 
-	delete path;
-	path = nullptr;
+		//path->AddCurve({ Vector2(Graphics::screenWidth * 0.7f, Graphics::screenHeight * 0.2f), Vector2(Graphics::screenWidth * 0.05f, Graphics::screenHeight * 0.5f),
+			//Vector2(Graphics::screenWidth * 0.8f, Graphics::screenHeight * 0.3f),Vector2(Graphics::screenWidth * 1.1f, Graphics::screenHeight * 0.5f) }, 180);
+
+		paths.push_back(std::vector<Vector2>());
+		path->Sample(&paths[currentPath]);
+
+		delete path;
+		path = nullptr;
+	}
+
 }
 
 Enemy::Enemy(int path)
@@ -38,7 +56,6 @@ Enemy::Enemy(int path)
 	texture->Pos(Vec2_Zero);
 
 	speed = 100.0f;
-
 }
 
 Enemy::Enemy(int path, std::string textureName)
@@ -70,7 +87,7 @@ Enemy::~Enemy()
 
 void Enemy::HandleFlyInState()
 {
-	if((paths[currentPath][currentWaypoint] - Pos()).MagnitudeSqr() < epsilon)
+	if ((paths[currentPath][currentWaypoint] - Pos()).MagnitudeSqr() < epsilon)
 	{
 		currentWaypoint++;
 	}
@@ -84,19 +101,60 @@ void Enemy::HandleFlyInState()
 	}
 	else
 	{
-		currentState = formation;
+		currentState = inactive;
 	}
 }
 
-void Enemy::HandleFormationState()
+void Enemy::HandleInactiveState()
 {
+	float t = 5;
+	Active(false);
 
+	accuTimer += timer->DeltaTime();
+
+	if (!ObjectPooling::Instance()->enemies[5]->active)
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			ObjectPooling::Instance()->enemies[i]->Active(true);
+			Pos(startPos);
+			this->currentWaypoint = 0;
+			this->currentState = flyIn;
+		}
+		//ObjectPooling::Instance()->enemies[5]->Active(true);
+		//this->currentState = flyIn;
+	}
+
+
+
+
+	//if (!!ObjectPooling::Instance()->enemies[10]->active)
+	//{
+	//	for (int y = 5; y < 10; y++)
+	//	{
+	//		ObjectPooling::Instance()->enemies[y]->Active(true);
+	//		ObjectPooling::Instance()->enemies[y]->currentWaypoint = 0;
+	//		currentState = flyIn;
+	//	}
+	//}
+
+	//if (!!ObjectPooling::Instance()->enemies[15]->active)
+	//{
+	//	for (int y = 10; y < 15; y++)
+	//	{
+	//		ObjectPooling::Instance()->enemies[y]->Active(true);
+	//		ObjectPooling::Instance()->enemies[y]->currentWaypoint = 0;
+	//		currentState = flyIn;
+	//	}
+	//}
+
+
+
+//TODO create a timer. 
+// When timer reaches x amount of accumulated time
+//Switch to Reset fly in state
 }
 
-void Enemy::HandleDiveState()
-{
-
-}
 
 void Enemy::HandleDeadState()
 {
@@ -110,11 +168,8 @@ void Enemy::HandleStates()
 	case flyIn:
 		HandleFlyInState();
 		break;
-	case formation:
-		HandleFormationState();
-		break;
-	case dive:
-		HandleDiveState();
+	case inactive:
+		HandleInactiveState();
 		break;
 	case dead:
 		HandleDeadState();
@@ -123,12 +178,10 @@ void Enemy::HandleStates()
 	}
 }
 
+
 void Enemy::Update()
 {
-	if (Active())
-	{
-		HandleStates();
-	}
+	HandleStates();
 }
 
 void Enemy::Render()

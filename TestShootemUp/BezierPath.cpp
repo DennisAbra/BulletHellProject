@@ -18,14 +18,14 @@ void BezierPath::AddCurve(BezierCurve curve, int sample)
 
 BezierCurve BezierPath::TopUCurve()
 {
-	return { Vector2(Graphics::screenWidth * 0, Graphics::screenHeight * 0), Vector2(Graphics::screenWidth * 0.5f, Graphics::screenHeight * 0.55f),
-		Vector2(Graphics::screenWidth * 0.5f,  Graphics::screenHeight * 0.55f),Vector2(Graphics::screenWidth * 1.f, Graphics::screenHeight * 0.f) };
+	return { Vector2(Graphics::screenWidth * 0 - 100, Graphics::screenHeight * 0), Vector2(Graphics::screenWidth * 0.5f, Graphics::screenHeight * 0.55f),
+		Vector2(Graphics::screenWidth * 0.5f,  Graphics::screenHeight * 0.55f),Vector2(Graphics::screenWidth + 100, Graphics::screenHeight * 0.f) };
 }
 
 BezierCurve BezierPath::LeftUCurve()
 {
-	return { Vector2(Graphics::screenWidth * 0, Graphics::screenHeight * 0.2), Vector2(Graphics::screenWidth * 0.5f, Graphics::screenHeight * 0.55f),
-		Vector2(Graphics::screenWidth * 0.5f,  Graphics::screenHeight * 0.55f),Vector2(Graphics::screenWidth * 1.f, Graphics::screenHeight * 0.f) };
+	return { Vector2(Graphics::screenWidth * 0-100, Graphics::screenHeight * 0.2), Vector2(Graphics::screenWidth * 0.5f, Graphics::screenHeight * 0.55f),
+		Vector2(Graphics::screenWidth * 0.5f,  Graphics::screenHeight * 0.55f),Vector2(Graphics::screenWidth * 1.f +100, Graphics::screenHeight * 0.f) };
 }
 
 BezierCurve BezierPath::RightUCurve()
@@ -35,14 +35,14 @@ BezierCurve BezierPath::RightUCurve()
 
 BezierCurve BezierPath::TopLeftSCurve()
 {
-	return { Vector2(Graphics::screenWidth * 0, Graphics::screenHeight * 0.2f), Vector2(Graphics::screenWidth * 0.8f, Graphics::screenHeight * 0.2f),
-		Vector2(Graphics::screenWidth * 0.2f,  Graphics::screenHeight * 0.8f),Vector2(Graphics::screenWidth * 1.f, Graphics::screenHeight * 0.8f) };
+	return { Vector2((Graphics::screenWidth * 0)- 100, Graphics::screenHeight * 0.2f), Vector2(Graphics::screenWidth * 0.8f, Graphics::screenHeight * 0.2f),
+		Vector2(Graphics::screenWidth * 0.2f,  Graphics::screenHeight * 0.8f),Vector2(Graphics::screenWidth +100, Graphics::screenHeight * 0.8f) };
 }
 
 BezierCurve BezierPath::TopRightSCurve()
 {
-	return { Vector2(Graphics::screenWidth * 1.f, Graphics::screenHeight * 0.2f), Vector2(Graphics::screenWidth * 0.2f, Graphics::screenHeight * 0.2f),
-		Vector2(Graphics::screenWidth * 0.8f,  Graphics::screenHeight * 0.8f),Vector2(Graphics::screenWidth * 0.f, Graphics::screenHeight * 0.8f) };
+	return { Vector2(Graphics::screenWidth * 1.f +100, Graphics::screenHeight * 0.2f), Vector2(Graphics::screenWidth * 0.2f, Graphics::screenHeight * 0.2f),
+		Vector2(Graphics::screenWidth * 0.8f,  Graphics::screenHeight * 0.8f),Vector2(Graphics::screenWidth * 0.f -100, Graphics::screenHeight * 0.8f) };
 }
 
 

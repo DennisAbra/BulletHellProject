@@ -41,34 +41,27 @@ GameManager::GameManager() // Handle as Awake in Unity
 	timer = Timer::Instance();
 
 	Enemy::CreatePaths();
-	//enemy = new Enemy(0);
-	//enemy2 = new Enemy(0);
+
+
 
 	player = new Player(400, 300, inputManager, "Bubble4.png");
 	entityManager->AddPlayer(player);
 
-	//entityManager->AddEnemies(enemy);
-	//entityManager->AddEnemies(enemy2);
 
 	enemyPool->InitializeEnemyPool();
 	for (int i = 0; i < enemyPool->POOL_SIZE; i++)
 	{
 		enemyPool->SetEnemyActive();
-
-		if (enemyPool->enemies[i] != NULL)
-		{
-
-			printf("Enemy spawing works!\n");
-		}
 		entityManager->AddEnemies(enemyPool->enemies[i]);
-	}	
+
+		enemyPool->enemies[i]->Pos(Vector2(enemyPool->enemies[i]->Pos().x, -60.0f * (i + 1)));
+		enemyPool->enemies[i]->startPos = Vector2(enemyPool->enemies[i]->Pos().x, -60.0f * (i + 1));
+	}
 
 }
 
 GameManager::~GameManager()
 {
-	delete texture;
-	texture = nullptr;
 
 	enemyPool->Release();
 	enemyPool = nullptr;
@@ -103,6 +96,7 @@ void GameManager::EarlyUpdate()
 void GameManager::Update() // Do Entity updates and input here
 {
 	entityManager->Update();
+	
 }
 
 void GameManager::Render()
@@ -111,7 +105,7 @@ void GameManager::Render()
 	//Do all draw calls here and before graphics->Render()
 
 	entityManager->Render();
-	
+
 
 	graphics->Render();
 }
