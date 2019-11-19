@@ -1,15 +1,36 @@
-#pragma once
-#include <vector>
-#include "AnimatedTexture.h"
+#ifndef _BULLET_H
+#define _BULLET_H
+#include "Texture.h"
+#include "Timer.h"
+#include "MathHelper.h"
+#include "Graphics.h"
 
-class Bullet
+class Bullet : public GameEntity 
 {
-public:
-	std::vector<Bullet*> bullets;
-	void PlayerShoot(Vector2 position);
 
 private:
-	int offsetX;
-	int offsetY;
+
+	const int OFFSCREEN_BUFFER = 10; //If offscreen by 10 pixels, disable bullet
+
+	Timer* timer;
+	
+	float speed;
+
+	Texture* texture;
+
+public:
+
+	Bullet();
+	~Bullet();
+
+	void Fire(Vector2 pos);
+	void Reload();
+
+	void Update();
+	void Render();
+
+
 };
 
+
+#endif

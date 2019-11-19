@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <iostream>
+
 Player::Player(int posX, int posY, InputManager* input, const char* filePath) : input(input)
 {
 	position.x = posX;
@@ -8,9 +9,25 @@ Player::Player(int posX, int posY, InputManager* input, const char* filePath) : 
 	texture = new Texture(filePath);
 	texture->Pos(position);
 
+
+
 	movementState = MovementStates::KEYBOARD;
 
 	timer = timer->Instance();
+
+	for (int i = 0; i < MAX_BULLETS; i++)
+	{
+		bullets[i] = new Bullet();
+	}
+}
+
+Player::~Player()
+{
+	for (int i = 0; i < MAX_BULLETS; i++)
+	{
+		delete bullets[i];
+		bullets[i] = NULL;
+	}
 }
 
 void Player::Update()
@@ -19,6 +36,14 @@ void Player::Update()
 	MovePlayer();
 	texture->Pos(position);
 
+	firePoint = { texture->Pos().x, texture->Pos().y + 5 };
+
+	HandleFiring();
+
+	for (int i = 0; i < MAX_BULLETS; i++)
+	{
+		bullets[i]->Update();
+	}
 }
 
 void Player::Render()
@@ -26,6 +51,24 @@ void Player::Render()
 	if (Active())
 	{
 		texture->Render();
+	}
+	for (int i = 0; i < MAX_BULLETS; i++)
+	{
+		bullets[i]->Render();
+	}
+}
+
+void Player::HandleFiring()
+{
+	if (input->KeyPressed(SDL_SCANCODE_SPACE)) 
+	{
+		for (int i = 0; i < MAX_BULLETS; i++)
+		{
+			if (!bullets[i]->Active()) 
+			{
+				bullets[i]->Fire(firePoint);
+			}
+		}
 	}
 }
 
@@ -105,7 +148,6 @@ void Player::MovePlayer()
 		if (ShouldNormalizeVector())
 		{
 			position += (movement * .75f) * speed  * timer->DeltaTime();
-		std::cout << movement.x << ',' <<  movement.y  << std::endl;
 		}
 		else
 		{

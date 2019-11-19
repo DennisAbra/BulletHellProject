@@ -6,7 +6,7 @@ GameEntity::GameEntity(float x, float y)
 	pos.y = y;
 
 	rotation = 0;
-	
+
 	active = true;
 
 	parent = NULL;
@@ -109,7 +109,7 @@ void GameEntity::Parent(GameEntity* _parent)
 
 		Vector2 parentScale = _parent->Scale(world);
 		//Vector2 tempCalc = Pos(world) - _parent->Pos(world);
-		pos = RotateVector(Pos(world) - _parent->Pos(world),  -_parent->Rotation(world));
+		pos = RotateVector(Pos(world) - _parent->Pos(world), -_parent->Rotation(world));
 		pos.x /= parentScale.x;
 		pos.y /= parentScale.y;
 
@@ -128,7 +128,8 @@ GameEntity* GameEntity::Parent()
 
 void GameEntity::Translate(Vector2 vec)
 {
-	pos += vec;
+	
+		pos += vec;
 }
 
 void GameEntity::Rotate(float amount)
