@@ -50,7 +50,8 @@ void EntityManager::Update()
 		if (Collision::CheckAABBC(player->texture->renderRect, enemy->texture->renderRect))
 		{
 			Graphics::Instance()->DrawLine(enemy->texture->renderRect.x * 0.1, enemy->texture->renderRect.y * 0.1, enemy->texture->renderRect.x, enemy->texture->renderRect.y);
-			//printf("WE HAVE COLLIDED GOOD SIR\n");
+			player->playerHit = true;
+			printf("WE HAVE COLLIDED GOOD SIR\n");
 		}
 
 		for (auto bullet : player->bullets)

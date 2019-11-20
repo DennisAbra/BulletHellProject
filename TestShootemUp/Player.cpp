@@ -3,13 +3,20 @@
 
 Player::Player(int posX, int posY, InputManager* input, const char* filePath) : input(input)
 {
+	playerHit = false;
+	gameOver = false;
+	gameOverDelay = 6.0f;
+	gameOverTimer = 0.0f;
+
+	currentState = alive;
+
 	position.x = posX;
 	position.y = posY;
 
 	texture = new Texture(filePath);
 	texture->Pos(position);
 
-
+	playerCurrentHealth = playerMaxHealth;
 
 	movementState = MovementStates::KEYBOARD;
 
@@ -19,6 +26,7 @@ Player::Player(int posX, int posY, InputManager* input, const char* filePath) : 
 	{
 		bullets[i] = new Bullet();
 	}
+
 }
 
 Player::~Player()
@@ -30,8 +38,39 @@ Player::~Player()
 	}
 }
 
+void Player::WasHit()
+{
+	printf("Player curren HP:%i ", playerCurrentHealth);
+	playerCurrentHealth--;
+}
+
+void Player::CheckCollisions()
+{
+	if (playerHit == true)
+	{
+		WasHit();
+		//Change health bar?
+		playerHit = false;
+	}
+}
+
+void Player::HandlePlayerDeath()
+{
+	if (playerCurrentHealth <= 0)
+	{
+		Active(false); //Player is "dead"
+	}
+}
+
 void Player::Update()
 {
+	CheckCollisions();
+
+	if (playerCurrentHealth <= 0)
+	{
+		HandlePlayerDeath();
+	}
+
 	SwitchMovement();
 	MovePlayer();
 	texture->Pos(position);
@@ -60,11 +99,11 @@ void Player::Render()
 
 void Player::HandleFiring()
 {
-	if (input->KeyPressed(SDL_SCANCODE_SPACE)) 
+	if (input->KeyPressed(SDL_SCANCODE_SPACE))
 	{
 		for (int i = 0; i < MAX_BULLETS; i++)
 		{
-			if (!bullets[i]->Active()) 
+			if (!bullets[i]->Active())
 			{
 				bullets[i]->Fire(firePoint);
 			}
@@ -173,7 +212,7 @@ void Player::MovePlayer()
 		}
 		if (ShouldNormalizeVector())
 		{
-			position += (movement * .75f) * speed  * timer->DeltaTime();
+			position += (movement * .75f) * speed * timer->DeltaTime();
 		}
 		else
 		{

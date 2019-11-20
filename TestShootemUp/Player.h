@@ -5,6 +5,7 @@
 #include "Timer.h"
 #include "Bullet.h"
 #include "Collision.h"
+#include "Enemy.h"
 
 class Bullet;
 
@@ -16,10 +17,29 @@ public:
 	~Player();
 	void Update();
 	void Render();
+	void CheckCollisions();
+	void WasHit(); 
+	void HandlePlayerDeath();
+
+public:
+	/* Player death, respawn and game over variables*/
+	bool playerHit;
+
+	float gameOverDelay;
+	float gameOverTimer;
+	bool gameOver;
+
+	int playerMaxHealth = 5;
+	int playerCurrentHealth;
+
+	enum PlayerStates { alive, dead };
+
+	static const int MAX_BULLETS = 10;
+
+	Bullet* bullets[MAX_BULLETS];	  //Move to Bullet.h
 
 	enum class  MovementStates { KEYBOARD = 0, MOUSE = 1 };
 	Texture* texture;
-
 
 private:
 
@@ -32,17 +52,19 @@ private:
 
 private:
 
-	enum PlayerStates { alive, dead };
+
 	PlayerStates currentState;
 	Bullet* bullet;
 	InputManager* input;
-
+	Enemy* enemy;
 
 	Vector2 position;
 	Vector2 scale;
 	Vector2 firePoint;
 
 	Timer* timer;
+
+	AnimatedTexture* animatedTexture;
 
 	float rotation;
 	float speed = 50.f;
@@ -54,15 +76,5 @@ private:
 	bool CheckMouseScreenBounds();
 	void MovePlayer();
 	void SwitchMovement();
-
-	
-public:
-	int playerMaxHealth;
-	int playerCurrentHealth;
-
-	static const int MAX_BULLETS = 10;
-
-	Bullet* bullets[MAX_BULLETS];	  //Move to Bullet.h
-
 };
 
