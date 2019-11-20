@@ -25,7 +25,7 @@ public:
 	void DrawTexture(SDL_Texture* tex, SDL_Rect* clip = NULL, SDL_Rect* rend = NULL, float angle = 0.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 	void DrawLine(float startX, float startY, float endX, float endY);
-
+	SDL_Renderer* renderer;
 private:
 	static Graphics* instance;
 	static bool initialized;
@@ -33,7 +33,7 @@ private:
 	SDL_Window* window;
 	SDL_Surface* backBuffer;
 
-	SDL_Renderer* renderer;
+
 
 	Graphics();
 	~Graphics();

@@ -44,7 +44,8 @@ GameManager::GameManager() // Handle as Awake in Unity
 
 
 
-	player = new Player(400, 300, inputManager, "Bubble4.png");
+	player = new Player(400, 300, inputManager, "KristerTrump.png");
+	player->texture->Scale(Vector2(0.3, 0.3));
 	entityManager->AddPlayer(player);
 
 

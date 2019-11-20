@@ -50,7 +50,7 @@ Enemy::Enemy(int path)
 	currentWaypoint = 0;
 	Pos(paths[currentPath][currentWaypoint]);
 
-	texture = new Texture("swordfish.png");
+	texture = new Texture("DuckKing.png");
 	texture->Parent(this);
 
 	texture->Pos(Vec2_Zero);
@@ -97,7 +97,7 @@ void Enemy::HandleFlyInState()
 		Vector2 distance = paths[currentPath][currentWaypoint] - Pos();
 		Translate(distance.Normalized() * timer->DeltaTime() * speed);
 
-		Rotation(atan2(distance.y, distance.x) * radToDeg + 180.0f);
+		//Rotation(atan2(distance.y, distance.x) * radToDeg);
 	}
 	else
 	{

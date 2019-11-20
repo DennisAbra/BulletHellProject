@@ -159,6 +159,7 @@
     <ClInclude Include="BezierPath.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="DRectangle.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="GameEntity.h" />
