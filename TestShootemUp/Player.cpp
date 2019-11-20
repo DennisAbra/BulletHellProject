@@ -26,7 +26,7 @@ Player::~Player()
 	for (int i = 0; i < MAX_BULLETS; i++)
 	{
 		delete bullets[i];
-		bullets[i] = NULL;
+		bullets[i] = nullptr;
 	}
 }
 
@@ -70,6 +70,32 @@ void Player::HandleFiring()
 			}
 		}
 	}
+}
+
+void Player::handlePlayerStates()
+{
+	switch (currentState)
+	{
+	case alive:
+		active = true;
+		break;
+
+	case dead:
+		break;
+	}
+}
+
+void Player::handleAliveState()
+{
+	//Check HP
+	this->active = true; //Expand later.
+}
+
+void Player::handleDeadState()
+{
+	//Play death animation.
+	this->active = false; //Inactivate player
+	//Check if player wants to restart
 }
 
 bool Player::ShouldNormalizeVector()

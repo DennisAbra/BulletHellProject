@@ -13,7 +13,6 @@ private:
 
 	Timer* timer;
 
-	Texture* texture;
 
 	States currentState;
 
@@ -28,6 +27,7 @@ private:
 
 
 public:
+	Texture* texture;
 
 	Vector2 startPos;
 	static void CreatePaths();

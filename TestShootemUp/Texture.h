@@ -5,14 +5,14 @@
 class Texture : public GameEntity
 {
 protected:
-	SDL_Texture* texture;
-	Graphics* graphics;
 
+	Graphics* graphics;
+	SDL_Texture* texture;
 	int width;
 	int height;
 
 	bool clipped;
-	SDL_Rect renderRect;
+
 	SDL_Rect clipRect;
 
 public:
@@ -22,6 +22,7 @@ public:
 	int GetWidth();
 	int GetHeight();
 	~Texture();
+	SDL_Rect renderRect;
 
 	virtual void Render();
 };

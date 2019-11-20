@@ -1,4 +1,5 @@
 #include "EntityManager.h"
+#include "Collision.h"
 
 EntityManager* EntityManager::instance = nullptr;
 
@@ -40,9 +41,25 @@ void EntityManager::AddPlayer(Player* _player)
 
 void EntityManager::Update()
 {
+	// SDL_Rect finalRect;
+	//finalRect.w = player->texture->renderRect.w * 0.5;
+	//finalRect.h = player->texture->renderRect.h * 0.5;
 	for (auto enemy : enemies)
 	{
 		//TODO - create a kongo line of enemies
+		if (Collision::CheckAABBC(player->texture->renderRect, enemy->texture->renderRect))
+		{
+			Graphics::Instance()->DrawLine(enemy->texture->renderRect.x * 0.1, enemy->texture->renderRect.y * 0.1, enemy->texture->renderRect.x, enemy->texture->renderRect.y);
+			//printf("WE HAVE COLLIDED GOOD SIR\n");
+		}
+
+		for (auto bullet : player->bullets)
+		{
+			if (Collision::CheckAABBC(bullet->texture->renderRect, enemy->texture->renderRect))
+			{
+				printf("Bullet collided \n");
+			}
+		}
 		enemy->Update();
 	}
 	

@@ -4,7 +4,7 @@ Bullet::Bullet()
 {
 	timer = Timer::Instance();
 
-	speed = 500.0f;
+	speed = 750.0f;
 
 	texture = new Texture("Bubble4.png");
 	texture->Parent(this);
@@ -16,11 +16,11 @@ Bullet::Bullet()
 
 Bullet::~Bullet() 
 {
-	timer = NULL;
+	timer = nullptr;
 
 	delete texture;
     
-	texture = NULL;
+	texture = nullptr;
 }
 
 void Bullet::Fire(Vector2 pos) 
@@ -32,6 +32,8 @@ void Bullet::Fire(Vector2 pos)
 void Bullet::Reload() 
 {
 	Active(false);
+
+	Pos(Graphics::screenHeight + 100);
 }
 
 void Bullet::Update() 

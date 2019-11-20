@@ -4,6 +4,7 @@
 #include "Texture.h"
 #include "Timer.h"
 #include "Bullet.h"
+#include "Collision.h"
 
 class Bullet;
 
@@ -17,16 +18,25 @@ public:
 	void Render();
 
 	enum class  MovementStates { KEYBOARD = 0, MOUSE = 1 };
-	
+	Texture* texture;
+
 
 private:
+
 	void HandleFiring();
+	void handlePlayerStates();
+
+	void handleAliveState();
+	void handleDeadState();
+
+
 private:
 
-
+	enum PlayerStates { alive, dead };
+	PlayerStates currentState;
 	Bullet* bullet;
 	InputManager* input;
-	Texture* texture;
+
 
 	Vector2 position;
 	Vector2 scale;
@@ -45,7 +55,14 @@ private:
 	void MovePlayer();
 	void SwitchMovement();
 
-	static const int MAX_BULLETS = 2;
-	Bullet* bullets[MAX_BULLETS];
+	
+public:
+	int playerMaxHealth;
+	int playerCurrentHealth;
+
+	static const int MAX_BULLETS = 10;
+
+	Bullet* bullets[MAX_BULLETS];	  //Move to Bullet.h
+
 };
 

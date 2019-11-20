@@ -16,10 +16,10 @@ private:
 	
 	float speed;
 
-	Texture* texture;
+
 
 public:
-
+	Texture* texture;
 	Bullet();
 	~Bullet();
 
