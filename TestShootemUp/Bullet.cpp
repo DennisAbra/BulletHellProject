@@ -1,17 +1,29 @@
 #include "Bullet.h"
+#include "BoxCollider.h"
+#include "PhysManager.h"
 
-Bullet::Bullet() 
+Bullet::Bullet(bool friendly)
 {
 	timer = Timer::Instance();
 
 	speed = 750.0f;
 
-	texture = new Texture("Bubble4.png");
+	texture = new Texture("PlayerBullet.png");
 	texture->Parent(this);
 	texture->Pos(Vec2_Zero);
-	texture->Scale(Vector2(0.5f, 0.5f));
+	texture->Scale(Vector2(0.25f, 0.25f));
 
 	Reload();
+
+	AddCollider(new BoxCollider(texture->ScaledDimensions()));
+	if (friendly)
+	{
+		PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::FriendlyProjectile);
+	}
+	else
+	{
+		PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::HostileProjectile);
+	}
 }
 
 Bullet::~Bullet() 
@@ -36,6 +48,17 @@ void Bullet::Reload()
 	Pos(Graphics::screenHeight + 100);
 }
 
+void Bullet::Hit(PhysEntity* other)
+{
+	printf("You have the the rubber ducky\n");
+	Reload();
+}
+
+bool Bullet::IgnoreCollisions()
+{
+	return !Active();
+}
+
 void Bullet::Update() 
 {
 	if (Active()) 
@@ -56,5 +79,6 @@ void Bullet::Render()
 	if (Active()) 
 	{
 		texture->Render();
+		PhysEntity::Render();
 	}
 }

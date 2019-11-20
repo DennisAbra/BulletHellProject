@@ -1,9 +1,16 @@
 #pragma warning(push)
 #pragma warning(disable : 26812)
 #include "Enemy.h"
+#include "BoxCollider.h"
+#include "PhysManager.h"
 
 
 std::vector<std::vector<Vector2>> Enemy::paths;
+
+bool Enemy::IgnoreCollisions()
+{
+	return active == false;
+}
 
 void Enemy::CreatePaths()
 {
@@ -56,6 +63,9 @@ Enemy::Enemy(int path)
 	texture->Pos(Vec2_Zero);
 
 	speed = 100.0f;
+
+	AddCollider(new BoxCollider(Vector2(50, 50)));
+	id = PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::Hostile);
 }
 
 Enemy::Enemy(int path, std::string textureName)
@@ -190,6 +200,7 @@ void Enemy::Render()
 		{
 			Graphics::Instance()->DrawLine(paths[currentPath][i].x, paths[currentPath][i].y, paths[currentPath][i + 1].x, paths[currentPath][i + 1].y);
 		}
+		PhysEntity::Render();
 	}
 }
 #pragma warning(pop)

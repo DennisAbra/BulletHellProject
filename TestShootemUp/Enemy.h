@@ -2,8 +2,9 @@
 #include "AnimatedTexture.h"
 #include "BezierPath.h"
 #include "ObjectPooling.h"
+#include "PhysEntity.h"
 
-class Enemy : public GameEntity
+class Enemy : public PhysEntity
 {
 
 private:
@@ -23,7 +24,7 @@ private:
 	float speed;
 	float accuTimer = 0;
 
-	bool EnemyIsOnScreen();
+	bool IgnoreCollisions() override;
 
 
 public:

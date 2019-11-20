@@ -9,7 +9,7 @@
 
 class Bullet;
 
-class Player : public GameEntity
+class Player : public PhysEntity
 {
 public:
 
@@ -17,8 +17,10 @@ public:
 	~Player();
 	void Update();
 	void Render();
+
 	void OnCollision();
-	void WasHit(); 
+	bool WasHit(); 
+	void Hit(PhysEntity* other) override;
 	void HandlePlayerDeath();
 
 	void Invincible();
@@ -28,6 +30,7 @@ public:
 
 	bool playerHit = false;
 	bool playerInvincible = false;
+	bool wasHit;
 
 	float maxInvincibilityFrameTimer = 1.0f;
 	float invincibilityFrameTimer;
@@ -53,6 +56,7 @@ private:
 	void HandleFiring();
 	void handlePlayerStates();
 
+	bool IgnoreCollisions() override;
 	void handleAliveState();
 	void handleDeadState();
 

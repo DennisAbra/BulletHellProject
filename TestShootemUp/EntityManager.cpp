@@ -45,19 +45,23 @@ void EntityManager::Update()
 	//finalRect.h = player->texture->renderRect.h * 0.5;
 	for (auto enemy : enemies)
 	{
-		if (Collision::CheckAABBC(player->texture->renderRect, enemy->texture->renderRect))
-		{
+		//if (Collision::CheckAABBC(player->texture->renderRect, enemy->texture->renderRect))
+		//{
 			Graphics::Instance()->DrawLine(enemy->texture->renderRect.x * 0.1, enemy->texture->renderRect.y * 0.1, enemy->texture->renderRect.x, enemy->texture->renderRect.y);
-			player->OnCollision();
-			if (!player->playerInvincible)
+			//player->OnCollision();
+			if (player->WasHit())
 			{
-				//printf("Collision With Player Detected!\n");
+				player->playerInvincible = true;
 			}
-		}
-		else 
-		{
-			player->playerHit = false;
-		}
+			//if (!player->playerInvincible)
+			//{
+				//printf("Collision With Player Detected!\n");
+		//	}
+		//}
+		//else 
+		//{
+		//	player->playerHit = false;
+		//}
 
 		for (auto bullet : player->bullets)
 		{

@@ -64,6 +64,16 @@ inline Vector2 operator *(const float& x, const Vector2& y)
 	return Vector2(x * y.x, x * y.y);
 }
 
+inline Vector2 operator /(const Vector2& x, const float& y)
+{
+	return Vector2(x.x / y, x.y / y);
+}
+
+inline Vector2 operator /(const float& x, const Vector2& y)
+{
+	return Vector2(x / y.x, x / y.y);
+}
+
 inline Vector2 RotateVector(const Vector2& vec, float angle)
 {
 	float radAngle = (float)(angle * degToRad);
@@ -87,10 +97,10 @@ struct BezierCurve
 	Vector2 p3;
 
 	Vector2 CalculateCurvePoint(float t)
-	{	
+	{
 		float u = 1.0f - t;
-		
-		Vector2 point = (pow(u,3) * p0) + (3 * pow(u,2) * t * p1) + (3 * u * pow(t,2) * p2) + (pow(t,3) * p3);
+
+		Vector2 point = (pow(u, 3) * p0) + (3 * pow(u, 2) * t * p1) + (3 * u * pow(t, 2) * p2) + (pow(t, 3) * p3);
 		point.x = round(point.x);
 		point.y = round(point.y);
 		return point;

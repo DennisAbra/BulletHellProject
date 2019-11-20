@@ -22,6 +22,7 @@ public:
 	int GetWidth();
 	int GetHeight();
 	~Texture();
+	Vector2 ScaledDimensions();
 	SDL_Rect renderRect;
 
 	virtual void Render();

@@ -38,6 +38,15 @@ GameManager::GameManager() // Handle as Awake in Unity
 
 	entityManager = EntityManager::Instance();
 
+	physManager = PhysManager::Instance();
+	physManager->SetLayerCollisionMask(PhysManager::CollisionLayers::Friendly, PhysManager::CollisionFlags::Hostile | PhysManager::CollisionFlags::HostileProjectile);
+
+	physManager->SetLayerCollisionMask(PhysManager::CollisionLayers::FriendlyProjectile, PhysManager::CollisionFlags::Hostile);
+
+	physManager->SetLayerCollisionMask(PhysManager::CollisionLayers::Hostile, PhysManager::CollisionFlags::Friendly | PhysManager::CollisionFlags::FriendlyProjectiles);
+
+	physManager->SetLayerCollisionMask(PhysManager::CollisionLayers::HostileProjectile, PhysManager::CollisionFlags::Friendly);
+
 	timer = Timer::Instance();
 
 	Enemy::CreatePaths();
@@ -63,6 +72,8 @@ GameManager::GameManager() // Handle as Awake in Unity
 
 GameManager::~GameManager()
 {
+	PhysManager::Release();
+	physManager = nullptr;
 
 	enemyPool->Release();
 	enemyPool = nullptr;
@@ -113,6 +124,7 @@ void GameManager::Render()
 
 void GameManager::LateUpdate() // Do collision or Physics checks here
 {
+	physManager->Update();
 	inputManager->UpdatePrevInput();
 	timer->Reset();
 }

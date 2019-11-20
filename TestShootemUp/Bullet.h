@@ -1,11 +1,11 @@
 #ifndef _BULLET_H
 #define _BULLET_H
-#include "Texture.h"
+#include "PhysEntity.h"
 #include "Timer.h"
 #include "MathHelper.h"
 #include "Graphics.h"
 
-class Bullet : public GameEntity 
+class Bullet : public PhysEntity 
 {
 
 private:
@@ -16,15 +16,17 @@ private:
 	
 	float speed;
 
-
+	bool IgnoreCollisions() override;
 
 public:
 	Texture* texture;
-	Bullet();
+	Bullet(bool friendly);
 	~Bullet();
 
 	void Fire(Vector2 pos);
 	void Reload();
+
+	void Hit(PhysEntity* other) override;
 
 	void Update();
 	void Render();

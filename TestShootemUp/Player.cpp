@@ -1,10 +1,13 @@
 #include "Player.h"
 #include <iostream>
+#include "BoxCollider.h"
+#include "PhysManager.h"
 
 Player::Player(int posX, int posY, InputManager* input, const char* filePath) : input(input)
 {
 	playerHit = false;
 	gameOver = false;
+	wasHit = false;
 	gameOverDelay = 6.0f;
 	gameOverTimer = 0.0f;
 
@@ -15,7 +18,8 @@ Player::Player(int posX, int posY, InputManager* input, const char* filePath) : 
 	position.y = posY;
 
 	texture = new Texture(filePath);
-	texture->Pos(position);
+	texture->Pos(Vec2_Zero);
+	texture->Parent(this);
 
 	playerCurrentHealth = playerMaxHealth;
 
@@ -25,8 +29,11 @@ Player::Player(int posX, int posY, InputManager* input, const char* filePath) : 
 
 	for (int i = 0; i < MAX_BULLETS; i++)
 	{
-		bullets[i] = new Bullet();
+		bullets[i] = new Bullet(true);
 	}
+
+	AddCollider(new BoxCollider(Vector2(40.0f, 52.0f))); // DONT CHANGE IT'S PERFECT(ish)
+	id = PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::Friendly);
 }
 
 Player::~Player()
@@ -38,12 +45,19 @@ Player::~Player()
 	}
 }
 
-void Player::WasHit()
+bool Player::WasHit()
 {
-	printf("Player current HP:%i ", playerCurrentHealth);
+	//playerInvincible = true;
+	return wasHit;
+}
+
+void Player::Hit(PhysEntity* other)
+{
+	printf("Player current HP:%i\n ", playerCurrentHealth);
 	if (!playerInvincible)
 	{
 		playerCurrentHealth--;
+		wasHit = true;
 	}
 }
 
@@ -63,11 +77,11 @@ void Player::Invincible()
 	}
 }
 
-void Player::OnCollision()
-{
-	WasHit();
-	playerInvincible = true;
-}
+//void Player::OnCollision()
+//{
+//	WasHit();
+//	playerInvincible = true;
+//}
 
 void Player::HandlePlayerDeath()
 {
@@ -79,12 +93,15 @@ void Player::HandlePlayerDeath()
 
 void Player::Update()
 {
-	printf("Player invincible: %i\n", playerInvincible);
-	
+
+	if (wasHit)
+	{
+		wasHit = false;
+	}
 
 	if (playerInvincible)
 	{
-
+		printf("WE GOT HERE / LINE 104");
 		Invincible();
 	}
 
@@ -95,7 +112,7 @@ void Player::Update()
 
 	SwitchMovement();
 	MovePlayer();
-	texture->Pos(position);
+	/*texture->*/Pos(position);
 
 	firePoint = { texture->Pos().x, texture->Pos().y - 20 };
 
@@ -117,6 +134,7 @@ void Player::Render()
 	{
 		bullets[i]->Render();
 	}
+	PhysEntity::Render();
 }
 
 void Player::HandleFiring()
@@ -145,6 +163,11 @@ void Player::handlePlayerStates()
 		active = false;
 		break;
 	}
+}
+
+bool Player::IgnoreCollisions()
+{
+	return playerInvincible;
 }
 
 void Player::handleAliveState()

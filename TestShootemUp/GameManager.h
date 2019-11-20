@@ -4,6 +4,7 @@
 #include "AudioManager.h"
 #include "EntityManager.h"
 #include "ObjectPooling.h"
+#include "PhysManager.h"
 
 
 class GameManager
@@ -19,6 +20,7 @@ private:
 	InputManager* inputManager;
 	AudioManager* audioManager;
 	EntityManager* entityManager;
+	PhysManager* physManager;
 	
 
 	const int frameRate = 60;

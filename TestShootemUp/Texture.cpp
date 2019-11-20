@@ -63,6 +63,14 @@ Texture::~Texture()
 	graphics = nullptr;
 }
 
+Vector2 Texture::ScaledDimensions()
+{
+	Vector2 scaleDimensions = Scale();
+	scaleDimensions.x *= width;
+	scaleDimensions.y *= height;
+	return scaleDimensions;
+}
+
 void Texture::Render()
 {
 	Vector2 pos = Pos(world);

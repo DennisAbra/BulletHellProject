@@ -49,6 +49,12 @@
     <Filter Include="Header Files\GameFiles\Entities">
       <UniqueIdentifier>{171832fd-c72c-4163-9b4a-ee500a578521}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\System\Physics">
+      <UniqueIdentifier>{596c8196-dffb-4574-8464-0639d6f48718}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\System\Physics">
+      <UniqueIdentifier>{dbf64534-49b7-4acb-bc3e-c20896f465b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEntity.cpp">
@@ -81,9 +87,6 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Source Files\Engine\System</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\GameFiles\Entities</Filter>
     </ClCompile>
@@ -101,6 +104,24 @@
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Source Files\Engine\System\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Source Files\Engine\System\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysEntity.cpp">
+      <Filter>Source Files\Engine\System\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollider.cpp">
+      <Filter>Source Files\Engine\System\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollider.cpp">
+      <Filter>Source Files\Engine\System\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysManager.cpp">
+      <Filter>Source Files\Engine\System\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -134,9 +155,6 @@
     <ClInclude Include="Timer.h">
       <Filter>Header Files\Engine\System</Filter>
     </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>Header Files\Engine\System</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Header Files\GameFiles\Entities</Filter>
     </ClInclude>
@@ -155,8 +173,26 @@
     <ClInclude Include="Bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DRectangle.h">
-      <Filter>Header Files\Engine</Filter>
+    <ClInclude Include="Collision.h">
+      <Filter>Header Files\Engine\System\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files\Engine\System\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysEntity.h">
+      <Filter>Header Files\Engine\System\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider.h">
+      <Filter>Header Files\Engine\System\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollider.h">
+      <Filter>Header Files\Engine\System\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysManager.h">
+      <Filter>Header Files\Engine\System\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysHelper.h">
+      <Filter>Header Files\Engine\System\Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
