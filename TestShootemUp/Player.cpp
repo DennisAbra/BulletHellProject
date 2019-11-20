@@ -8,6 +8,7 @@ Player::Player(int posX, int posY, InputManager* input, const char* filePath) : 
 	gameOverDelay = 6.0f;
 	gameOverTimer = 0.0f;
 
+	invincibilityFrameTimer = maxInvincibilityFrameTimer;
 	currentState = alive;
 
 	position.x = posX;
@@ -26,7 +27,6 @@ Player::Player(int posX, int posY, InputManager* input, const char* filePath) : 
 	{
 		bullets[i] = new Bullet();
 	}
-
 }
 
 Player::~Player()
@@ -40,23 +40,38 @@ Player::~Player()
 
 void Player::WasHit()
 {
-	printf("Player curren HP:%i ", playerCurrentHealth);
-	playerCurrentHealth--;
+	printf("Player current HP:%i ", playerCurrentHealth);
+	if (!playerInvincible)
+	{
+		playerCurrentHealth--;
+	}
 }
 
-void Player::CheckCollisions()
+void Player::Invincible()
 {
-	if (playerHit == true)
+	invincibilityFrameTimer -= timer->DeltaTime();
+	/*printf("Invincibility Frame Timer: %f\n", invincibilityFrameTimer);*/
+	if (invincibilityFrameTimer <= 0.0f)
 	{
-		WasHit();
-		//Change health bar?
-		playerHit = false;
+		printf("Invincibility false: %f\n", invincibilityFrameTimer);
+		playerInvincible = false;
+
+		if (!playerInvincible)
+		{
+			invincibilityFrameTimer = maxInvincibilityFrameTimer;
+		}
 	}
+}
+
+void Player::OnCollision()
+{
+	WasHit();
+	playerInvincible = true;
 }
 
 void Player::HandlePlayerDeath()
 {
-	if (playerCurrentHealth <= 0)
+	if (playerCurrentHealth <= 0 && !playerInvincible)
 	{
 		Active(false); //Player is "dead"
 	}
@@ -64,7 +79,14 @@ void Player::HandlePlayerDeath()
 
 void Player::Update()
 {
-	CheckCollisions();
+	//printf("Player invincible: %b", playerInvincible);
+	
+
+	if (playerInvincible)
+	{
+
+		Invincible();
+	}
 
 	if (playerCurrentHealth <= 0)
 	{
@@ -120,6 +142,7 @@ void Player::handlePlayerStates()
 		break;
 
 	case dead:
+		active = false;
 		break;
 	}
 }

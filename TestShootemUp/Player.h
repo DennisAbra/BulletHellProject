@@ -17,13 +17,20 @@ public:
 	~Player();
 	void Update();
 	void Render();
-	void CheckCollisions();
+	void OnCollision();
 	void WasHit(); 
 	void HandlePlayerDeath();
 
+	void Invincible();
+
 public:
 	/* Player death, respawn and game over variables*/
-	bool playerHit;
+
+	bool playerHit = false;
+	bool playerInvincible = false;
+
+	float maxInvincibilityFrameTimer = 1.0f;
+	float invincibilityFrameTimer;
 
 	float gameOverDelay;
 	float gameOverTimer;

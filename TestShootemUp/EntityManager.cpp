@@ -50,15 +50,22 @@ void EntityManager::Update()
 		if (Collision::CheckAABBC(player->texture->renderRect, enemy->texture->renderRect))
 		{
 			Graphics::Instance()->DrawLine(enemy->texture->renderRect.x * 0.1, enemy->texture->renderRect.y * 0.1, enemy->texture->renderRect.x, enemy->texture->renderRect.y);
-			player->playerHit = true;
-			printf("WE HAVE COLLIDED GOOD SIR\n");
+			player->OnCollision();
+			if (!player->playerInvincible)
+			{
+				//printf("Collision With Player Detected!\n");
+			}
+		}
+		else 
+		{
+			player->playerHit = false;
 		}
 
 		for (auto bullet : player->bullets)
 		{
 			if (Collision::CheckAABBC(bullet->texture->renderRect, enemy->texture->renderRect))
 			{
-				printf("Bullet collided \n");
+				//printf("Collision with bullet detected!\n");
 			}
 		}
 		enemy->Update();
