@@ -79,7 +79,7 @@ void Player::HandlePlayerDeath()
 
 void Player::Update()
 {
-	//printf("Player invincible: %b", playerInvincible);
+	printf("Player invincible: %i\n", playerInvincible);
 	
 
 	if (playerInvincible)
