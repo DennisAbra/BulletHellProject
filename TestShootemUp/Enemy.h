@@ -27,6 +27,10 @@ private:
 	bool IgnoreCollisions() override;
 	bool DEBUG_LINES = false;
 
+	float invincibilityFrameTimer;
+	float maxInvincibilityFrameTimer = 1.0f;
+
+	bool wasHit = false;
 
 public:
 	Texture* texture;
@@ -43,6 +47,13 @@ public:
 
 	void HandleStates();
 
+	void Hit(PhysEntity* other) override;
+	void Invincible();
+	bool WasHit();
+	bool invincible = false;
+	bool isAlive = true;
+	int health = 30;
+	int maxHealth = 30;
 
 	void Update();
 	void Render();

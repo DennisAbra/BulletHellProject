@@ -40,7 +40,10 @@ bool PhysEntity::CheckCollision(PhysEntity* other)
 	{
 		return false;
 	}
-	return ColliderColliderCheck(broadPhaseCollider, other->broadPhaseCollider);
+	else
+	{
+		return ColliderColliderCheck(broadPhaseCollider, other->broadPhaseCollider);
+	}
 }
 
 void PhysEntity::Hit(PhysEntity* other)

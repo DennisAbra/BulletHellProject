@@ -18,8 +18,8 @@ Player::Player(int posX, int posY, InputManager* input, const char* filePath) : 
 	position.y = posY;
 
 	texture = new Texture(filePath);
-	texture->Pos(Vec2_Zero);
 	texture->Parent(this);
+	texture->Pos(Vec2_Zero);
 
 	playerCurrentHealth = playerMaxHealth;
 
@@ -52,10 +52,10 @@ bool Player::WasHit()
 
 void Player::Hit(PhysEntity* other)
 {
-	printf("Player current HP:%i\n ", playerCurrentHealth);
 	if (!playerInvincible)
 	{
 		playerCurrentHealth--;
+		printf("Player current HP:%i\n ", playerCurrentHealth);
 		wasHit = true;
 	}
 }

@@ -7,15 +7,8 @@
 
 std::vector<std::vector<Vector2>> Enemy::paths;
 
-bool Enemy::IgnoreCollisions()
-{
-	return active == false;
-}
-
 void Enemy::CreatePaths()
 {
-	//int currentPath = 0;
-
 	for (int currentPath = 0; currentPath < 3; currentPath++)
 	{
 		BezierPath* path = new BezierPath();
@@ -32,10 +25,6 @@ void Enemy::CreatePaths()
 			path->AddCurve(path->TopUCurve(), 45);
 			break;
 		}
-
-
-		//path->AddCurve({ Vector2(Graphics::screenWidth * 0.7f, Graphics::screenHeight * 0.2f), Vector2(Graphics::screenWidth * 0.05f, Graphics::screenHeight * 0.5f),
-			//Vector2(Graphics::screenWidth * 0.8f, Graphics::screenHeight * 0.3f),Vector2(Graphics::screenWidth * 1.1f, Graphics::screenHeight * 0.5f) }, 180);
 
 		paths.push_back(std::vector<Vector2>());
 		path->Sample(&paths[currentPath]);
@@ -107,7 +96,7 @@ void Enemy::HandleFlyInState()
 		Vector2 distance = paths[currentPath][currentWaypoint] - Pos();
 		Translate(distance.Normalized() * timer->DeltaTime() * speed);
 
-		Rotation(atan2(distance.y, distance.x) * radToDeg);
+		//Rotation(atan2(distance.y, distance.x) * radToDeg);
 	}
 	else
 	{
@@ -127,7 +116,11 @@ void Enemy::HandleInactiveState()
 			ObjectPooling::Instance()->enemies[i]->Pos(ObjectPooling::Instance()->enemies[i]->startPos);
 			ObjectPooling::Instance()->enemies[i]->currentWaypoint = 0;
 			ObjectPooling::Instance()->enemies[i]->currentState = flyIn;
-			
+			if (ObjectPooling::Instance()->enemies[i]->isAlive == false)
+			{
+				ObjectPooling::Instance()->enemies[i]->isAlive = true;
+				ObjectPooling::Instance()->enemies[i]->health = maxHealth;
+			}
 		}	
 	}
 
@@ -139,6 +132,12 @@ void Enemy::HandleInactiveState()
 			ObjectPooling::Instance()->enemies[i]->Pos(ObjectPooling::Instance()->enemies[i]->startPos);
 			ObjectPooling::Instance()->enemies[i]->currentWaypoint = 0;
 			ObjectPooling::Instance()->enemies[i]->currentState = flyIn;
+
+			if (ObjectPooling::Instance()->enemies[i]->isAlive == false)
+			{
+				ObjectPooling::Instance()->enemies[i]->isAlive = true;
+				ObjectPooling::Instance()->enemies[i]->health = maxHealth;
+			}
 		}
 	}
 
@@ -151,14 +150,13 @@ void Enemy::HandleInactiveState()
 			ObjectPooling::Instance()->enemies[i]->currentWaypoint = 0;
 			ObjectPooling::Instance()->enemies[i]->currentState = flyIn;
 
+			if (ObjectPooling::Instance()->enemies[i]->isAlive == false)
+			{
+				ObjectPooling::Instance()->enemies[i]->isAlive = true;
+				ObjectPooling::Instance()->enemies[i]->health = maxHealth;
+			}
 		}
 	}
-
-
-
-//TODO create a timer. 
-// When timer reaches x amount of accumulated time
-//Switch to Reset fly in state
 }
 
 
@@ -184,15 +182,70 @@ void Enemy::HandleStates()
 	}
 }
 
+void Enemy::Hit(PhysEntity* other)
+{
+	if (!invincible)
+	{
+		health--;
+		printf("Enemy current HP: %i\n", health);
+		wasHit = true;
+	}
+}
+
+void Enemy::Invincible()
+{
+	invincibilityFrameTimer -= timer->DeltaTime();
+	if (invincibilityFrameTimer <= 0.0f)
+	{
+		wasHit = false;
+		invincible = false;
+		if (!invincible)
+		{
+			invincibilityFrameTimer = maxInvincibilityFrameTimer;
+		}
+	}
+}
+
+bool Enemy::IgnoreCollisions()
+{
+	if (isAlive)
+	{
+		return invincible;
+	}
+	if(wasHit && isAlive)
+	{
+		return wasHit;
+	}
+	else
+	{
+		return !isAlive;
+	}
+}
+
+bool Enemy::WasHit()
+{
+	return wasHit;
+}
+
 
 void Enemy::Update()
 {
 	HandleStates();
+
+	if (invincible)
+	{
+		Invincible();
+	}
+
+	if (health <= 0)
+	{
+		isAlive = false; //TODO Change this to a bool - isAlive
+	}
 }
 
 void Enemy::Render()
 {
-	if (Active())
+	if (Active() && isAlive)
 	{
 		texture->Render();
 

@@ -18,7 +18,7 @@ public:
 	void Update();
 	void Render();
 
-	void OnCollision();
+	//void OnCollision();
 	bool WasHit(); 
 	void Hit(PhysEntity* other) override;
 	void HandlePlayerDeath();
