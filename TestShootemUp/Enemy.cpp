@@ -107,7 +107,7 @@ void Enemy::HandleFlyInState()
 		Vector2 distance = paths[currentPath][currentWaypoint] - Pos();
 		Translate(distance.Normalized() * timer->DeltaTime() * speed);
 
-		//Rotation(atan2(distance.y, distance.x) * radToDeg);
+		Rotation(atan2(distance.y, distance.x) * radToDeg);
 	}
 	else
 	{
@@ -196,10 +196,14 @@ void Enemy::Render()
 	{
 		texture->Render();
 
-		for (int i = 0; i < paths[currentPath].size() - 1; i++)
+		if (DEBUG_LINES)
 		{
-			Graphics::Instance()->DrawLine(paths[currentPath][i].x, paths[currentPath][i].y, paths[currentPath][i + 1].x, paths[currentPath][i + 1].y);
+			for (int i = 0; i < paths[currentPath].size() - 1; i++)
+			{
+				Graphics::Instance()->DrawLine(paths[currentPath][i].x, paths[currentPath][i].y, paths[currentPath][i + 1].x, paths[currentPath][i + 1].y);
+			}
 		}
+
 		PhysEntity::Render();
 	}
 }

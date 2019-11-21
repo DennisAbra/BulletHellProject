@@ -25,6 +25,7 @@ private:
 	float accuTimer = 0;
 
 	bool IgnoreCollisions() override;
+	bool DEBUG_LINES = false;
 
 
 public:

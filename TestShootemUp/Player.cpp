@@ -47,7 +47,6 @@ Player::~Player()
 
 bool Player::WasHit()
 {
-	//playerInvincible = true;
 	return wasHit;
 }
 
@@ -67,7 +66,6 @@ void Player::Invincible()
 	/*printf("Invincibility Frame Timer: %f\n", invincibilityFrameTimer);*/
 	if (invincibilityFrameTimer <= 0.0f)
 	{
-		printf("Invincibility false: %f\n", invincibilityFrameTimer);
 		playerInvincible = false;
 
 		if (!playerInvincible)
@@ -101,7 +99,6 @@ void Player::Update()
 
 	if (playerInvincible)
 	{
-		printf("WE GOT HERE / LINE 104");
 		Invincible();
 	}
 
@@ -110,13 +107,17 @@ void Player::Update()
 		HandlePlayerDeath();
 	}
 
-	SwitchMovement();
-	MovePlayer();
-	/*texture->*/Pos(position);
+	if (Active())
+	{
+		SwitchMovement();
+		MovePlayer();
+		Pos(position);
 
-	firePoint = { texture->Pos().x, texture->Pos().y - 20 };
+		firePoint = { texture->Pos().x, texture->Pos().y - 20 };
 
-	HandleFiring();
+		HandleFiring();
+	}
+
 
 	for (int i = 0; i < MAX_BULLETS; i++)
 	{

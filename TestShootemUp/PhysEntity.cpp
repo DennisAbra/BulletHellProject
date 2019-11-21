@@ -77,6 +77,7 @@ void PhysEntity::AddCollider(Collider* col, Vector2 localPos)
 	{
 		float furthestDistance = colliders[0]->GetFurthestPoint().Magnitude();
 		float distance = 0.0f;
+
 		for (int i = 1; i < colliders.size(); i++)
 		{
 			distance = colliders[i]->GetFurthestPoint().Magnitude();

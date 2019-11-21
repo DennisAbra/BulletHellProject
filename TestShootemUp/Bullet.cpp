@@ -11,7 +11,7 @@ Bullet::Bullet(bool friendly)
 	texture = new Texture("PlayerBullet.png");
 	texture->Parent(this);
 	texture->Pos(Vec2_Zero);
-	texture->Scale(Vector2(0.25f, 0.25f));
+	texture->Scale(Vector2(0.125f, 0.125f));
 
 	Reload();
 
