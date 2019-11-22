@@ -9,7 +9,7 @@ std::vector<std::vector<Vector2>> Enemy::paths;
 
 void Enemy::CreatePaths()
 {
-	for (int currentPath = 0; currentPath < 3; currentPath++)
+	for (int currentPath = 0; currentPath < 4; currentPath++)
 	{
 		BezierPath* path = new BezierPath();
 
@@ -23,6 +23,9 @@ void Enemy::CreatePaths()
 			break;
 		case 2:
 			path->AddCurve(path->TopUCurve(), 45);
+			break;
+		case 3:
+			path->AddCurve(path->TopLeftSCurve(), 45);
 			break;
 		}
 

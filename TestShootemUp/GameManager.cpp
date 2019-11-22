@@ -52,11 +52,13 @@ GameManager::GameManager() // Handle as Awake in Unity
 	Enemy::CreatePaths();
 
 
-
-	player = new Player(400, 300, inputManager, "KristerTrump.png");
-	player->texture->Scale(Vector2(0.3, 0.3));
+	
+	player = new Player(400, 300, inputManager, "PartyKrister.png");
+	/*player->texture->Scale(Vector2(0.3, 0.3));*/
 	entityManager->AddPlayer(player);
-
+	boss = new Boss(3, "PepsiBoss.png");
+	boss->texture->Scale(Vector2(0.3f, 0.3f));
+	entityManager->AddBoss(boss);
 
 	enemyPool->InitializeEnemyPool();
 	for (int i = 0; i < enemyPool->POOL_SIZE; i++)
@@ -107,7 +109,7 @@ void GameManager::EarlyUpdate()
 void GameManager::Update() // Do Entity updates and input here
 {
 	entityManager->Update();
-	
+	boss->Update();
 }
 
 void GameManager::Render()
@@ -116,7 +118,7 @@ void GameManager::Render()
 	//Do all draw calls here and before graphics->Render()
 
 	entityManager->Render();
-
+	boss->Render();
 
 	graphics->Render();
 }

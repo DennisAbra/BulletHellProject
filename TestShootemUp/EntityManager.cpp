@@ -38,6 +38,11 @@ void EntityManager::AddPlayer(Player* _player)
 	player = _player;
 }
 
+void EntityManager::AddBoss(Boss* boss)
+{
+	pepsiBoss = boss;
+}
+
 void EntityManager::Update()
 {
 	for (auto enemy : enemies)
@@ -58,6 +63,9 @@ void EntityManager::Update()
 
 		enemy->Update();
 	}
+
+
+	pepsiBoss->Update();
 
 	player->Update();
 }

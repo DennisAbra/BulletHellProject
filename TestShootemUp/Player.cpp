@@ -107,6 +107,7 @@ void Player::Update()
 		HandlePlayerDeath();
 	}
 
+
 	if (Active())
 	{
 		SwitchMovement();

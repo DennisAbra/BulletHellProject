@@ -7,6 +7,7 @@
 #include "PhysManager.h"
 
 
+
 class GameManager
 {
 private:
@@ -33,6 +34,7 @@ private:
 
 	Player* player;
 
+	Boss* boss;
 	Texture* texture;
 
 	GameManager();

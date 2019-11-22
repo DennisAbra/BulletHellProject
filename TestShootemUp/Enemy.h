@@ -7,7 +7,7 @@
 class Enemy : public PhysEntity
 {
 
-private:
+protected:
 	static std::vector<std::vector<Vector2>> paths;
 
 	enum States { flyIn, inactive, dead };

@@ -55,6 +55,12 @@
     <Filter Include="Source Files\Engine\System\Physics">
       <UniqueIdentifier>{dbf64534-49b7-4acb-bc3e-c20896f465b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameFiles\Entities\Boss">
+      <UniqueIdentifier>{29afc842-a62b-4b52-a59f-6962b51553a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameFiles\Entities\Boss">
+      <UniqueIdentifier>{8ffe17d6-fba3-4ff9-92cd-09304439478d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEntity.cpp">
@@ -102,9 +108,6 @@
     <ClCompile Include="BezierPath.cpp">
       <Filter>Source Files\Engine\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>Source Files\Engine\System\Physics</Filter>
     </ClCompile>
@@ -122,6 +125,15 @@
     </ClCompile>
     <ClCompile Include="PhysManager.cpp">
       <Filter>Source Files\Engine\System\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files\GameFiles\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Source Files\GameFiles\Entities\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="BossArm.cpp">
+      <Filter>Source Files\GameFiles\Entities\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +205,12 @@
     </ClInclude>
     <ClInclude Include="PhysHelper.h">
       <Filter>Header Files\Engine\System\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Header Files\GameFiles\Entities\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="BossArm.h">
+      <Filter>Header Files\GameFiles\Entities\Boss</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
