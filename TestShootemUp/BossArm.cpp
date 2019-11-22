@@ -27,6 +27,10 @@ BossArm::BossArm(int path, std::string textureName, InputManager* input) : Enemy
 
 	texture->Pos(Vec2_Zero);
 
+	health = 10;
+	maxHealth = 10;
+
+
 	speed = 50.0f;
 	id = PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::Hostile);
 }
@@ -45,6 +49,7 @@ BossArm::~BossArm()
 void BossArm::AimTowardsPlayer(Player* player)
 {
 	this->player = player;
+	//TODO: Rotate arm towards player
 }
 
 void BossArm::MoveOffset()
