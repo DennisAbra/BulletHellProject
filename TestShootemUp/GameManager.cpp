@@ -28,6 +28,7 @@ GameManager::GameManager() // Handle as Awake in Unity
 		quit = true;
 	}
 
+
 	enemyPool = ObjectPooling::Instance();
 
 	assetManager = AssetManager::Instance();
@@ -75,6 +76,7 @@ GameManager::GameManager() // Handle as Awake in Unity
 
 GameManager::~GameManager()
 {
+
 	PhysManager::Release();
 	physManager = nullptr;
 
@@ -120,7 +122,6 @@ void GameManager::Render()
 	//Do all draw calls here and before graphics->Render()
 
 	entityManager->Render();
-	
 
 	graphics->Render();
 }

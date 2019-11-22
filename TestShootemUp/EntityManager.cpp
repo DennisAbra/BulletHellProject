@@ -90,4 +90,19 @@ void EntityManager::Render()
 	}
 	pepsiBoss->Render();
 	player->Render();
+	player->emptyGlass->Render();
+
+	if (player->glassBottom->active == true) 
+	{
+		player->glassBottom->Render();
+	}
+	if (player->glassMiddle->active == true) 
+	{
+		player->glassMiddle->Render();
+	}
+	if (player->glassTop->active == true) 
+	{
+		player->glassTop->Render();
+	}
+	
 }

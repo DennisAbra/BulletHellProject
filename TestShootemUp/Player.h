@@ -39,8 +39,13 @@ public:
 	float gameOverTimer;
 	bool gameOver;
 
-	int playerMaxHealth = 5;
+	int playerMaxHealth = 3;
 	int playerCurrentHealth;
+
+	Vector2 emptyGlassStartPos = { 75, Graphics::screenHeight - 100 };
+	Vector2 glassBottomPos = { 75, Graphics::screenHeight - 50 };
+	Vector2 glassMiddlePos = { 75, Graphics::screenHeight - 105 };
+	Vector2 glassTopPos = { 75, Graphics::screenHeight - 160 };
 
 	enum PlayerStates { alive, dead };
 
@@ -50,6 +55,10 @@ public:
 
 	enum class  MovementStates { KEYBOARD = 0, MOUSE = 1 };
 	Texture* texture;
+	Texture* emptyGlass;
+	Texture* glassBottom;
+	Texture* glassMiddle;
+	Texture* glassTop;
 
 private:
 
@@ -60,9 +69,7 @@ private:
 	void handleAliveState();
 	void handleDeadState();
 
-
 private:
-
 
 	PlayerStates currentState;
 	Bullet* bullet;

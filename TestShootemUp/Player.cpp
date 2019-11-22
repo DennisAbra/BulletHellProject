@@ -21,6 +21,23 @@ Player::Player(int posX, int posY, InputManager* input, const char* filePath) : 
 	texture->Parent(this);
 	texture->Pos(Vec2_Zero);
 
+	emptyGlass = new Texture("Glass.png");
+	emptyGlass->Pos(emptyGlassStartPos);
+	emptyGlass->Scale(Vector2{ 0.3, 0.3 });
+
+	glassBottom = new Texture("Bottom.png");
+	//glassBottom->Parent(emptyGlass);
+	glassBottom->Pos(glassBottomPos);
+	glassBottom->Scale(Vector2{ 0.3, 0.3 });
+
+	glassMiddle = new Texture("Middle.png");
+	glassMiddle->Pos(glassMiddlePos);
+	glassMiddle->Scale(Vector2{ 0.3, 0.3 });
+
+	glassTop = new Texture("Top.png");
+	glassTop->Pos(glassTopPos);
+	glassTop->Scale(Vector2{0.3, 0.3});
+
 	playerCurrentHealth = playerMaxHealth;
 
 	movementState = MovementStates::KEYBOARD;
@@ -43,6 +60,18 @@ Player::~Player()
 		delete bullets[i];
 		bullets[i] = nullptr;
 	}
+
+	delete emptyGlass;
+	emptyGlass = nullptr;
+
+	delete glassBottom;
+	glassBottom = nullptr;
+
+	delete glassMiddle;
+	glassMiddle = nullptr;
+
+	delete glassTop;
+	glassTop = nullptr;
 }
 
 bool Player::WasHit()
@@ -54,9 +83,27 @@ void Player::Hit(PhysEntity* other)
 {
 	if (!playerInvincible)
 	{
-		playerCurrentHealth--;
 		printf("Player current HP:%i\n ", playerCurrentHealth);
 		wasHit = true;
+
+		if (playerCurrentHealth == 3) 
+		{
+			playerCurrentHealth--;
+			glassTop->Active(false);
+			return;
+		}
+		if (playerCurrentHealth == 2)
+		{
+			playerCurrentHealth--;
+			glassMiddle->active = false;
+			return;
+		}
+		if (playerCurrentHealth == 1)
+		{
+			playerCurrentHealth--;
+			glassBottom->active = false;
+			return; 
+		}
 	}
 }
 

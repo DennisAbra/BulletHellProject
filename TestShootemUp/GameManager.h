@@ -6,14 +6,13 @@
 #include "ObjectPooling.h"
 #include "PhysManager.h"
 
-
-
 class GameManager
 {
 private:
 
 	static GameManager* instance;
 	bool quit;
+
 
 	ObjectPooling* enemyPool;
 	Graphics* graphics;
@@ -22,7 +21,6 @@ private:
 	AudioManager* audioManager;
 	EntityManager* entityManager;
 	PhysManager* physManager;
-	
 
 	const int frameRate = 60;
 	Timer* timer;
