@@ -85,7 +85,7 @@ void Player::Hit(PhysEntity* other)
 	{
 		printf("Player current HP:%i\n ", playerCurrentHealth);
 		wasHit = true;
-
+		playerInvincible = true;
 		if (playerCurrentHealth == 3) 
 		{
 			playerCurrentHealth--;

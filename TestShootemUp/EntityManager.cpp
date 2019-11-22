@@ -61,7 +61,6 @@ void EntityManager::Update()
 		if (enemy->WasHit())
 		{
 			enemy->invincible = true;
-			printf("this happened");
 		}
 
 		enemy->Update();

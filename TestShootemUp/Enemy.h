@@ -29,7 +29,7 @@ protected:
 	bool DEBUG_LINES = false;
 
 	float invincibilityFrameTimer;
-	float maxInvincibilityFrameTimer = 1.0f;
+	float maxInvincibilityFrameTimer = 0.5f;
 
 	bool wasHit = false;
 
@@ -56,8 +56,8 @@ public:
 	bool WasHit();
 	bool invincible = false;
 	bool isAlive = true;
-	int health = 30;
-	int maxHealth = 30;
+	int health = 3;
+	int maxHealth = 3;
 
 	void Update();
 	void Render();

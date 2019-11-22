@@ -221,8 +221,8 @@ void Enemy::Hit(PhysEntity* other)
 {
 	if (!invincible)
 	{
+		invincible = true;
 		health--;
-		printf("Enemy current HP: %i\n", health);
 		wasHit = true;
 	}
 }
@@ -238,6 +238,7 @@ void Enemy::Invincible()
 			invincibilityFrameTimer = maxInvincibilityFrameTimer;
 		}
 	}
+
 }
 
 bool Enemy::IgnoreCollisions()
