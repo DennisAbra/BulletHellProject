@@ -1,5 +1,7 @@
 #include "BoxCollider.h"
 
+
+
 BoxCollider::BoxCollider(Vector2 size) : Collider(ColliderType::Box)
 {
 	AddVert(0, Vector2(-0.5 * size.x, -0.5f * size.y));
@@ -10,6 +12,22 @@ BoxCollider::BoxCollider(Vector2 size) : Collider(ColliderType::Box)
 	if (DEBUG_COLLIDERS)
 	{
 		SetDebugTexture(new Texture("DebugCollider.png"));
+		debugTexture->Scale(size / 100.0f);
+	}
+}
+
+
+
+BoxCollider::BoxCollider(Vector2 size, SDL_Point* pivotPoint) : Collider(ColliderType::Box)
+{
+	AddVert(0, Vector2(-0.5 * size.x, -0.5f * size.y));
+	AddVert(1, Vector2(0.5 * size.x, -0.5f * size.y));
+	AddVert(2, Vector2(-0.5 * size.x, 0.5f * size.y));
+	AddVert(3, Vector2(0.5 * size.x, 0.5f * size.y));
+
+	if (DEBUG_COLLIDERS)
+	{
+		SetDebugTexture(new Texture("DebugCollider.png",pivotPoint));
 		debugTexture->Scale(size / 100.0f);
 	}
 }

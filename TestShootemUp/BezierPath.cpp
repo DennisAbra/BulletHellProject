@@ -44,6 +44,10 @@ BezierCurve BezierPath::TopRightSCurve()
 	return { Vector2(Graphics::screenWidth * 1.f +100, Graphics::screenHeight * 0.2f), Vector2(Graphics::screenWidth * 0.2f, Graphics::screenHeight * 0.2f),
 		Vector2(Graphics::screenWidth * 0.8f,  Graphics::screenHeight * 0.8f),Vector2(Graphics::screenWidth * 0.f -100, Graphics::screenHeight * 0.8f) };
 }
+BezierCurve BezierPath::DeadCenter()
+{
+	return{ Vec2_Zero,Vec2_Left,Vec2_One,Vector2(Graphics::screenWidth ,Graphics::screenHeight) };
+}
 
 
 void BezierPath::Sample(std::vector<Vector2>* sampledPath)

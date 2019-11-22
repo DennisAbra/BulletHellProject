@@ -23,5 +23,7 @@ public:
 	BezierCurve TopLeftSCurve();
 	BezierCurve TopRightSCurve();
 	
+	BezierCurve DeadCenter();
+
 	void Sample(std::vector<Vector2>* sampledPath);
 };

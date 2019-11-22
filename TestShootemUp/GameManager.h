@@ -31,8 +31,8 @@ private:
 	Enemy* enemy2;
 
 	Player* player;
-
 	Boss* boss;
+	BossArm* bossArm;
 	Texture* texture;
 
 	GameManager();

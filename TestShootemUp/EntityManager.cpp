@@ -21,6 +21,9 @@ void EntityManager::Release()
 	}
 	enemies.clear();
 
+	delete bossArm;
+	bossArm = nullptr;
+
 	delete pepsiBoss;
 	pepsiBoss = nullptr;
 
@@ -46,6 +49,11 @@ void EntityManager::AddBoss(Boss* boss)
 	pepsiBoss = boss;
 }
 
+void EntityManager::AddBossArm(BossArm* bossArm)
+{
+	this->bossArm = bossArm;
+}
+
 void EntityManager::Update()
 {
 	for (auto enemy : enemies)
@@ -63,12 +71,13 @@ void EntityManager::Update()
 			enemy->invincible = true;
 		}
 
+		
+
 		enemy->Update();
 	}
 
-
 	pepsiBoss->Update();
-
+	bossArm->Update();
 	player->Update();
 }
 
@@ -88,6 +97,7 @@ void EntityManager::Render()
 		enemy->Render();
 	}
 	pepsiBoss->Render();
+	bossArm->Render();
 	player->Render();
 	player->emptyGlass->Render();
 

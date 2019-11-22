@@ -8,6 +8,7 @@ protected:
 
 	Graphics* graphics;
 	SDL_Texture* texture;
+	SDL_Point* point;
 	int width;
 	int height;
 
@@ -17,6 +18,7 @@ protected:
 
 public:
 	Texture(std::string filename);
+	Texture(std::string filename, SDL_Point* point);
 	Texture(std::string filename, int x, int y, int w, int h);
 	Texture(std::string text, std::string fontPath, int size, SDL_Color color);
 	int GetWidth();

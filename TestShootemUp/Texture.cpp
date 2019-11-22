@@ -13,6 +13,21 @@ Texture::Texture(std::string filename)
 	renderRect.h = height;
 }
 
+Texture::Texture(std::string filename, SDL_Point* point)
+{
+	this->point = point;
+	graphics = Graphics::Instance();
+
+	texture = AssetManager::Instance()->GetTexture(filename);
+
+	SDL_QueryTexture(texture, NULL, NULL, &width, &height);
+	clipped = false;
+	
+	renderRect.w = width;
+	renderRect.h = height;
+
+}
+
 Texture::Texture(std::string filename, int x, int y, int w, int h)
 {
 	graphics = Graphics::Instance();
@@ -61,6 +76,7 @@ Texture::~Texture()
 {
 	texture = nullptr;
 	graphics = nullptr;
+	point = nullptr;
 }
 
 Vector2 Texture::ScaledDimensions()
@@ -80,6 +96,12 @@ void Texture::Render()
 	renderRect.y = (int)(pos.y - height * scale.y * 0.5f);
 	renderRect.w = (int)(width * scale.x);
 	renderRect.h = (int)(height * scale.y);
-
-	graphics->DrawTexture(texture,(clipped)? &clipRect : NULL, &renderRect, Rotation(world));
+	if (point)
+	{
+		graphics->DrawTexturePivot(texture, (clipped) ? &clipRect : NULL, &renderRect, Rotation(world), point);
+	}
+	else
+	{
+		graphics->DrawTexture(texture, (clipped) ? &clipRect : NULL, &renderRect, Rotation(world));
+	}
 }

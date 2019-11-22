@@ -12,6 +12,7 @@ private:
 
 	Player* player;
 	Boss* pepsiBoss;
+	BossArm* bossArm;
 	EntityManager();
 	~EntityManager();
 
@@ -23,6 +24,7 @@ public:
 	void AddEnemies(Enemy* enemy);
 	void AddPlayer(Player* _player);
 	void AddBoss(Boss* boss);
+	void AddBossArm(BossArm* bossArm);
 
 	void Update();
 	void Render();

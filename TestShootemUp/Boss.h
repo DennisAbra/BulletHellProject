@@ -7,15 +7,10 @@
 
 class Boss : public Enemy
 {
-private:
-
+private:	
 
 
 public:
-	//Texture* texture;
-
-	//Vector2 startPos;
-
 	Boss(int path);
 	Boss(int path, std::string textureName);
 	virtual ~Boss();

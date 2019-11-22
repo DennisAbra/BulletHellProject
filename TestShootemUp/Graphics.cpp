@@ -140,6 +140,11 @@ void Graphics::DrawTexture(SDL_Texture* tex, SDL_Rect* clip, SDL_Rect* rend, flo
 	SDL_RenderCopyEx(renderer, tex, clip, rend, angle, NULL, flip);
 }
 
+void Graphics::DrawTexturePivot(SDL_Texture* tex, SDL_Rect* clip, SDL_Rect* rend, float angle, SDL_Point* pivotPoint, SDL_RendererFlip flip)
+{
+	SDL_RenderCopyEx(renderer, tex, clip, rend, angle, pivotPoint, flip);
+}
+
 void Graphics::DrawLine(float startX, float startY, float endX, float endY)
 {
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);

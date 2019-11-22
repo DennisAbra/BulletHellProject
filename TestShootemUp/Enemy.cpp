@@ -25,7 +25,7 @@ void Enemy::CreatePaths()
 			path->AddCurve(path->TopUCurve(), 45);
 			break;
 		case 3:
-			path->AddCurve(path->TopLeftSCurve(), 45);
+			path->AddCurve(path->DeadCenter(), 1);
 			break;
 		}
 

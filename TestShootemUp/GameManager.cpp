@@ -55,13 +55,21 @@ GameManager::GameManager() // Handle as Awake in Unity
 
 	
 	player = new Player(400, 300, inputManager, "PartyKrister.png");
-	/*player->texture->Scale(Vector2(0.3, 0.3));*/
 	entityManager->AddPlayer(player);
 
 	boss = new Boss(3, "PepsiBoss.png");
 	boss->texture->Scale(Vector2(0.5f, 0.5f));
-	
 	entityManager->AddBoss(boss);
+
+	bossArm = new BossArm(3,"BossArm.png", inputManager);
+	bossArm->texture->Scale(Vector2(0.5f, 0.5f));
+	bossArm->Parent(boss);
+	bossArm->Pos(bossArm->Parent()->Pos() + bossArm->posOffset);
+	
+	
+	entityManager->AddBossArm(bossArm);
+	bossArm->AimTowardsPlayer(player);
+
 
 	enemyPool->InitializeEnemyPool();
 	for (int i = 0; i < enemyPool->POOL_SIZE; i++)
