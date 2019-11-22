@@ -1,13 +1,16 @@
 #pragma once
 #include "AnimatedTexture.h"
 #include "Player.h"
-class HealthBar
+class HealthBar : public GameEntity
 {
+private:
+	static HealthBar* instance;
+
 public: //Methods
+	static HealthBar* Instance();
+
 	 HealthBar();
 	 ~HealthBar();
-
-	 AnimatedTexture* healthBar;
 
 	 void SetMaxHealthBar(); //To be called in cTor
 
@@ -15,6 +18,6 @@ public: //Methods
 
 public: //Variables
 
-	Player* player;
-	int frameCount;
+
+
 };
