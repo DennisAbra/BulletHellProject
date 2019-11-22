@@ -1,11 +1,11 @@
 #pragma once
 #include "GameEntity.h"
 #include "InputManager.h"
-#include "Texture.h"
+#include "AnimatedTexture.h"
 #include "Timer.h"
 #include "Bullet.h"
 #include "Collision.h"
-#include "Enemy.h"
+//       #include "Enemy.h"
 
 class Bullet;
 
@@ -65,9 +65,9 @@ private:
 
 
 	PlayerStates currentState;
-	Bullet* bullet;
+	//Bullet* bullet;
 	InputManager* input;
-	Enemy* enemy;
+	//Enemy* enemy;
 
 	Vector2 position;
 	Vector2 scale;

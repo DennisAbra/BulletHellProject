@@ -111,7 +111,6 @@ void GameManager::EarlyUpdate()
 void GameManager::Update() // Do Entity updates and input here
 {
 	entityManager->Update();
-	boss->Update();
 }
 
 void GameManager::Render()

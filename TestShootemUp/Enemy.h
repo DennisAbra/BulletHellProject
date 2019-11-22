@@ -3,6 +3,7 @@
 #include "BezierPath.h"
 #include "ObjectPooling.h"
 #include "PhysEntity.h"
+#include "Bullet.h"
 
 class Enemy : public PhysEntity
 {
@@ -32,6 +33,9 @@ protected:
 
 	bool wasHit = false;
 
+	Vector2 firepoint;
+	void HandleFiring();
+
 public:
 	Texture* texture;
 
@@ -57,6 +61,9 @@ public:
 
 	void Update();
 	void Render();
+
+	static const int MAX_BULLETS = 100;
+	Bullet* bullets[MAX_BULLETS];
 
 
 };

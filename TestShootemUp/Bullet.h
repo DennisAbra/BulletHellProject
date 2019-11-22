@@ -17,10 +17,12 @@ private:
 	float speed;
 
 	bool IgnoreCollisions() override;
+	bool friendlyBullet;
 
 public:
 	Texture* texture;
 	Bullet(bool friendly);
+	Bullet(bool friendly, std::string texturePath);
 	~Bullet();
 
 	void Fire(Vector2 pos);

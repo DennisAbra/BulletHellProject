@@ -56,6 +56,12 @@ Enemy::Enemy(int path)
 
 	speed = 100.0f;
 
+
+	for (int i = 0; i < MAX_BULLETS; i++)
+	{
+		bullets[i] = new Bullet(false, "CocaCola.png");
+	}
+
 	AddCollider(new BoxCollider(Vector2(50, 50)));
 	id = PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::Hostile);
 }
@@ -76,11 +82,23 @@ Enemy::Enemy(int path, std::string textureName)
 
 	texture->Pos(Vec2_Zero);
 
+
+	for (int i = 0; i < MAX_BULLETS; i++)
+	{
+		bullets[i] = new Bullet(false, "CocaCola.png");
+	}
+
 	speed = 50.0f;
 }
 
 Enemy::~Enemy()
 {
+	for (int i = 0; i < MAX_BULLETS; i++)
+	{
+		delete bullets[i];
+		bullets[i] = nullptr;
+	}
+
 	timer = nullptr;
 
 	delete texture;
@@ -108,7 +126,7 @@ void Enemy::HandleFlyInState()
 }
 
 void Enemy::HandleInactiveState()
-{	
+{
 	Active(false);
 
 	if (!ObjectPooling::Instance()->enemies[4]->active)
@@ -124,7 +142,7 @@ void Enemy::HandleInactiveState()
 				ObjectPooling::Instance()->enemies[i]->isAlive = true;
 				ObjectPooling::Instance()->enemies[i]->health = maxHealth;
 			}
-		}	
+		}
 	}
 
 	if (!ObjectPooling::Instance()->enemies[9]->active)
@@ -168,6 +186,8 @@ void Enemy::HandleDeadState()
 
 }
 
+
+
 void Enemy::HandleStates()
 {
 	switch (currentState)
@@ -185,6 +205,18 @@ void Enemy::HandleStates()
 	}
 }
 
+void Enemy::HandleFiring()
+{
+	for (int i = 0; i < MAX_BULLETS; i++)
+	{
+		if (!bullets[i]->Active())
+		{
+			bullets[i]->Fire(firepoint);
+		}
+	}
+
+}
+
 void Enemy::Hit(PhysEntity* other)
 {
 	if (!invincible)
@@ -200,7 +232,6 @@ void Enemy::Invincible()
 	invincibilityFrameTimer -= timer->DeltaTime();
 	if (invincibilityFrameTimer <= 0.0f)
 	{
-		wasHit = false;
 		invincible = false;
 		if (!invincible)
 		{
@@ -215,7 +246,7 @@ bool Enemy::IgnoreCollisions()
 	{
 		return invincible;
 	}
-	if(wasHit && isAlive)
+	if (wasHit && isAlive)
 	{
 		return wasHit;
 	}
@@ -234,6 +265,21 @@ bool Enemy::WasHit()
 void Enemy::Update()
 {
 	HandleStates();
+	firepoint = Pos();
+
+	static float time;
+	static float t = 2.0f;
+	time += timer->DeltaTime();
+	if (t < time)
+	{
+		HandleFiring();
+		time = 0;
+	}
+
+	if (wasHit)
+	{
+		wasHit = false;
+	}
 
 	if (invincible)
 	{
@@ -244,6 +290,11 @@ void Enemy::Update()
 	{
 		isAlive = false; //TODO Change this to a bool - isAlive
 	}
+
+	for (int i = 0; i < MAX_BULLETS; i++)
+	{
+		bullets[i]->Update();
+	}
 }
 
 void Enemy::Render()
@@ -251,6 +302,11 @@ void Enemy::Render()
 	if (Active() && isAlive)
 	{
 		texture->Render();
+
+		for (int i = 0; i < MAX_BULLETS; i++)
+		{
+			bullets[i]->Render();
+		}
 
 		if (DEBUG_LINES)
 		{
