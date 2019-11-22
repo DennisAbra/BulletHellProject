@@ -21,6 +21,9 @@ void EntityManager::Release()
 	}
 	enemies.clear();
 
+	delete pepsiBoss;
+	pepsiBoss = nullptr;
+
 	delete player;
 	player = nullptr;
 
@@ -85,6 +88,6 @@ void EntityManager::Render()
 	{
 		enemy->Render();
 	}
-
+	pepsiBoss->Render();
 	player->Render();
 }

@@ -56,8 +56,10 @@ GameManager::GameManager() // Handle as Awake in Unity
 	player = new Player(400, 300, inputManager, "PartyKrister.png");
 	/*player->texture->Scale(Vector2(0.3, 0.3));*/
 	entityManager->AddPlayer(player);
+
 	boss = new Boss(3, "PepsiBoss.png");
-	boss->texture->Scale(Vector2(0.3f, 0.3f));
+	boss->texture->Scale(Vector2(0.5f, 0.5f));
+	
 	entityManager->AddBoss(boss);
 
 	enemyPool->InitializeEnemyPool();
@@ -118,7 +120,7 @@ void GameManager::Render()
 	//Do all draw calls here and before graphics->Render()
 
 	entityManager->Render();
-	boss->Render();
+	
 
 	graphics->Render();
 }
