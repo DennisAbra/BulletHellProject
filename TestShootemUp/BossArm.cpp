@@ -49,7 +49,8 @@ BossArm::~BossArm()
 void BossArm::AimTowardsPlayer(Player* player)
 {
 	this->player = player;
-	//TODO: Rotate arm towards player
+	distanceToPlayer = this->Pos() - player->Pos();
+	Rotation(atan2(distanceToPlayer.y, distanceToPlayer.x) * radToDeg + 90.f);		
 }
 
 void BossArm::MoveOffset()
@@ -83,12 +84,6 @@ void BossArm::Update()
 			isAlive = false; //TODO Change this to a bool - isAlive
 		}
 		
-		Rotation(rotation);
-		if (Rotation() >= 90)
-		{
-			Rotation(rotation);
-		}
-		
-		
+		AimTowardsPlayer(player);
 }
 

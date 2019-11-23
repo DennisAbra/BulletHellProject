@@ -8,7 +8,7 @@ class BossArm : public Enemy
 {
 private:
 	float rotation;
-
+	Vector2 distanceToPlayer;
 	
 	InputManager* input;
 	Player* player;
