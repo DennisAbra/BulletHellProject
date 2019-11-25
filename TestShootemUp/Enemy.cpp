@@ -271,6 +271,7 @@ void Enemy::Update()
 	static float time;
 	static float t = 2.0f;
 	time += timer->DeltaTime();
+	if(Active() && isAlive)
 	if (t < time)
 	{
 		HandleFiring();
@@ -304,11 +305,6 @@ void Enemy::Render()
 	{
 		texture->Render();
 
-		for (int i = 0; i < MAX_BULLETS; i++)
-		{
-			bullets[i]->Render();
-		}
-
 		if (DEBUG_LINES)
 		{
 			for (int i = 0; i < paths[currentPath].size() - 1; i++)
@@ -318,6 +314,11 @@ void Enemy::Render()
 		}
 
 		PhysEntity::Render();
+	}
+
+	for (int i = 0; i < MAX_BULLETS; i++)
+	{
+		bullets[i]->Render();
 	}
 }
 #pragma warning(pop)
