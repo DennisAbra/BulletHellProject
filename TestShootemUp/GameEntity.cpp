@@ -49,7 +49,7 @@ void GameEntity::Rotation(float r)
 	else if (rotation < 0.0f)
 	{
 		int mul = (rotation / 360.0f) - 1;
-		rotation += 360 * mul;
+		rotation -= 360 * mul;
 	}
 }
 

@@ -54,7 +54,7 @@ GameManager::GameManager() // Handle as Awake in Unity
 
 
 	
-	player = new Player(400, 300, inputManager, "PartyKrister.png");
+	player = new Player(Graphics::screenWidth * 0.5f, Graphics::screenHeight * 0.5f, inputManager, "PartyKrister.png");
 	entityManager->AddPlayer(player);
 
 	boss = new Boss(3, "PepsiBoss.png");

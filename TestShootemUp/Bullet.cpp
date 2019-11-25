@@ -104,6 +104,8 @@ void Bullet::Update()
 		else
 		{
 			Translate(Vec2_Up * speed * timer->DeltaTime());
+			//TODO Check if it's a boss bullet. 
+			// If true fire the bullet towards the player
 		}
 
 

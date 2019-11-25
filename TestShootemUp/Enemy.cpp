@@ -88,6 +88,7 @@ Enemy::Enemy(int path, std::string textureName)
 		bullets[i] = new Bullet(false, "CocaCola.png");
 	}
 
+	id = PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::Hostile);
 	speed = 50.0f;
 }
 

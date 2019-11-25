@@ -10,7 +10,7 @@ class Bullet : public PhysEntity
 
 private:
 
-	const int OFFSCREEN_BUFFER = 10; //If offscreen by 10 pixels, disable bullet
+
 
 	Timer* timer;
 	
@@ -20,6 +20,7 @@ private:
 	bool friendlyBullet;
 
 public:
+	const int OFFSCREEN_BUFFER = 10; //If offscreen by 10 pixels, disable bullet
 	Texture* texture;
 	Bullet(bool friendly);
 	Bullet(bool friendly, std::string texturePath);
