@@ -19,7 +19,7 @@ BossArm::BossArm(int path, std::string textureName, InputManager* input) : Enemy
 	currentPath = path;
 
 	currentState = flyIn;
-
+	
 	currentWaypoint = 0;
 	Pos(paths[currentPath][currentWaypoint]);
 
@@ -64,6 +64,7 @@ void BossArm::AimTowardsPlayer(Player* player)
 
 void BossArm::Update()
 {
+
 	if (invincible)
 	{
 		Invincible();
@@ -81,6 +82,7 @@ void BossArm::Update()
 	if (Active() && isAlive)
 		if (t < time)
 		{
+			//printf("X: %f, Y: %f\n", Pos().x, Pos().y);
 			HandleFiring();
 			time = 0;
 		}

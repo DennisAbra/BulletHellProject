@@ -44,11 +44,33 @@ BezierCurve BezierPath::TopRightSCurve()
 	return { Vector2(Graphics::screenWidth * 1.f +100, Graphics::screenHeight * 0.2f), Vector2(Graphics::screenWidth * 0.2f, Graphics::screenHeight * 0.2f),
 		Vector2(Graphics::screenWidth * 0.8f,  Graphics::screenHeight * 0.8f),Vector2(Graphics::screenWidth * 0.f -100, Graphics::screenHeight * 0.8f) };
 }
-BezierCurve BezierPath::DeadCenter()
+
+#pragma region Box Path
+//Entry Path for boss
+BezierCurve BezierPath::EntryPath()
 {
-	return{ Vec2_Zero,Vec2_Left,Vec2_One,Vector2(Graphics::screenWidth ,Graphics::screenHeight) };
+	return{ Vec2_Zero,Vec2_Left,Vec2_One,Vector2(150,150) };
+}
+///////////
+BezierCurve BezierPath::LeftRight()
+{
+	return { Vector2(150,150) , Vec2_One,Vec2_One,Vector2(950,150)};
+}
+BezierCurve BezierPath::RightDown()
+{
+	return { Vector2(950,150) , Vec2_One,Vec2_One,Vector2(950,450) };
+}
+BezierCurve BezierPath::RightLeft()
+{
+	return { Vector2(950,450) , Vec2_One,Vec2_One,Vector2(150,450) };
+}
+BezierCurve BezierPath::LeftUp()
+{
+	return { Vector2(150,450) , Vec2_One,Vec2_One,Vector2(150,150) };
+
 }
 
+#pragma endregion
 
 void BezierPath::Sample(std::vector<Vector2>* sampledPath)
 {

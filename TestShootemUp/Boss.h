@@ -9,13 +9,13 @@ class Boss : public Enemy
 {
 private:	
 
-
 public:
 	Boss(int path);
 	Boss(int path, std::string textureName);
 	virtual ~Boss();
 
-
+	void HandleFlyInState() override;
+	
 
 
 	
