@@ -1,18 +1,17 @@
 #pragma once
 #include "AnimatedTexture.h"
-#include "InputManager.h"
 #include "AudioManager.h"
 #include "EntityManager.h"
 #include "ObjectPooling.h"
 #include "PhysManager.h"
+#include "SceneManager.h"
 
 class GameManager
 {
 private:
 
 	static GameManager* instance;
-	bool quit;
-
+	bool play;
 
 	ObjectPooling* enemyPool;
 	Graphics* graphics;
@@ -26,6 +25,8 @@ private:
 	Timer* timer;
 
 	SDL_Event event;
+
+	SceneManager* sceneManager;
 
 	Enemy* enemy;
 	Enemy* enemy2;
@@ -43,8 +44,12 @@ private:
 	void LateUpdate();
 
 	void Render();
+	void RenderUI();
 
 public:
+	bool quit;
+
+	//bool inMenu = true;
 
 	static GameManager* Instance();
 	static void Release();

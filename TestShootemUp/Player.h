@@ -51,7 +51,7 @@ public:
 
 	static const int MAX_BULLETS = 10;
 
-	Bullet* bullets[MAX_BULLETS];	  //Move to Bullet.h
+	Bullet* bullets[MAX_BULLETS];
 
 	enum class  MovementStates { KEYBOARD = 0, MOUSE = 1 };
 	Texture* texture;

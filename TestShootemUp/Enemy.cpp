@@ -185,13 +185,10 @@ void Enemy::HandleInactiveState()
 	}
 }
 
-
 void Enemy::HandleDeadState()
 {
 
 }
-
-
 
 void Enemy::HandleStates()
 {

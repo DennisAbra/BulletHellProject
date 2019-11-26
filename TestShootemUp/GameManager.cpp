@@ -28,6 +28,7 @@ GameManager::GameManager() // Handle as Awake in Unity
 		quit = true;
 	}
 
+	sceneManager = SceneManager::Instance();
 
 	enemyPool = ObjectPooling::Instance();
 
@@ -52,21 +53,24 @@ GameManager::GameManager() // Handle as Awake in Unity
 
 	Enemy::CreatePaths();
 
+	sceneManager = SceneManager::Instance();
+
 
 	
 	player = new Player(Graphics::screenWidth * 0.5f, Graphics::screenHeight * 0.5f, inputManager, "PartyKrister.png");
+
 	entityManager->AddPlayer(player);
 
 	boss = new Boss(3, "PepsiBoss.png");
 	boss->texture->Scale(Vector2(0.5f, 0.5f));
 	entityManager->AddBoss(boss);
 
-	bossArm = new BossArm(3,"BossArm.png", inputManager);
+	bossArm = new BossArm(3, "BossArm.png", inputManager);
 	bossArm->texture->Scale(Vector2(0.5f, 0.5f));
 	bossArm->Parent(boss);
 	bossArm->Pos(bossArm->Parent()->Pos() + bossArm->posOffset);
-	
-	
+
+
 	entityManager->AddBossArm(bossArm);
 	bossArm->AimTowardsPlayer(player);
 
@@ -84,6 +88,8 @@ GameManager::GameManager() // Handle as Awake in Unity
 
 GameManager::~GameManager()
 {
+	SceneManager::Release();
+	sceneManager = nullptr;
 
 	PhysManager::Release();
 	physManager = nullptr;
@@ -110,7 +116,6 @@ GameManager::~GameManager()
 
 	Timer::Release();
 	timer = nullptr;
-
 }
 
 void GameManager::EarlyUpdate()
@@ -120,16 +125,56 @@ void GameManager::EarlyUpdate()
 
 void GameManager::Update() // Do Entity updates and input here
 {
-	entityManager->Update();
+	switch (sceneManager->currentScene)
+	{
+	case SceneManager::play:
+		entityManager->Update();
+		break;
+
+	case SceneManager::start:
+		sceneManager->Update();
+		break;
+	}
+
+	switch (sceneManager->currentScene) //For input
+	{
+	case SceneManager::play:
+
+		if (inputManager->KeyPressed(SDL_SCANCODE_ESCAPE))
+		{
+			sceneManager->currentScene = SceneManager::start;
+		}
+
+		if (player->playerCurrentHealth <= 0)
+		{
+			//Switch screen to death screen
+			quit = true;
+		}
+
+
+		break;
+	}
+
+
 }
 
 void GameManager::Render()
 {
 	graphics->ClearBackBuffer();
+
+	switch (sceneManager->currentScene)
+	{
+	case SceneManager::play:
+
+		entityManager->Render();
+
+		break;
+
+	case SceneManager::start:
+		sceneManager->Render();
+		break;
+	}
 	//Do all draw calls here and before graphics->Render()
-
-	entityManager->Render();
-
 	graphics->Render();
 }
 
@@ -142,8 +187,6 @@ void GameManager::LateUpdate() // Do collision or Physics checks here
 
 void GameManager::Run() // Don't test stuff here. Use the Update functions
 {
-
-
 	while (!quit)
 	{
 		timer->Update();

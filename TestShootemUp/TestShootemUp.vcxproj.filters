@@ -31,9 +31,6 @@
     <Filter Include="Source Files\Engine\Entities">
       <UniqueIdentifier>{7921822d-18cc-4ae5-93ae-712ecb7675cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Engine\Managers">
-      <UniqueIdentifier>{4630aebb-5d99-4c16-a34c-551cfa06f30f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Engine\System">
       <UniqueIdentifier>{2f7c6ed9-ad8e-4fab-ab15-7fe8313f8008}</UniqueIdentifier>
     </Filter>
@@ -61,6 +58,9 @@
     <Filter Include="Source Files\GameFiles\Entities\Boss">
       <UniqueIdentifier>{8ffe17d6-fba3-4ff9-92cd-09304439478d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine\Entities\Managers">
+      <UniqueIdentifier>{4630aebb-5d99-4c16-a34c-551cfa06f30f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEntity.cpp">
@@ -73,16 +73,16 @@
       <Filter>Source Files\Engine\Entities</Filter>
     </ClCompile>
     <ClCompile Include="AssetManager.cpp">
-      <Filter>Source Files\Engine\Managers</Filter>
+      <Filter>Source Files\Engine\Entities\Managers</Filter>
     </ClCompile>
     <ClCompile Include="AudioManager.cpp">
-      <Filter>Source Files\Engine\Managers</Filter>
+      <Filter>Source Files\Engine\Entities\Managers</Filter>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
-      <Filter>Source Files\Engine\Managers</Filter>
+      <Filter>Source Files\Engine\Entities\Managers</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files\Engine\Managers</Filter>
+      <Filter>Source Files\Engine\Entities\Managers</Filter>
     </ClCompile>
     <ClCompile Include="Graphics.cpp">
       <Filter>Source Files\Engine\System</Filter>
@@ -103,7 +103,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EntityManager.cpp">
-      <Filter>Source Files\Engine\Managers</Filter>
+      <Filter>Source Files\Engine\Entities\Managers</Filter>
     </ClCompile>
     <ClCompile Include="BezierPath.cpp">
       <Filter>Source Files\Engine\Entities</Filter>
@@ -134,6 +134,12 @@
     </ClCompile>
     <ClCompile Include="BossArm.cpp">
       <Filter>Source Files\GameFiles\Entities\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="StartScreen.cpp">
+      <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +217,12 @@
     </ClInclude>
     <ClInclude Include="BossArm.h">
       <Filter>Header Files\GameFiles\Entities\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="StartScreen.h">
+      <Filter>Header Files\Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Header Files\Engine\System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

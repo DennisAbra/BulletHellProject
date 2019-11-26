@@ -155,7 +155,9 @@
     <ClCompile Include="PhysManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ObjectPooling.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="StartScreen.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
@@ -183,6 +185,8 @@
     <ClInclude Include="PhysManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ObjectPooling.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="StartScreen.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
