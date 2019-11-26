@@ -74,7 +74,7 @@ void StartScreen::ResetAnimation()
 {
 	animationStartPos = Vector2(Graphics::Instance()->screenWidth * 1.0f, Graphics::Instance()->screenHeight);
 	animationEndPos = Vec2_Zero;
-	animationTotalTime = 10.0f;
+	animationTotalTime = 5.0f;
 	animationTimer = 0.0f;
 	animationDone = false;
 

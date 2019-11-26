@@ -145,12 +145,6 @@ void GameManager::Update() // Do Entity updates and input here
 			sceneManager->currentScene = SceneManager::start;
 		}
 
-		if (player->playerCurrentHealth <= 0)
-		{
-			//Switch screen to death screen
-			quit = true;
-		}
-
 
 		break;
 	}
