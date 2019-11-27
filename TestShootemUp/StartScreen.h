@@ -2,10 +2,13 @@
 #include "AnimatedTexture.h"
 #include "InputManager.h"
 #include "Timer.h"
+#include "AudioManager.h"
 
 class StartScreen : public GameEntity
 {
 private:
+
+	AudioManager* audioManager;
 	Timer* timer;
 	InputManager* input;
 

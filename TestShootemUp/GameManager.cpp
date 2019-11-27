@@ -59,19 +59,6 @@ GameManager::GameManager() // Handle as Awake in Unity
 
 	entityManager->AddPlayer(player);
 
-	//boss = new Boss(3, "PepsiBoss.png", player);
-	//boss->texture->Scale(Vector2(0.5f, 0.5f));
-	//entityManager->AddBoss(boss);
-
-	//bossArm = new BossArm(3,"BossArm.png", inputManager, player);
-	//bossArm->texture->Scale(Vector2(0.5f, 0.5f));
-	//bossArm->Parent(boss);
-	//bossArm->Pos(Vec2_Zero + bossArm->posOffset);
-
-	//entityManager->AddBossArm(bossArm);
-	//bossArm->AimTowardsPlayer(player);
-
-
 	enemyPool->InitializeEnemyPool();
 	for (int i = 0; i < enemyPool->POOL_SIZE; i++)
 	{
@@ -123,12 +110,19 @@ void GameManager::EarlyUpdate()
 void GameManager::Update() // Do Entity updates and input here
 {
 	static bool bossAlive = false;
-	audioManager->PlayMusic("music.mp3");
+	static bool isPlayingMusic = false;
+
 	switch (sceneManager->currentScene)
 	{
 	case SceneManager::play:
 		entityManager->Update();
 
+		if (!isPlayingMusic)
+		{
+			
+			//audioManager->PlayMusic("music.mp3");
+			isPlayingMusic = true;
+		}
 
 		if (Enemy::deadEnemyCounter == 15 && !bossAlive)
 		{
@@ -157,9 +151,16 @@ void GameManager::Update() // Do Entity updates and input here
 	{
 	case SceneManager::play:
 
+		if (bossAlive == false)
+		{
+			audioManager->PlayMusic("WinSound.mp3", 1);
+		}
+
 		if (inputManager->KeyPressed(SDL_SCANCODE_ESCAPE))
 		{
 			sceneManager->currentScene = SceneManager::start;
+			audioManager->PlayMusic("Vroom.mp3", 1);
+
 		}
 
 		else if (player->playerCurrentHealth <= 0)

@@ -2,6 +2,7 @@
 
 StartScreen::StartScreen()
 {
+	audioManager = AudioManager::Instance();
 	timer = Timer::Instance();
 	input = InputManager::Instance();
 
@@ -66,11 +67,13 @@ StartScreen::~StartScreen()
 
 void StartScreen::ResetAnimation()
 {
-	animationStartPos = Vector2(Graphics::Instance()->screenWidth * 1.0f, Graphics::Instance()->screenHeight);
+	animationStartPos = Vector2(Graphics::Instance()->screenWidth * -1.0f, Graphics::Instance()->screenHeight * -1.0f);
 	animationEndPos = Vec2_Zero;
-	animationTotalTime = 5.0f;
+	animationTotalTime = 2.0f;
 	animationTimer = 0.0f;
 	animationDone = false;
+
+	audioManager->PlayMusic("Katchow!!!.mp3", 1);
 
 	Pos(animationStartPos);
 }
