@@ -151,6 +151,11 @@ void GameManager::Update() // Do Entity updates and input here
 	{
 	case SceneManager::play:
 
+		if (bossAlive == false)
+		{
+			audioManager->PlayMusic("WinSound.mp3", 1);
+		}
+
 		if (inputManager->KeyPressed(SDL_SCANCODE_ESCAPE))
 		{
 			sceneManager->currentScene = SceneManager::start;
