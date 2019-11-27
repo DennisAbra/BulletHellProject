@@ -46,6 +46,11 @@ Bullet::Bullet(Type typeShootingTheBullet, std::string texturePath)
 		texture->Scale(Vector2(0.050f, 0.050f));
 		speed = 350.0f;
 	}
+	else if (typeShootingTheBullet == Bullet::Boss)
+	{
+		texture->Scale(Vector2(0.5f, 0.5f));
+		speed = 350.0f;
+	}
 
 	Reload();
 

@@ -66,9 +66,7 @@ GameManager::GameManager() // Handle as Awake in Unity
 	bossArm = new BossArm(3,"BossArm.png", inputManager, player);
 	bossArm->texture->Scale(Vector2(0.5f, 0.5f));
 	bossArm->Parent(boss);
-	//bossArm->Pos(bossArm->Parent()->Pos() + bossArm->posOffset);
 	bossArm->Pos(Vec2_Zero + bossArm->posOffset);
-
 
 	entityManager->AddBossArm(bossArm);
 	bossArm->AimTowardsPlayer(player);

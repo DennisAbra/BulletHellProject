@@ -8,7 +8,7 @@ BossArm::BossArm(int path, std::string textureName, Player* player) : Enemy(path
 
 }
 
-BossArm::BossArm(int path, std::string textureName, InputManager* input, Player* player) : Enemy(path, textureName, player), input(input)
+BossArm::BossArm(int path, std::string textureName, InputManager* input, Player* _player) : Enemy(path, textureName, _player), input(input)
 {
 	speed = 0.f;
 	posOffset = Vector2(110, 50);
@@ -31,42 +31,38 @@ BossArm::BossArm(int path, std::string textureName, InputManager* input, Player*
 	health = 10;
 	maxHealth = 10;
 
-	//id = PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::Hostile);
+	player = _player;
+
+	firePointEntity = new GameEntity();
+	firePointEntity->Parent(this);
+	firePointEntity->Pos(Vec2_Zero);
+	firePointEntity->Pos(Vector2(25, 60));
 }
 
 BossArm::~BossArm()
 {
-
+	delete firePointEntity;
+	firePointEntity = nullptr;
 	player = nullptr;
 
 	input = nullptr;
-
-
 }
 
-
-Vector2 BossArm::FindFirePoint(Vector2 offset, float angle)
-{
-	angle = (angle)* degToRad;
-	Vector2 newVector = offset - player->Pos();
-	//float rotatedX = cos(angle) * (offset.x - newVector.x) - sin(angle) * (offset.y - newVector.y) + newVector.x;
-	//float rotatedY = cos(angle) * (offset.x - newVector.x) - sin(angle) * (offset.y - newVector.y) + newVector.y;
-
-
-	return newVector + player->Pos() + Parent()->Rotation() /*{ rotatedX, rotatedY }*/;
-}
 
 void BossArm::AimTowardsPlayer(Player* player)
 {
 	this->player = player;
 	distanceToPlayer = this->Pos() - player->Pos();
-	Rotation(atan2(distanceToPlayer.y, distanceToPlayer.x) * radToDeg + 90.f);
+	rotation = atan2(distanceToPlayer.y, distanceToPlayer.x) * radToDeg + 90.f;
+	if (rotation < 35 && rotation > -55)
+	{
+		Rotation(rotation);
+	}
 }
 
 
 void BossArm::Update()
 {
-
 	if (invincible)
 	{
 		Invincible();
@@ -84,39 +80,38 @@ void BossArm::Update()
 	if (Active() && isAlive)
 		if (t < time)
 		{
-			//printf("X: %f, Y: %f\n", Pos().x, Pos().y);
-			
-			//HandleFiring();
 			for (int i = 0; i < MAX_BULLETS; i++)
 			{
 				if (!bullets[i]->Active())
 				{
 					bullets[i]->Fire(firepoint);
-					printf("FIRE");
 					time = 0;
-						break;
+					break;
 				}
 			}
 			//time = 0;
 		}
-
-	firepoint = FindFirePoint({ Pos().x + 50, Pos().y + 100 }, Rotation());
-	//TODO Fix this
+	if(firePointEntity)
+	firepoint = firePointEntity->Pos();
 
 	for (int i = 0; i < MAX_BULLETS; i++)
 	{
 		if (bullets[i]->Active())
 		{
-			//Check if it's a BossBullet and do this inside Bullet->Update()
-			bullets[i]->Translate( (player->Pos().Normalized()) * 5); // This should be distance between player and boss // I think
+			if (player->Pos().x > Pos().x)
+			{
+			bullets[i]->Translate( (player->Pos().Normalized()) * 5); 
+			}
+			else
+			{
+				bullets[i]->Translate((Vector2((player->Pos().x *-1), player->Pos().y)).Normalized() * 5);
+			}
+
 			if (Pos().y < -bullets[i]->OFFSCREEN_BUFFER || Pos().y > Graphics::screenHeight + bullets[i]->OFFSCREEN_BUFFER || Pos().x < -bullets[i]->OFFSCREEN_BUFFER || Pos().x > Graphics::screenWidth + bullets[i]->OFFSCREEN_BUFFER)
 			{
 				bullets[i]->Reload();
 			}
 		}
-
-
-		//bullets[i]->Update();
 	}
 	AimTowardsPlayer(player);
 }
