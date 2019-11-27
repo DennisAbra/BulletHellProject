@@ -26,7 +26,7 @@ protected:
 	float accuTimer = 0;
 
 	bool IgnoreCollisions() override;
-	bool DEBUG_LINES = false;
+	bool DEBUG_LINES = true;
 
 	float invincibilityFrameTimer;
 	float maxInvincibilityFrameTimer = 0.5f;

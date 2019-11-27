@@ -10,7 +10,7 @@ BossArm::BossArm(int path, std::string textureName, Player* player) : Enemy(path
 
 BossArm::BossArm(int path, std::string textureName, InputManager* input, Player* _player) : Enemy(path, textureName, _player), input(input)
 {
-	speed = 0.f;
+	speed = 100.f;
 	posOffset = Vector2(110, 50);
 	AddCollider(new BoxCollider(texture->ScaledDimensions() * 0.5f, &point));
 

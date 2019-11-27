@@ -23,14 +23,22 @@ public:
 	BezierCurve TopLeftSCurve();
 	BezierCurve TopRightSCurve();
 	
-	BezierCurve EntryPath();
+	
 
 	//Making a rectangle using curves
+	BezierCurve EntryPath();
 	BezierCurve LeftUp();
 	BezierCurve RightLeft();
 	BezierCurve RightDown();
 	BezierCurve LeftRight();
 	//////////////////////////////////
 
+	/// UnlimitedPath
+	BezierCurve EntryPathUnlimited();
+	BezierCurve RightCurveUnlimited();
+	BezierCurve LeftCurveUnlimited();
+	BezierCurve BackToEight();
+
+	/////////////////////////////////
 	void Sample(std::vector<Vector2>* sampledPath);
 };

@@ -10,7 +10,7 @@ Boss::Boss(int path, std::string textureName, Player* player)
 :Enemy(path,textureName, player)
 {
 	AddCollider(new BoxCollider(Vector2(150, 150)));
-
+	speed = 100.f;
 	id = PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::Hostile);
 }
 
@@ -36,7 +36,7 @@ void Boss::HandleFlyInState()
 	}
 	else
 	{
-		currentWaypoint = 1;
+		currentWaypoint = 45;
 	}
 }
 

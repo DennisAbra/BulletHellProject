@@ -72,6 +72,29 @@ BezierCurve BezierPath::LeftUp()
 
 #pragma endregion
 
+
+#pragma region Unlimited Path
+
+/// Entry Path for eight
+BezierCurve BezierPath::EntryPathUnlimited()
+{
+	return{ Vector2(300,-50),Vector2(300,300),Vector2(500,250),Vector2(512,250) };
+}
+
+BezierCurve BezierPath::RightCurveUnlimited()
+{
+	return {Vector2(512,250),Vector2(1024,0),Vector2(1024,450),Vector2(512,250)};
+}
+
+BezierCurve BezierPath::LeftCurveUnlimited()
+{
+	return { Vector2(512,250),Vector2(0,0),Vector2(0,450),Vector2(512,250) };
+}
+
+
+
+#pragma endregion
+
 void BezierPath::Sample(std::vector<Vector2>* sampledPath)
 {
 	for (int i = 0; i < curves.size(); i++)

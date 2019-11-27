@@ -28,11 +28,13 @@ void Enemy::CreatePaths()
 			path->AddCurve(path->TopUCurve(), 45);
 			break;
 		case 3:
-			path->AddCurve(path->EntryPath(), 1);
-			path->AddCurve(path->LeftRight(), 1);
+			path->AddCurve(path->EntryPathUnlimited(), 45);
+			path->AddCurve(path->RightCurveUnlimited(), 45);
+			path->AddCurve(path->LeftCurveUnlimited(), 45);
+			/*path->AddCurve(path->LeftRight(), 1);
 			path->AddCurve(path->RightDown(), 1);
 			path->AddCurve(path->RightLeft(), 1);
-			path->AddCurve(path->LeftUp(), 1);
+			path->AddCurve(path->LeftUp(), 1);*/
 			break;
 		}
 
