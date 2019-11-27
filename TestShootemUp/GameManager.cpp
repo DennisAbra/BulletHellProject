@@ -54,8 +54,6 @@ GameManager::GameManager() // Handle as Awake in Unity
 	Enemy::CreatePaths();
 
 	sceneManager = SceneManager::Instance();
-
-
 	
 	player = new Player(Graphics::screenWidth * 0.5f, Graphics::screenHeight * 0.5f, inputManager, "PartyKrister.png");
 
@@ -146,11 +144,25 @@ void GameManager::Update() // Do Entity updates and input here
 			sceneManager->currentScene = SceneManager::start;
 		}
 
+		else if (player->playerCurrentHealth <= 0)
+		{
+			sceneManager->currentScene = SceneManager::death;
+			if (sceneManager->quitGame == true)
+			{
+				quit = true;
+			}
+		}
+		break;
+
+	case SceneManager::death:
+
+		if (inputManager->KeyPressed(SDL_SCANCODE_RETURN))
+		{
+			quit = true;
+		}
 
 		break;
 	}
-
-
 }
 
 void GameManager::Render()
@@ -166,6 +178,10 @@ void GameManager::Render()
 		break;
 
 	case SceneManager::start:
+		sceneManager->Render();
+		break;
+
+	case SceneManager::death:
 		sceneManager->Render();
 		break;
 	}
@@ -192,6 +208,11 @@ void GameManager::Run() // Don't test stuff here. Use the Update functions
 			{
 				quit = true;
 			}
+		}
+
+		if (sceneManager->quitGame == true)
+		{
+			quit = true;
 		}
 
 		if (timer->DeltaTime() >= 1.0f / frameRate)

@@ -22,7 +22,7 @@ SceneManager::SceneManager()
 {
 	inputManager = InputManager::Instance();
 	startScreen = new StartScreen();
-
+	deathScreen = new DeathScreen();
 	currentScene = SceneManager::start;
 }
 
@@ -50,7 +50,17 @@ void SceneManager::Update()
 		}
 		else if (inputManager->KeyPressed(SDL_SCANCODE_RETURN) && startScreen->selectedMode == 1)
 		{
-			//quit
+			quitGame = true;
+		}
+		break;
+
+	case death:
+
+		//Check death input
+
+		if (inputManager->KeyPressed(SDL_SCANCODE_RETURN))
+		{
+			quitGame = true;
 		}
 
 		break;
@@ -67,6 +77,10 @@ void SceneManager::Render()
 		break;
 
 	case play:
+		break;
+
+	case death:
+		deathScreen->Render();
 		break;
 	}
 }

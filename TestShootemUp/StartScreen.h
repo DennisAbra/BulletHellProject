@@ -12,7 +12,6 @@ private:
 	//Top bar Entities
 	GameEntity* topBar;
 	GameEntity* playModes;
-	Texture* highScore;
 
 	//Play entities
 	Texture* playButton;

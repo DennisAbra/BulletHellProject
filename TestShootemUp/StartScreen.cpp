@@ -7,9 +7,7 @@ StartScreen::StartScreen()
 
 	//Top Bar Entities
 	topBar = new GameEntity(Graphics::Instance()->screenWidth * 0.5f, 80.0f);
-	highScore = new Texture("HIGH-SCORE: ", "font.ttf", 32, { 200, 0, 0 });
 
-	highScore->Parent(topBar);
 
 	topBar->Parent(this);
 
@@ -27,7 +25,6 @@ StartScreen::StartScreen()
 	cursor->Pos(Vector2(-75.0f, 35.0f));
 	playButton->Pos(Vector2(0.0f, 35.0f));
 	quitButton->Pos(Vector2(0.0f, 85.0f));
-	highScore->Pos(Vector2(-30.0f, 0.0f));
 
 	playModes->Parent(this);
 
@@ -56,9 +53,6 @@ StartScreen::~StartScreen()
 
 	delete playButton;
 	playButton = nullptr;
-
-	delete highScore;
-	highScore = nullptr;
 
 	delete quitButton;
 	quitButton = nullptr;
@@ -118,10 +112,6 @@ void StartScreen::Update()
 	if (input->KeyPressed(SDL_SCANCODE_DOWN))
 	{
 		ChangeSelectedMode(1);
-		if (selectedMode == 0 && input->KeyPressed(SDL_SCANCODE_RETURN))
-		{
-
-		}
 	}
 	else if (input->KeyPressed(SDL_SCANCODE_UP))
 	{
@@ -132,7 +122,6 @@ void StartScreen::Update()
 void StartScreen::Render()
 {
 	playButton->Render();
-	highScore->Render();
 	quitButton->Render();
 	logo->Render();
 	cursor->Render();
