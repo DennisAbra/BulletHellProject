@@ -70,7 +70,6 @@ GameManager::GameManager() // Handle as Awake in Unity
 	bossArm->Parent(boss);
 	//bossArm->Pos(bossArm->Parent()->Pos() + bossArm->posOffset);
 	bossArm->Pos(Vec2_Zero + bossArm->posOffset);
-	// Change to Vec2_Zero + bossArm.posOffset
 
 
 	entityManager->AddBossArm(bossArm);
