@@ -40,10 +40,33 @@ bool PhysEntity::CheckCollision(PhysEntity* other)
 	{
 		return false;
 	}
+
+	bool narrowPhaseCheck = false;
+	if (broadPhaseCollider && other->broadPhaseCollider)
+	{
+		narrowPhaseCheck = ColliderColliderCheck(broadPhaseCollider, other->broadPhaseCollider);
+	}
 	else
 	{
-		return ColliderColliderCheck(broadPhaseCollider, other->broadPhaseCollider);
+		narrowPhaseCheck = true;
 	}
+
+	if (narrowPhaseCheck)
+	{
+		for (int i = 0; i < colliders.size(); i++)
+		{
+			for (int j = 0; j < other->colliders.size(); j++)
+			{
+				if (ColliderColliderCheck(colliders[i], other->colliders[j]))
+				{
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
+
 }
 
 void PhysEntity::Hit(PhysEntity* other)
@@ -75,7 +98,7 @@ void PhysEntity::AddCollider(Collider* col, Vector2 localPos)
 	col->Pos(localPos);
 	colliders.push_back(col);
 
-	if (colliders.size() > 1 || 
+	if (colliders.size() > 1 ||
 		colliders[0]->GetColliderType() != Collider::ColliderType::Circle)
 	{
 		float furthestDistance = colliders[0]->GetFurthestPoint().Magnitude();

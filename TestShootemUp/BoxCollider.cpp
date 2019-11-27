@@ -62,6 +62,11 @@ Vector2 BoxCollider::GetFurthestPoint()
 	return localPos + verts[furthestIndex]->Pos(GameEntity::local);
 }
 
+Vector2 BoxCollider::GetVertexPosition(int index)
+{
+	return verts[index]->Pos();
+}
+
 void BoxCollider::AddVert(int index, Vector2 pos)
 {
 	verts[index] = new GameEntity(pos.x, pos.y);

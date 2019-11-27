@@ -1,6 +1,7 @@
 #include "Bullet.h"
 #include "BoxCollider.h"
 #include "PhysManager.h"
+#include "Player.h"
 
 Bullet::Bullet(bool friendly)
 {
@@ -31,7 +32,7 @@ Bullet::Bullet(bool friendly)
 	}
 }
 
-Bullet::Bullet(bool friendly, std::string texturePath)
+Bullet::Bullet(Type typeShootingTheBullet, std::string texturePath)
 {
 	timer = Timer::Instance();
 
@@ -40,7 +41,7 @@ Bullet::Bullet(bool friendly, std::string texturePath)
 	texture = new Texture(texturePath);
 	texture->Parent(this);
 	texture->Pos(Vec2_Zero);
-	if (!friendly)
+	if (typeShootingTheBullet == Bullet::Enemy)
 	{
 		texture->Scale(Vector2(0.050f, 0.050f));
 		speed = 350.0f;
@@ -49,14 +50,15 @@ Bullet::Bullet(bool friendly, std::string texturePath)
 	Reload();
 
 	AddCollider(new BoxCollider(texture->ScaledDimensions()));
-	if (friendly)
+	if (Bullet::Friendly)
 	{
 		PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::FriendlyProjectile);
 	}
-	else
+	else 
 	{
 		PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::HostileProjectile);
 	}
+	type = typeShootingTheBullet;
 }
 
 Bullet::~Bullet() 
@@ -77,12 +79,18 @@ void Bullet::Fire(Vector2 pos)
 void Bullet::Reload() 
 {
 	Active(false);
-
 	Pos(Graphics::screenHeight + 100);
 }
 
+void Bullet::GetPlayer(Player* myPlayer)
+{
+	bulletsPlayerRef = myPlayer;
+}
+
+
 void Bullet::Hit(PhysEntity* other)
 {
+	Active(false);
 	Reload();
 }
 
@@ -101,12 +109,16 @@ void Bullet::Update()
 
 			///*Vector2 pos =*/ Pos();
 		}
-		else
+		else if(type == Enemy)
 		{
 			Translate(Vec2_Up * speed * timer->DeltaTime());
 			//TODO Check if it's a boss bullet. 
 			// If true fire the bullet towards the player
 		}
+		//else if(type == Boss && bulletsPlayerRef != NULL)
+		//{
+		//	Translate(bulletsPlayerRef->Pos().Normalized() * 5);
+		//}
 
 
 		if (Pos().y < -OFFSCREEN_BUFFER || Pos().y > Graphics::screenHeight + OFFSCREEN_BUFFER || Pos().x < -OFFSCREEN_BUFFER || Pos().x > Graphics::screenWidth + OFFSCREEN_BUFFER)

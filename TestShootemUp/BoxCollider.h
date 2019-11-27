@@ -19,4 +19,6 @@ public:
 
 	Vector2 GetFurthestPoint() override;
 
+	Vector2 GetVertexPosition(int index);
+
 };

@@ -42,7 +42,7 @@ public:
 	Vector2 startPos;
 	static void CreatePaths();
 	Enemy(int path);
-	Enemy(int path, std::string textureName);
+	Enemy(int path, std::string textureName, Player* player);
 	virtual ~Enemy();
 
 	virtual void HandleFlyInState();

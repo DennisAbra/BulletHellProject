@@ -61,14 +61,16 @@ GameManager::GameManager() // Handle as Awake in Unity
 
 	entityManager->AddPlayer(player);
 
-	boss = new Boss(3, "PepsiBoss.png");
+	boss = new Boss(3, "PepsiBoss.png", player);
 	boss->texture->Scale(Vector2(0.5f, 0.5f));
 	entityManager->AddBoss(boss);
 
-	bossArm = new BossArm(3, "BossArm.png", inputManager);
+	bossArm = new BossArm(3,"BossArm.png", inputManager, player);
 	bossArm->texture->Scale(Vector2(0.5f, 0.5f));
 	bossArm->Parent(boss);
-	bossArm->Pos(bossArm->Parent()->Pos() + bossArm->posOffset);
+	//bossArm->Pos(bossArm->Parent()->Pos() + bossArm->posOffset);
+	bossArm->Pos(Vec2_Zero + bossArm->posOffset);
+	// Change to Vec2_Zero + bossArm.posOffset
 
 
 	entityManager->AddBossArm(bossArm);

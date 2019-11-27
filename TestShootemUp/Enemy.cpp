@@ -2,6 +2,7 @@
 #pragma warning(disable : 26812)
 #include "Enemy.h"
 #include "BoxCollider.h"
+#include "CircleCollider.h"
 #include "PhysManager.h"
 
 
@@ -63,14 +64,15 @@ Enemy::Enemy(int path)
 
 	for (int i = 0; i < MAX_BULLETS; i++)
 	{
-		bullets[i] = new Bullet(false, "CocaCola.png");
+		bullets[i] = new Bullet(Bullet::Enemy, "CocaCola.png");
 	}
 
-	AddCollider(new BoxCollider(Vector2(50, 50)));
+	//AddCollider(new BoxCollider(Vector2(50, 50)));
+	AddCollider(new CircleCollider(45));
 	id = PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::Hostile);
 }
 
-Enemy::Enemy(int path, std::string textureName)
+Enemy::Enemy(int path, std::string textureName, Player* player)
 {
 	timer = Timer::Instance();
 
@@ -89,7 +91,8 @@ Enemy::Enemy(int path, std::string textureName)
 
 	for (int i = 0; i < MAX_BULLETS; i++)
 	{
-		bullets[i] = new Bullet(false, "CocaCola.png");
+		bullets[i] = new Bullet(Bullet::Boss, "BossBullet.png");
+		bullets[i]->GetPlayer(player);
 	}
 
 	id = PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::Hostile);
@@ -249,10 +252,10 @@ bool Enemy::IgnoreCollisions()
 	{
 		return invincible;
 	}
-	if (wasHit && isAlive)
-	{
-		return wasHit;
-	}
+	//if (wasHit)
+	//{
+	//	return wasHit;
+	//}
 	else
 	{
 		return !isAlive;

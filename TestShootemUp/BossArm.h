@@ -14,8 +14,8 @@ private:
 	SDL_Point point = {25, 30}; // this + rotation + offset
 
 public:
-	BossArm(int path, std::string textureName);
-	BossArm(int path, std::string textureName, InputManager* input);
+	BossArm(int path, std::string textureName, Player* player);
+	BossArm(int path, std::string textureName, InputManager* input, Player* player);
 	
 	~BossArm();
 	Vector2 posOffset;

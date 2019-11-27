@@ -3,12 +3,12 @@
 #include "PhysManager.h"
 
 
-BossArm::BossArm(int path, std::string textureName) : Enemy(path, textureName)
+BossArm::BossArm(int path, std::string textureName, Player* player) : Enemy(path, textureName, NULL)
 {
 
 }
 
-BossArm::BossArm(int path, std::string textureName, InputManager* input) : Enemy(path, textureName), input(input)
+BossArm::BossArm(int path, std::string textureName, InputManager* input, Player* player) : Enemy(path, textureName, player), input(input)
 {
 	speed = 0.f;
 	posOffset = Vector2(110, 50);
@@ -48,10 +48,12 @@ BossArm::~BossArm()
 Vector2 BossArm::FindFirePoint(Vector2 offset, float angle)
 {
 	angle = (angle)* degToRad;
-	float rotatedX = cos(angle) * (offset.x - Pos().x) - sin(angle) * (offset.y - Pos().y) + Pos().x;
-	float rotatedY = cos(angle) * (offset.x - Pos().x) - sin(angle) * (offset.y - Pos().y) + Pos().y;
+	Vector2 newVector = offset - player->Pos();
+	//float rotatedX = cos(angle) * (offset.x - newVector.x) - sin(angle) * (offset.y - newVector.y) + newVector.x;
+	//float rotatedY = cos(angle) * (offset.x - newVector.x) - sin(angle) * (offset.y - newVector.y) + newVector.y;
 
-	return { rotatedX, rotatedY };
+
+	return newVector + player->Pos() + Parent()->Rotation() /*{ rotatedX, rotatedY }*/;
 }
 
 void BossArm::AimTowardsPlayer(Player* player)
@@ -83,20 +85,38 @@ void BossArm::Update()
 		if (t < time)
 		{
 			//printf("X: %f, Y: %f\n", Pos().x, Pos().y);
-			HandleFiring();
-			time = 0;
+			
+			//HandleFiring();
+			for (int i = 0; i < MAX_BULLETS; i++)
+			{
+				if (!bullets[i]->Active())
+				{
+					bullets[i]->Fire(firepoint);
+					printf("FIRE");
+					time = 0;
+						break;
+				}
+			}
+			//time = 0;
 		}
 
-	firepoint = FindFirePoint({ Pos().x + 50, Pos().y + 150 }, Rotation());
+	firepoint = FindFirePoint({ Pos().x + 50, Pos().y + 100 }, Rotation());
 	//TODO Fix this
+
 	for (int i = 0; i < MAX_BULLETS; i++)
 	{
 		if (bullets[i]->Active())
 		{
 			//Check if it's a BossBullet and do this inside Bullet->Update()
-			bullets[i]->Translate(player->Pos().Normalized() * 5);
+			bullets[i]->Translate( (player->Pos().Normalized()) * 5); // This should be distance between player and boss // I think
+			if (Pos().y < -bullets[i]->OFFSCREEN_BUFFER || Pos().y > Graphics::screenHeight + bullets[i]->OFFSCREEN_BUFFER || Pos().x < -bullets[i]->OFFSCREEN_BUFFER || Pos().x > Graphics::screenWidth + bullets[i]->OFFSCREEN_BUFFER)
+			{
+				bullets[i]->Reload();
+			}
 		}
-		bullets[i]->Update();
+
+
+		//bullets[i]->Update();
 	}
 	AimTowardsPlayer(player);
 }

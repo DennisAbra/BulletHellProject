@@ -11,7 +11,7 @@ private:
 
 public:
 	Boss(int path);
-	Boss(int path, std::string textureName);
+	Boss(int path, std::string textureName, Player* player);
 	virtual ~Boss();
 
 	void HandleFlyInState() override;

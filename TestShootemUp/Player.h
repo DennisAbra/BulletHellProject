@@ -28,6 +28,8 @@ public:
 public:
 	/* Player death, respawn and game over variables*/
 
+	Player* me;
+
 	bool playerHit = false;
 	bool playerInvincible = false;
 	bool wasHit;
