@@ -59,17 +59,17 @@ GameManager::GameManager() // Handle as Awake in Unity
 
 	entityManager->AddPlayer(player);
 
-	boss = new Boss(3, "PepsiBoss.png", player);
-	boss->texture->Scale(Vector2(0.5f, 0.5f));
-	entityManager->AddBoss(boss);
+	//boss = new Boss(3, "PepsiBoss.png", player);
+	//boss->texture->Scale(Vector2(0.5f, 0.5f));
+	//entityManager->AddBoss(boss);
 
-	bossArm = new BossArm(3,"BossArm.png", inputManager, player);
-	bossArm->texture->Scale(Vector2(0.5f, 0.5f));
-	bossArm->Parent(boss);
-	bossArm->Pos(Vec2_Zero + bossArm->posOffset);
+	//bossArm = new BossArm(3,"BossArm.png", inputManager, player);
+	//bossArm->texture->Scale(Vector2(0.5f, 0.5f));
+	//bossArm->Parent(boss);
+	//bossArm->Pos(Vec2_Zero + bossArm->posOffset);
 
-	entityManager->AddBossArm(bossArm);
-	bossArm->AimTowardsPlayer(player);
+	//entityManager->AddBossArm(bossArm);
+	//bossArm->AimTowardsPlayer(player);
 
 
 	enemyPool->InitializeEnemyPool();
@@ -122,10 +122,30 @@ void GameManager::EarlyUpdate()
 
 void GameManager::Update() // Do Entity updates and input here
 {
+	static bool bossAlive = false;
+	audioManager->PlayMusic("music.mp3");
 	switch (sceneManager->currentScene)
 	{
 	case SceneManager::play:
 		entityManager->Update();
+
+
+		if (Enemy::deadEnemyCounter == 15 && !bossAlive)
+		{
+			boss = new Boss(3, "PepsiBoss.png", player);
+			boss->texture->Scale(Vector2(0.5f, 0.5f));
+			entityManager->AddBoss(boss);
+
+			bossArm = new BossArm(3, "BossArm.png", inputManager, player);
+			bossArm->texture->Scale(Vector2(0.5f, 0.5f));
+			bossArm->Parent(boss);
+			bossArm->Pos(Vec2_Zero + bossArm->posOffset);
+
+			entityManager->AddBossArm(bossArm);
+			bossArm->AimTowardsPlayer(player);
+			bossAlive = true;
+			Enemy::bossSpawned = true;
+		}
 		break;
 
 	case SceneManager::start:

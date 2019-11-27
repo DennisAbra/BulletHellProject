@@ -1,5 +1,6 @@
 #include "EntityManager.h"
 #include "Collision.h"
+#include "AudioManager.h"
 
 EntityManager* EntityManager::instance = nullptr;
 
@@ -76,8 +77,12 @@ void EntityManager::Update()
 		enemy->Update();
 	}
 
-	pepsiBoss->Update();
-	bossArm->Update();
+	if (Enemy::bossSpawned)
+	{
+		pepsiBoss->Update();
+		bossArm->Update();
+	}
+
 	player->Update();
 }
 
@@ -96,8 +101,12 @@ void EntityManager::Render()
 	{
 		enemy->Render();
 	}
-	pepsiBoss->Render();
-	bossArm->Render();
+	if (Enemy::bossSpawned)
+	{
+		pepsiBoss->Render();
+		bossArm->Render();
+	}
+
 	player->Render();
 	player->emptyGlass->Render();
 

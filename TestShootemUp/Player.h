@@ -5,7 +5,6 @@
 #include "Timer.h"
 #include "Bullet.h"
 #include "Collision.h"
-//       #include "Enemy.h"
 
 class Bullet;
 
@@ -18,7 +17,6 @@ public:
 	void Update();
 	void Render();
 
-	//void OnCollision();
 	bool WasHit(); 
 	void Hit(PhysEntity* other) override;
 	void HandlePlayerDeath();

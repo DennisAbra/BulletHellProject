@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Boss.h"
 class Collision;
+class AudioManager;
 
 class EntityManager
 {
@@ -15,7 +16,6 @@ private:
 	BossArm* bossArm;
 	EntityManager();
 	~EntityManager();
-
 
 public:
 	static EntityManager* Instance();

@@ -2,6 +2,7 @@
 #include <iostream>
 #include "BoxCollider.h"
 #include "PhysManager.h"
+#include "AudioManager.h"
 
 Player::Player(int posX, int posY, InputManager* input, const char* filePath) : input(input)
 {
@@ -122,12 +123,6 @@ void Player::Invincible()
 	}
 }
 
-//void Player::OnCollision()
-//{
-//	WasHit();
-//	playerInvincible = true;
-//}
-
 void Player::HandlePlayerDeath()
 {
 	if (playerCurrentHealth <= 0 && !playerInvincible)
@@ -194,6 +189,7 @@ void Player::HandleFiring()
 		{
 			if (!bullets[i]->Active())
 			{
+				AudioManager::Instance()->PlaySFX("shoot.wav");
 				bullets[i]->Fire(firePoint);
 			}
 		}

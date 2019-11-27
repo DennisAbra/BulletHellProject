@@ -58,6 +58,8 @@ public:
 	bool isAlive = true;
 	int health = 3;
 	int maxHealth = 3;
+	static int deadEnemyCounter;
+	static bool bossSpawned;
 
 	void Update();
 	void Render();

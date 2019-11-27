@@ -7,6 +7,8 @@
 
 
 std::vector<std::vector<Vector2>> Enemy::paths;
+bool Enemy::bossSpawned = false;
+int Enemy::deadEnemyCounter = 0;
 
 void Enemy::CreatePaths()
 {
@@ -61,7 +63,6 @@ Enemy::Enemy(int path)
 
 	speed = 100.0f;
 
-
 	for (int i = 0; i < MAX_BULLETS; i++)
 	{
 		bullets[i] = new Bullet(Bullet::Enemy, "CocaCola.png");
@@ -70,6 +71,7 @@ Enemy::Enemy(int path)
 	//AddCollider(new BoxCollider(Vector2(50, 50)));
 	AddCollider(new CircleCollider(45));
 	id = PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::Hostile);
+
 }
 
 Enemy::Enemy(int path, std::string textureName, Player* player)
@@ -295,6 +297,8 @@ void Enemy::Update()
 
 	if (health <= 0)
 	{
+		if(isAlive)
+		deadEnemyCounter++;
 		isAlive = false; //TODO Change this to a bool - isAlive
 	}
 
