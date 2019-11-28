@@ -86,11 +86,14 @@ GameManager::~GameManager()
 	entityManager->Instance()->Release();
 	entityManager = nullptr;
 
+	AssetManager::Release();
+	assetManager = nullptr;
+
 	AudioManager::Release();
 	audioManager = nullptr;
 
-	AssetManager::Release();
-	assetManager = nullptr;
+
+
 
 	Graphics::Release();
 	graphics = nullptr;

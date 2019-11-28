@@ -9,6 +9,8 @@ Boss::Boss(int path) : Enemy(path)
 Boss::Boss(int path, std::string textureName, Player* player)
 :Enemy(path,textureName, player)
 {
+	health = 10;
+	maxHealth = 10;
 	AddCollider(new BoxCollider(Vector2(150, 150)));
 	speed = 100.f;
 	id = PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::Hostile);

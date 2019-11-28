@@ -63,56 +63,60 @@ void BossArm::AimTowardsPlayer(Player* player)
 
 void BossArm::Update()
 {
-	if (invincible)
+	if (Parent()->Active())
 	{
-		Invincible();
-	}
-
-	if (health <= 0)
-	{
-		isAlive = false; //TODO Change this to a bool - isAlive // What are you talking about, this is a bool??
-	}
-
-	static float time;
-	static float t = 2.0f;
-	time += timer->DeltaTime();
-
-	if (Active() && isAlive)
-		if (t < time)
+		if (invincible)
 		{
-			for (int i = 0; i < MAX_BULLETS; i++)
+			Invincible();
+		}
+
+		if (health <= 0)
+		{
+			isAlive = false; //TODO Change this to a bool - isAlive // What are you talking about, this is a bool??
+		}
+
+		static float time;
+		static float t = 2.0f;
+		time += timer->DeltaTime();
+
+		if (Active() && isAlive)
+			if (t < time)
 			{
-				if (!bullets[i]->Active())
+				for (int i = 0; i < MAX_BULLETS; i++)
 				{
-					bullets[i]->Fire(firepoint);
-					time = 0;
-					break;
+					if (!bullets[i]->Active())
+					{
+						bullets[i]->Fire(firepoint);
+						time = 0;
+						break;
+					}
+				}
+				//time = 0;
+			}
+		if (firePointEntity)
+			firepoint = firePointEntity->Pos();
+
+		for (int i = 0; i < MAX_BULLETS; i++)
+		{
+			if (bullets[i]->Active())
+			{
+				if (player->Pos().x > Pos().x)
+				{
+					bullets[i]->Translate((player->Pos().Normalized()) * 5);
+				}
+				else
+				{
+					bullets[i]->Translate((Vector2((player->Pos().x * -1), player->Pos().y)).Normalized() * 5);
+				}
+
+				if (Pos().y < -bullets[i]->OFFSCREEN_BUFFER || Pos().y > Graphics::screenHeight + bullets[i]->OFFSCREEN_BUFFER || Pos().x < -bullets[i]->OFFSCREEN_BUFFER || Pos().x > Graphics::screenWidth + bullets[i]->OFFSCREEN_BUFFER)
+				{
+					bullets[i]->Reload();
 				}
 			}
-			//time = 0;
 		}
-	if(firePointEntity)
-	firepoint = firePointEntity->Pos();
-
-	for (int i = 0; i < MAX_BULLETS; i++)
-	{
-		if (bullets[i]->Active())
-		{
-			if (player->Pos().x > Pos().x)
-			{
-			bullets[i]->Translate( (player->Pos().Normalized()) * 5); 
-			}
-			else
-			{
-				bullets[i]->Translate((Vector2((player->Pos().x *-1), player->Pos().y)).Normalized() * 5);
-			}
-
-			if (Pos().y < -bullets[i]->OFFSCREEN_BUFFER || Pos().y > Graphics::screenHeight + bullets[i]->OFFSCREEN_BUFFER || Pos().x < -bullets[i]->OFFSCREEN_BUFFER || Pos().x > Graphics::screenWidth + bullets[i]->OFFSCREEN_BUFFER)
-			{
-				bullets[i]->Reload();
-			}
-		}
+		AimTowardsPlayer(player);
 	}
-	AimTowardsPlayer(player);
+	
 }
 

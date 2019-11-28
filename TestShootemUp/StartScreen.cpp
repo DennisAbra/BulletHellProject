@@ -73,7 +73,7 @@ void StartScreen::ResetAnimation()
 	animationTimer = 0.0f;
 	animationDone = false;
 
-	audioManager->PlayMusic("Katchow!!!.mp3", 1);
+	audioManager->PlayMusic("Katchow.mp3", 1);
 
 	Pos(animationStartPos);
 }

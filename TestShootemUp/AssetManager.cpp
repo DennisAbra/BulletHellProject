@@ -74,6 +74,8 @@ AssetManager::~AssetManager()
 	}
 
 	sfx.clear();
+
+
 }
 
 std::string AssetManager::GetFullPath(std::string filename)
