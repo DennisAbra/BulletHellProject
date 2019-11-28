@@ -1,6 +1,16 @@
 #include "Boss.h"
-#include "BoxCollider.h"
+#include "CircleCollider.h"
 #include "PhysManager.h"
+
+void Boss::Hit(PhysEntity* other)
+{
+	if (!invincible && !BossArm::armIsAlive)
+	{
+		invincible = true;
+		health--;
+		wasHit = true;
+	}
+}
 
 Boss::Boss(int path) : Enemy(path)
 {
@@ -11,7 +21,8 @@ Boss::Boss(int path, std::string textureName, Player* player)
 {
 	health = 10;
 	maxHealth = 10;
-	AddCollider(new BoxCollider(Vector2(150, 150)));
+
+	AddCollider(new CircleCollider(100));
 	speed = 100.f;
 	id = PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::Hostile);
 }
@@ -33,8 +44,6 @@ void Boss::HandleFlyInState()
 	{
 		Vector2 distance = paths[currentPath][currentWaypoint] - Pos();
 		Translate(distance.Normalized() * timer->DeltaTime() * speed);
-
-		//Rotation(atan2(distance.y, distance.x) * radToDeg);
 	}
 	else
 	{

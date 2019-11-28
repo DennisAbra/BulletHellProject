@@ -9,6 +9,8 @@ class Boss : public Enemy
 {
 private:	
 
+	void Hit(PhysEntity* other) override;
+
 public:
 	Boss(int path);
 	Boss(int path, std::string textureName, Player* player);

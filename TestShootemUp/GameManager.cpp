@@ -127,7 +127,7 @@ void GameManager::Update() // Do Entity updates and input here
 			isPlayingMusic = true;
 		}
 
-		if (Enemy::deadEnemyCounter == 15 && !bossAlive)
+		if (Enemy::deadEnemyCounter == 0 && !bossAlive)
 		{
 			audioManager->PlayMusic("WinSound.mp3", 1);
 
@@ -144,6 +144,7 @@ void GameManager::Update() // Do Entity updates and input here
 			bossArm->AimTowardsPlayer(player);
 			bossAlive = true;
 			Enemy::bossSpawned = true;
+			BossArm::armIsAlive = true;
 		}
 		break;
 

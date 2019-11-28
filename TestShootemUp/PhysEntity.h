@@ -6,12 +6,13 @@
 class PhysEntity : public GameEntity
 {
 protected:
+	void AddCollider(Collider* col, Vector2 localPos = Vec2_Zero);
 	unsigned long id;
 	std::vector<Collider*> colliders;
 	Collider* broadPhaseCollider;
 
 	virtual bool IgnoreCollisions();
-	void AddCollider(Collider* col, Vector2 localPos = Vec2_Zero);
+
 
 public:
 	PhysEntity();
