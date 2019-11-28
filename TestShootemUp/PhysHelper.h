@@ -74,69 +74,69 @@ inline bool BoxCircleCollision(BoxCollider* box, CircleCollider* circle)
 	return false;
 }
 
-inline bool BoxBoxCollision(BoxCollider* b1, BoxCollider* b2)
-{
-	Vector2 projectionAxis[4];
-
-	projectionAxis[0] = (b1->GetVertexPosition(0) - b1->GetVertexPosition(1)).Normalized();
-	projectionAxis[1] = (b1->GetVertexPosition(0) - b1->GetVertexPosition(2)).Normalized();
-	projectionAxis[2] = (b2->GetVertexPosition(0) - b2->GetVertexPosition(1)).Normalized();
-	projectionAxis[3] = (b2->GetVertexPosition(0) - b2->GetVertexPosition(2)).Normalized();
-
-	float b1Min = 0.0f, b1Max = 0.0f;
-	float b2Min = 0.0f, b2Max = 0.0f;
-	float proj1  = 0.0f, proj2 = 0.0f;
-
-	for (int i = 0; i < 4; i++)
-	{
-		for (int j = 0; j < 4; j++) 
-		{
-			proj1 = Dot(b1->GetVertexPosition(j), projectionAxis[i]);
-			proj2 = Dot(b2->GetVertexPosition(j), projectionAxis[i]);
-
-			if (j == 0)
-			{
-				b1Min = b1Max = proj1;
-				b2Min = b2Max = proj2;
-			}
-			else
-			{
-				if (proj1 < b1Min)
-				{
-					b1Min = proj1;
-				}
-
-				if (proj1 > b1Max)
-				{
-					b1Max = proj1;
-				}
-
-				if (proj2 < b2Min)
-				{
-					b2Min = proj2;
-				}
-
-				if (proj2 > b2Max)
-				{
-					b2Max = proj2;
-				}
-			}
-		}
-	}
-
-	float halfDist1 = (b1Max - b1Min) * 0.5f;
-	float midPoint1 = halfDist1 + b1Min;
-
-	float halftDist2 = (b2Max + b2Min) * 0.5f;
-	float midPoint2 = halftDist2 + b2Min;
-
-	if (abs(midPoint1 - midPoint2) > (halfDist1 + halftDist2))
-	{
-		return false;
-	}
-
-	return true;
-}
+//inline bool BoxBoxCollision(BoxCollider* b1, BoxCollider* b2)
+//{
+//	Vector2 projectionAxis[4];
+//
+//	projectionAxis[0] = (b1->GetVertexPosition(0) - b1->GetVertexPosition(1)).Normalized();
+//	projectionAxis[1] = (b1->GetVertexPosition(0) - b1->GetVertexPosition(2)).Normalized();
+//	projectionAxis[2] = (b2->GetVertexPosition(0) - b2->GetVertexPosition(1)).Normalized();
+//	projectionAxis[3] = (b2->GetVertexPosition(0) - b2->GetVertexPosition(2)).Normalized();
+//
+//	float b1Min = 0.0f, b1Max = 0.0f;
+//	float b2Min = 0.0f, b2Max = 0.0f;
+//	float proj1  = 0.0f, proj2 = 0.0f;
+//
+//	for (int i = 0; i < 4; i++)
+//	{
+//		for (int j = 0; j < 4; j++) 
+//		{
+//			proj1 = Dot(b1->GetVertexPosition(j), projectionAxis[i]);
+//			proj2 = Dot(b2->GetVertexPosition(j), projectionAxis[i]);
+//
+//			if (j == 0)
+//			{
+//				b1Min = b1Max = proj1;
+//				b2Min = b2Max = proj2;
+//			}
+//			else
+//			{
+//				if (proj1 < b1Min)
+//				{
+//					b1Min = proj1;
+//				}
+//
+//				if (proj1 > b1Max)
+//				{
+//					b1Max = proj1;
+//				}
+//
+//				if (proj2 < b2Min)
+//				{
+//					b2Min = proj2;
+//				}
+//
+//				if (proj2 > b2Max)
+//				{
+//					b2Max = proj2;
+//				}
+//			}
+//		}
+//	}
+//
+//	float halfDist1 = (b1Max - b1Min) * 0.5f;
+//	float midPoint1 = halfDist1 + b1Min;
+//
+//	float halftDist2 = (b2Max + b2Min) * 0.5f;
+//	float midPoint2 = halftDist2 + b2Min;
+//
+//	if (abs(midPoint1 - midPoint2) > (halfDist1 + halftDist2))
+//	{
+//		return false;
+//	}
+//
+//	return true;
+//}
 
 
 inline bool ColliderColliderCheck(Collider* c1, Collider* c2)
@@ -153,9 +153,9 @@ inline bool ColliderColliderCheck(Collider* c1, Collider* c2)
 	{
 		return BoxCircleCollision(static_cast<BoxCollider*>(c2), static_cast<CircleCollider*> (c1));
 	}
-	else if (c1->GetColliderType() == Collider::ColliderType::Box && c2->GetColliderType() == Collider::ColliderType::Box)
-	{
-		return BoxBoxCollision(static_cast<BoxCollider*>(c1), static_cast<BoxCollider*>(c2));
-	}
+	//else if (c1->GetColliderType() == Collider::ColliderType::Box && c2->GetColliderType() == Collider::ColliderType::Box)
+	//{
+	//	return BoxBoxCollision(static_cast<BoxCollider*>(c1), static_cast<BoxCollider*>(c2));
+	//}
 
 }

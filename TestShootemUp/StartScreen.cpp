@@ -103,6 +103,7 @@ void StartScreen::Update()
 {
 	if (!animationDone)
 	{
+		audioManager->PlayMusic("Vroom.mp3", 0);
 		animationTimer += timer->DeltaTime();
 		Pos(Lerp(animationStartPos, animationEndPos, animationTimer / animationTotalTime));
 
