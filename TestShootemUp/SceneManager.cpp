@@ -69,6 +69,13 @@ void SceneManager::Update()
 		}
 
 		break;
+
+	case win:
+
+		if (inputManager->KeyPressed(SDL_SCANCODE_RETURN))
+		{
+			quitGame = true;
+		}
 	}
 }
 

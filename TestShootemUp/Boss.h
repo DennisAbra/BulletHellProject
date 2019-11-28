@@ -12,6 +12,7 @@ private:
 	void Hit(PhysEntity* other) override;
 
 public:
+	bool killBoss = false;
 	Boss(int path);
 	Boss(int path, std::string textureName, Player* player);
 	virtual ~Boss();

@@ -44,7 +44,6 @@ private:
 	void LateUpdate();
 
 	void Render();
-	void RenderUI();
 
 public:
 	bool quit;

@@ -15,7 +15,7 @@ Bullet::Bullet(bool friendly)
 
 	if (friendly)
 	{
-		texture->Scale(Vector2(0.125f, 0.125f));
+		texture->Scale(Vector2(0.25f, 0.25f));
 	}
 
 

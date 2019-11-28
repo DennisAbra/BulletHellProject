@@ -9,6 +9,11 @@ void Boss::Hit(PhysEntity* other)
 		invincible = true;
 		health--;
 		wasHit = true;
+
+		if (health <= 0)
+		{
+			killBoss = true;
+		}
 	}
 }
 
