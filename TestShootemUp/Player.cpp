@@ -85,7 +85,6 @@ void Player::Hit(PhysEntity* other)
 {
 	if (!playerInvincible)
 	{
-		printf("Player current HP:%i\n ", playerCurrentHealth);
 		wasHit = true;
 		playerInvincible = true;
 		if (playerCurrentHealth == 3) 
@@ -112,7 +111,6 @@ void Player::Hit(PhysEntity* other)
 void Player::Invincible()
 {
 	invincibilityFrameTimer -= timer->DeltaTime();
-	/*printf("Invincibility Frame Timer: %f\n", invincibilityFrameTimer);*/
 	if (invincibilityFrameTimer <= 0.0f)
 	{
 		playerInvincible = false;
@@ -190,7 +188,7 @@ void Player::HandleFiring()
 		{
 			if (!bullets[i]->Active())
 			{
-				AudioManager::Instance()->PlaySFX("shoot.wav");
+				AudioManager::Instance()->PlaySFX("bottle_open.mp3");
 				bullets[i]->Fire(firePoint);
 			}
 		}
