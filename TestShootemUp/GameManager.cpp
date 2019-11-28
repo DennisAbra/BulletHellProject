@@ -92,9 +92,6 @@ GameManager::~GameManager()
 	AudioManager::Release();
 	audioManager = nullptr;
 
-
-
-
 	Graphics::Release();
 	graphics = nullptr;
 
