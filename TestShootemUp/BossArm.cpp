@@ -1,7 +1,9 @@
 #include "BossArm.h"
-#include "BoxCollider.h"
+#include "CircleCollider.h"
 #include "PhysManager.h"
 
+
+bool BossArm::armIsAlive = false;
 
 BossArm::BossArm(int path, std::string textureName, Player* player) : Enemy(path, textureName, NULL)
 {
@@ -12,7 +14,7 @@ BossArm::BossArm(int path, std::string textureName, InputManager* input, Player*
 {
 	speed = 100.f;
 	posOffset = Vector2(110, 50);
-	AddCollider(new BoxCollider(texture->ScaledDimensions() * 0.5f, &point));
+	AddCollider(new CircleCollider(100));
 
 	timer = Timer::Instance();
 
@@ -72,6 +74,7 @@ void BossArm::Update()
 
 		if (health <= 0)
 		{
+			armIsAlive = false;
 			isAlive = false; //TODO Change this to a bool - isAlive // What are you talking about, this is a bool??
 		}
 

@@ -1,8 +1,8 @@
 #include "Player.h"
 #include <iostream>
-#include "BoxCollider.h"
 #include "PhysManager.h"
 #include "AudioManager.h"
+#include "CircleCollider.h"
 
 Player::Player(int posX, int posY, InputManager* input, const char* filePath) : input(input)
 {
@@ -50,7 +50,8 @@ Player::Player(int posX, int posY, InputManager* input, const char* filePath) : 
 		bullets[i] = new Bullet(true);
 	}
 
-	AddCollider(new BoxCollider(Vector2(40.0f, 52.0f))); // DONT CHANGE IT'S PERFECT(ish)
+	AddCollider(new CircleCollider(30));
+	//AddCollider(new BoxCollider(Vector2(40.0f, 52.0f))); // DONT CHANGE IT'S PERFECT(ish)
 	id = PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::Friendly);
 }
 

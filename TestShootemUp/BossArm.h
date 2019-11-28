@@ -21,6 +21,8 @@ public:
 	~BossArm();
 	Vector2 posOffset;
 
+	static bool armIsAlive;
+
 	void AimTowardsPlayer(Player* player);
 
 	void Update() override;
