@@ -30,8 +30,8 @@ BossArm::BossArm(int path, std::string textureName, InputManager* input, Player*
 
 	texture->Pos(Vec2_Zero);
 
-	health = 3;
-	maxHealth = 3;
+	health = 10;
+	maxHealth = 10;
 
 	player = _player;
 
