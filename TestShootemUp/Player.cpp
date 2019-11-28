@@ -188,7 +188,7 @@ void Player::HandleFiring()
 		{
 			if (!bullets[i]->Active())
 			{
-				AudioManager::Instance()->PlaySFX("shoot.wav");
+				AudioManager::Instance()->PlaySFX("bottle_open.mp3");
 				bullets[i]->Fire(firePoint);
 			}
 		}
