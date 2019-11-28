@@ -129,6 +129,8 @@ void GameManager::Update() // Do Entity updates and input here
 
 		if (Enemy::deadEnemyCounter == 15 && !bossAlive)
 		{
+			audioManager->PlayMusic("WinSound.mp3", 1);
+
 			boss = new Boss(3, "PepsiBoss.png", player);
 			boss->texture->Scale(Vector2(0.5f, 0.5f));
 			entityManager->AddBoss(boss);
@@ -154,10 +156,7 @@ void GameManager::Update() // Do Entity updates and input here
 	{
 	case SceneManager::play:
 
-		if (bossAlive == false)
-		{
-			audioManager->PlayMusic("WinSound.mp3", 1);
-		}
+			//audioManager->PlayMusic("WinSound.mp3", 1);
 
 		if (inputManager->KeyPressed(SDL_SCANCODE_ESCAPE))
 		{

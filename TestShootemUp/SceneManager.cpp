@@ -56,8 +56,6 @@ void SceneManager::Update()
 
 	case death:
 
-		//Check death input
-
 		if (inputManager->KeyPressed(SDL_SCANCODE_RETURN))
 		{
 			quitGame = true;
