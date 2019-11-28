@@ -1,6 +1,7 @@
 #pragma once
 #include "StartScreen.h"
 #include "DeathScreen.h"
+#include "WinScreen.h"
 
 class SceneManager
 {
@@ -8,6 +9,8 @@ private:
 
 
 	static SceneManager* instance;
+
+	WinScreen* winScreen;
 
 	DeathScreen* deathScreen;
 
@@ -26,7 +29,7 @@ public:
 	void Update();
 	void Render();
 
-	enum SCENES { start, play, death};
+	enum SCENES { start, play, death, win};
 
 	SCENES currentScene;
 	

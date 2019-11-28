@@ -144,6 +144,9 @@
     <ClCompile Include="DeathScreen.cpp">
       <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
+    <ClCompile Include="WinScreen.cpp">
+      <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEntity.h">
@@ -228,6 +231,9 @@
       <Filter>Header Files\Engine\System</Filter>
     </ClInclude>
     <ClInclude Include="DeathScreen.h">
+      <Filter>Header Files\Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="WinScreen.h">
       <Filter>Header Files\Engine\System</Filter>
     </ClInclude>
   </ItemGroup>

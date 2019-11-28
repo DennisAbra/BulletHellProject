@@ -23,6 +23,7 @@ SceneManager::SceneManager()
 	inputManager = InputManager::Instance();
 	startScreen = new StartScreen();
 	deathScreen = new DeathScreen();
+	winScreen = new WinScreen();
 	currentScene = SceneManager::start;
 }
 
@@ -32,6 +33,12 @@ SceneManager::~SceneManager()
 
 	delete startScreen;
 	startScreen = NULL;
+
+	delete deathScreen;
+	deathScreen = nullptr;
+
+	delete winScreen;
+	winScreen = nullptr;
 }
 
 
@@ -79,6 +86,10 @@ void SceneManager::Render()
 
 	case death:
 		deathScreen->Render();
+		break;
+
+	case win:
+		winScreen->Render();
 		break;
 	}
 }

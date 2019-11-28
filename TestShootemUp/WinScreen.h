@@ -3,32 +3,29 @@
 #include "InputManager.h"
 #include "Texture.h"
 
-class DeathScreen : public GameEntity
+
+class WinScreen : public GameEntity //More or less same as death screen
 {
 private:
-	InputManager* inputManager;
-	/* TOP BAR ENTITIES */
-	GameEntity* topBar;
-	Texture* deathText;
-	/* BUTTONS */
 
-	GameEntity* midButtons;
+	InputManager* inputManager;
+	GameEntity* topBar;
+	Texture* winText;
+
+	GameEntity* midBar;
 	Texture* quitButton;
 	Texture* cursor;
 
 	Vector2 cursorStartPos;
 	Vector2 cursorOffset;
 
-	/* Logo */
-	//Texture* Logo; 
 
 public:
 
-	DeathScreen();
-	~DeathScreen();
+	WinScreen();
+	~WinScreen();
 
 	void Update();
 
 	void Render();
-
 };
