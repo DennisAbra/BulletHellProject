@@ -50,7 +50,6 @@ BossArm::~BossArm()
 	input = nullptr;
 }
 
-
 void BossArm::AimTowardsPlayer(Player* player)
 {
 	this->player = player;
@@ -61,7 +60,6 @@ void BossArm::AimTowardsPlayer(Player* player)
 		Rotation(rotation);
 	}
 }
-
 
 void BossArm::Update()
 {
@@ -94,10 +92,12 @@ void BossArm::Update()
 						break;
 					}
 				}
-				//time = 0;
 			}
+
 		if (firePointEntity)
+		{
 			firepoint = firePointEntity->Pos();
+		}
 
 		for (int i = 0; i < MAX_BULLETS; i++)
 		{

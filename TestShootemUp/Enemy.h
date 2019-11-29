@@ -64,7 +64,7 @@ public:
 	void Update();
 	void Render();
 
-	static const int MAX_BULLETS = 100;
+	static const int MAX_BULLETS = 10;
 	Bullet* bullets[MAX_BULLETS];
 
 

@@ -31,10 +31,6 @@ void Enemy::CreatePaths()
 			path->AddCurve(path->EntryPathUnlimited(), 45);
 			path->AddCurve(path->RightCurveUnlimited(), 45);
 			path->AddCurve(path->LeftCurveUnlimited(), 45);
-			/*path->AddCurve(path->LeftRight(), 1);
-			path->AddCurve(path->RightDown(), 1);
-			path->AddCurve(path->RightLeft(), 1);
-			path->AddCurve(path->LeftUp(), 1);*/
 			break;
 		}
 
@@ -70,7 +66,6 @@ Enemy::Enemy(int path)
 		bullets[i] = new Bullet(Bullet::Enemy, "CocaCola.png");
 	}
 
-	//AddCollider(new BoxCollider(Vector2(50, 50)));
 	AddCollider(new CircleCollider(45));
 	id = PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::Hostile);
 
@@ -99,6 +94,7 @@ Enemy::Enemy(int path, std::string textureName, Player* player)
 		bullets[i]->GetPlayer(player);
 	}
 
+	//This Constructor is used for boss. Since the collider will differ from regular enemies, it is set in the boss construct
 	id = PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::Hostile);
 	speed = 50.0f;
 }
@@ -128,8 +124,6 @@ void Enemy::HandleFlyInState()
 	{
 		Vector2 distance = paths[currentPath][currentWaypoint] - Pos();
 		Translate(distance.Normalized() * timer->DeltaTime() * speed);
-
-		//Rotation(atan2(distance.y, distance.x) * radToDeg);
 	}
 	else
 	{
@@ -210,7 +204,6 @@ void Enemy::HandleStates()
 	case dead:
 		HandleDeadState();
 		break;
-
 	}
 }
 
@@ -256,10 +249,6 @@ bool Enemy::IgnoreCollisions()
 	{
 		return invincible;
 	}
-	//if (wasHit)
-	//{
-	//	return wasHit;
-	//}
 	else
 	{
 		return !isAlive;
@@ -281,6 +270,7 @@ void Enemy::Update()
 	static float t = 2.0f;
 	time += timer->DeltaTime();
 	if(Active() && isAlive)
+
 	if (t < time)
 	{
 		HandleFiring();
@@ -301,7 +291,7 @@ void Enemy::Update()
 	{
 		if(isAlive)
 		deadEnemyCounter++;
-		isAlive = false; //TODO Change this to a bool - isAlive
+		isAlive = false;
 	}
 
 	for (int i = 0; i < MAX_BULLETS; i++)
