@@ -32,6 +32,7 @@ protected:
 	float maxInvincibilityFrameTimer = 0.5f;
 
 	bool wasHit = false;
+	bool isBoss = false;
 
 	Vector2 firepoint;
 	void HandleFiring();
@@ -64,7 +65,7 @@ public:
 	void Update();
 	void Render();
 
-	static const int MAX_BULLETS = 10;
+	static const int MAX_BULLETS = 100;
 	Bullet* bullets[MAX_BULLETS];
 
 

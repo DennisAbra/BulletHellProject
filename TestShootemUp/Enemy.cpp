@@ -214,6 +214,7 @@ void Enemy::HandleFiring()
 		if (!bullets[i]->Active())
 		{
 			bullets[i]->Fire(firepoint);
+			break;
 		}
 	}
 
@@ -271,7 +272,7 @@ void Enemy::Update()
 	time += timer->DeltaTime();
 	if(Active() && isAlive)
 
-	if (t < time)
+	if (t < time && !isBoss)
 	{
 		HandleFiring();
 		time = 0;
