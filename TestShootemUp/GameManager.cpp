@@ -65,8 +65,8 @@ GameManager::GameManager() // Handle as Awake in Unity
 		enemyPool->SetEnemyActive();
 		entityManager->AddEnemies(enemyPool->enemies[i]);
 
-		enemyPool->enemies[i]->Pos(Vector2(enemyPool->enemies[i]->Pos().x, -60.0f * (i + 1)));
-		enemyPool->enemies[i]->startPos = Vector2(enemyPool->enemies[i]->Pos().x, -60.0f * (i + 1));
+		enemyPool->enemies[i]->Pos(Vector2(enemyPool->enemies[i]->Pos().x, -100.0f * (i + 1)));
+		enemyPool->enemies[i]->startPos = Vector2(enemyPool->enemies[i]->Pos().x, -100.0f * (i + 1));
 	}
 }
 
@@ -212,7 +212,7 @@ void GameManager::Render()
 	case SceneManager::play:
 
 		entityManager->Render();
-
+	
 		break;
 
 	case SceneManager::start:

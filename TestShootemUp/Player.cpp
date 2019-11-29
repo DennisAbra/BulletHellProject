@@ -173,9 +173,11 @@ void Player::Render()
 	{
 		texture->Render();
 	}
+
 	for (int i = 0; i < MAX_BULLETS; i++)
 	{
-		bullets[i]->Render();
+
+		bullets[i]->Render();		
 	}
 	PhysEntity::Render();
 }
@@ -188,8 +190,9 @@ void Player::HandleFiring()
 		{
 			if (!bullets[i]->Active())
 			{
-				AudioManager::Instance()->PlaySFX("bottle_open.mp3");
+				AudioManager::Instance()->PlaySFX("bottle_open.mp3");			
 				bullets[i]->Fire(firePoint);
+				break;
 			}
 		}
 	}

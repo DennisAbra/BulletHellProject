@@ -84,7 +84,6 @@ void Bullet::Fire(Vector2 pos)
 void Bullet::Reload() 
 {
 	Active(false);
-	Pos(Graphics::screenHeight + 100);
 }
 
 void Bullet::GetPlayer(Player* myPlayer)
@@ -95,7 +94,6 @@ void Bullet::GetPlayer(Player* myPlayer)
 
 void Bullet::Hit(PhysEntity* other)
 {
-	Active(false);
 	Reload();
 }
 
@@ -111,20 +109,11 @@ void Bullet::Update()
 		if (friendlyBullet)
 		{
 			Translate(Vec2_Down * speed * timer->DeltaTime());
-
-			///*Vector2 pos =*/ Pos();
 		}
 		else if(type == Enemy)
 		{
 			Translate(Vec2_Up * speed * timer->DeltaTime());
-			//TODO Check if it's a boss bullet. 
-			// If true fire the bullet towards the player
 		}
-		//else if(type == Boss && bulletsPlayerRef != NULL)
-		//{
-		//	Translate(bulletsPlayerRef->Pos().Normalized() * 5);
-		//}
-
 
 		if (Pos().y < -OFFSCREEN_BUFFER || Pos().y > Graphics::screenHeight + OFFSCREEN_BUFFER || Pos().x < -OFFSCREEN_BUFFER || Pos().x > Graphics::screenWidth + OFFSCREEN_BUFFER)
 		{
