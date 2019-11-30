@@ -124,7 +124,7 @@ void GameManager::Update() // Do Entity updates and input here
 			isPlayingMusic = true;
 		}
 
-		if (Enemy::deadEnemyCounter == 10 && !bossAlive)
+		if (Enemy::deadEnemyCounter == 0 && !bossAlive)
 		{
 			audioManager->PlayMusic("WinSound.mp3", 1);
 			boss = new Boss(3, "PepsiBoss.png", player);
