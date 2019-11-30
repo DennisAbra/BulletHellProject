@@ -119,14 +119,12 @@ void GameManager::Update() // Do Entity updates and input here
 
 		if (!isPlayingMusic)
 		{
-			
-			//audioManager->PlayMusic("music.mp3");
+			audioManager->PlayMusic("music.mp3");
 			isPlayingMusic = true;
 		}
 
 		if (Enemy::deadEnemyCounter == 10 && !bossAlive)
 		{
-			audioManager->PlayMusic("WinSound.mp3", 1);
 			boss = new Boss(3, "PepsiBoss.png", player);
 			boss->texture->Scale(Vector2(0.5f, 0.5f));
 			entityManager->AddBoss(boss);
@@ -151,18 +149,13 @@ void GameManager::Update() // Do Entity updates and input here
 
 	switch (sceneManager->currentScene) //For input
 	{
-
-		//boss->killBoss = false;
-
 	case SceneManager::play:
 		
-			//audioManager->PlayMusic("WinSound.mp3", 1);
 
 		if (inputManager->KeyPressed(SDL_SCANCODE_ESCAPE))
 		{
 			sceneManager->currentScene = SceneManager::start;
 			audioManager->PlayMusic("Vroom.mp3", 1);
-
 		}
 
 		else if (player->playerCurrentHealth <= 0)
@@ -193,7 +186,14 @@ void GameManager::Update() // Do Entity updates and input here
 		break;
 
 	case SceneManager::win:
-
+		static bool once = false;
+		if (!once)
+		{
+			audioManager->PlayMusic("WinSound.mp3");
+			once = true;
+		}
+		 
+		
 		if (inputManager->KeyPressed(SDL_SCANCODE_RETURN))
 		{
 			quit = true;

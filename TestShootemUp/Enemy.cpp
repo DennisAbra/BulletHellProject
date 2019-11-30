@@ -267,32 +267,32 @@ void Enemy::Update()
 	HandleStates();
 	firepoint = Pos();
 
-	static float time;
-	static float t = 2.0f;
 	time += timer->DeltaTime();
-	if(Active() && isAlive)
 
-	if (t < time && !isBoss)
+	if (Active() && isAlive)
 	{
-		HandleFiring();
-		time = 0;
-	}
+		if (t < time && !isBoss)
+		{
+			HandleFiring();
+			time = 0;
+		}
 
-	if (wasHit)
-	{
-		wasHit = false;
-	}
+		if (wasHit)
+		{
+			wasHit = false;
+		}
 
-	if (invincible)
-	{
-		Invincible();
-	}
+		if (invincible)
+		{
+			Invincible();
+		}
 
-	if (health <= 0)
-	{
-		if(isAlive)
-		deadEnemyCounter++;
-		isAlive = false;
+		if (health <= 0)
+		{
+			if (isAlive)
+				deadEnemyCounter++;
+			isAlive = false;
+		}
 	}
 
 	for (int i = 0; i < MAX_BULLETS; i++)
@@ -320,7 +320,7 @@ void Enemy::Render()
 
 	for (int i = 0; i < MAX_BULLETS; i++)
 	{
-		bullets[i]->Render();
+			bullets[i]->Render();
 	}
 }
 #pragma warning(pop)

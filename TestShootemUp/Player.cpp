@@ -51,7 +51,6 @@ Player::Player(int posX, int posY, InputManager* input, const char* filePath) : 
 	}
 
 	AddCollider(new CircleCollider(30));
-	//AddCollider(new BoxCollider(Vector2(40.0f, 52.0f))); // DONT CHANGE IT'S PERFECT(ish)
 	id = PhysManager::Instance()->RegisterEntity(this, PhysManager::CollisionLayers::Friendly);
 }
 

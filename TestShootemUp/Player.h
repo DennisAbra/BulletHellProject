@@ -72,9 +72,7 @@ private:
 private:
 
 	PlayerStates currentState;
-	//Bullet* bullet;
 	InputManager* input;
-	//Enemy* enemy;
 
 	Vector2 position;
 	Vector2 scale;

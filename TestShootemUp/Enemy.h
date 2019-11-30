@@ -25,6 +25,9 @@ protected:
 	float speed;
 	float accuTimer = 0;
 
+	float time = 0;
+	float t = 1.0f;
+
 	bool IgnoreCollisions() override;
 	bool DEBUG_LINES = false;
 
